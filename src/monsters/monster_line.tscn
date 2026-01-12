@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://c51kjclr1a0mq"]
+
+[ext_resource type="Script" uid="uid://d22tgufensiqq" path="res://monster_line.gd" id="1_l8k7s"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_l8k7s"]
+
+[node name="Monster Line" type="Node3D"]
+script = ExtResource("1_l8k7s")
+
+[node name="Points" type="Node3D" parent="."]
+unique_name_in_owner = true
+
+[node name="Monster Point" type="MeshInstance3D" parent="Points"]
+mesh = SubResource("BoxMesh_l8k7s")
+skeleton = NodePath("../..")
+
+[node name="Monster Point2" type="MeshInstance3D" parent="Points"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+mesh = SubResource("BoxMesh_l8k7s")
+skeleton = NodePath("../..")
+
+[node name="Monster Point3" type="MeshInstance3D" parent="Points"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+mesh = SubResource("BoxMesh_l8k7s")
+skeleton = NodePath("../..")
