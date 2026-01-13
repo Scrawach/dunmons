@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://c4x78xdv4cpx4"]
+[gd_scene load_steps=11 format=3 uid="uid://c4x78xdv4cpx4"]
 
 [ext_resource type="PackedScene" uid="uid://cpq3bvvv5605v" path="res://monsters/monster_base.tscn" id="1_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://2dpaau0tgd4s" path="res://player/ui/player_hud.tscn" id="1_272bh"]
 [ext_resource type="PackedScene" uid="uid://c51kjclr1a0mq" path="res://monsters/monster_line.tscn" id="2_h2yge"]
 [ext_resource type="Script" uid="uid://b65182a2jjw81" path="res://monsters/drag_and_drop_3d.gd" id="3_h2yge"]
 [ext_resource type="PackedScene" uid="uid://dpn34cacjhahy" path="res://locations/proto_location.tscn" id="4_7mycd"]
@@ -20,6 +21,8 @@ sky = SubResource("Sky_ig7tw")
 tonemap_mode = 2
 
 [node name="Main" type="Node"]
+
+[node name="Player HUD" parent="." instance=ExtResource("1_272bh")]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_0xm2m")
@@ -55,13 +58,14 @@ metadata/_custom_type_script = "uid://b65182a2jjw81"
 
 [node name="Proto Location" parent="World3D" instance=ExtResource("4_7mycd")]
 
-[node name="Game" type="Node" parent="." node_paths=PackedStringArray("battle", "world_3d", "player_line", "current_location")]
+[node name="Game" type="Node" parent="." node_paths=PackedStringArray("battle", "world_3d", "player_line", "current_location", "player_hud")]
 script = ExtResource("4_lquwl")
 battle = NodePath("Battle")
 world_3d = NodePath("../World3D")
 player_line = NodePath("../World3D/Player Monster Line/Monster Line")
 current_location = NodePath("../World3D/Proto Location")
 location_template = ExtResource("4_7mycd")
+player_hud = NodePath("../Player HUD")
 metadata/_custom_type_script = "uid://d3kcr1y2o7ue"
 
 [node name="Battle" type="Node" parent="Game"]

@@ -1,6 +1,9 @@
 class_name AnimatedLineEdit
 extends PanelContainer
 
+signal text_submitted(new_text: String)
+signal text_changed(new_text: String)
+
 @export var max_length: int = 16
 
 @onready var line_edit: LineEdit = %LineEdit
@@ -9,9 +12,17 @@ extends PanelContainer
 
 var cached_labels: Array[AnimatedLabel]
 
+var text: 
+	set(value):
+		text = value
+		line_edit.text = text
+	get():
+		return line_edit.text
+
 func _ready() -> void:
 	_fill_label_cache()
 	line_edit.text_changed.connect(_on_text_changed)
+	line_edit.text_submitted.connect(func(new_text): text_submitted.emit(new_text))
 	line_edit.max_length = max_length
 
 func _fill_label_cache() -> void:
@@ -21,6 +32,7 @@ func _fill_label_cache() -> void:
 		cached_labels.append(label)
 
 func _on_text_changed(new_text: String) -> void:
+	text_changed.emit(new_text)
 	custom_caret.position.x = 0
 	for index in max_length:
 		var label := cached_labels[index]

@@ -5,6 +5,8 @@ signal dragged(monster: Monster)
 signal end_dragged(monster: Monster)
 
 @export var monster_name: String
+@export var health: int = 2
+@export var damage: int = 1
 
 @onready var dragging_area_3d: DraggingArea3D = %"Dragging Area3D"
 
@@ -24,9 +26,11 @@ func attack_async(target: Monster) -> void:
 
 func take_damage_async(damage: int) -> void:
 	print("%s taken %s damage points" % [monster_name, damage])
-	is_alive = false
-	play_death_async()
-	pass
+	health -= damage
+	
+	if health <= 0:
+		is_alive = false
+		await play_death_async()
 
 func play_death_async() -> void:
 	var tween := create_tween()

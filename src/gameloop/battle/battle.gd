@@ -20,14 +20,16 @@ func execute_async() -> BattleResult:
 		fighter_id += 1
 		fighter_id %= fighters.size()
 		
+		await wait_async(0.5)
 		await make_turn_async(fighter, fighters[fighter_id])
-		await wait_async(1.0)
 	
-	return BattleResult.player_win()
+	if player_monsters.has_creatures():
+		return BattleResult.player_win()
+	else:
+		return BattleResult.enemy_win()
 
 func make_turn_async(mine: MonsterLine, enemy: MonsterLine) -> void:
 	var unit := mine.get_first()
 	var target := enemy.get_first()
 	await unit.attack_async(enemy.get_first())
-	await target.take_damage_async(10)
-	pass
+	await target.take_damage_async(unit.damage)

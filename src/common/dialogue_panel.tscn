@@ -1,5 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://crwf1tvkf4smk"]
+[gd_scene load_steps=10 format=3 uid="uid://crwf1tvkf4smk"]
 
+[ext_resource type="Script" uid="uid://d0gaj7y28ijhn" path="res://common/dialogue_panel.gd" id="1_2rv6t"]
 [ext_resource type="Shader" uid="uid://yi7c2sddgwk8" path="res://shaders/distortion.gdshader" id="1_mke62"]
 [ext_resource type="Texture2D" uid="uid://dms8swqxwyt4q" path="res://panel.svg" id="2_2rv6t"]
 [ext_resource type="FontFile" uid="uid://duefpn463vu3a" path="res://fonts/Chewy-Regular.ttf" id="3_qy27g"]
@@ -8,7 +9,7 @@
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_wuwpc"]
 noise_type = 3
-frequency = 0.0144
+frequency = 0.006
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ollls"]
 generate_mipmaps = false
@@ -18,9 +19,18 @@ seamless = true
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_20rot"]
 shader = ExtResource("1_mke62")
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_ollls")
-shader_parameter/distortion_force = 0.01
+shader_parameter/distortion_force = 0.03
 shader_parameter/tiling = Vector2(1, 1)
 shader_parameter/offset_speed = Vector2(0.05, 0.05)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2rv6t"]
+bg_color = Color(0.16470589, 0.85490197, 0.54901963, 1)
+border_width_bottom = 6
+border_color = Color(0.12221228, 0.60108197, 0.38363686, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
 
 [node name="Dialogue Panel" type="PanelContainer"]
 anchors_preset = 7
@@ -28,38 +38,80 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -102.0
-offset_top = -203.0
-offset_right = 103.0
-offset_bottom = -49.0
+offset_left = -248.5
+offset_top = -204.0
+offset_right = 248.5
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_gmp5o")
-
-[node name="NinePatchRect" type="NinePatchRect" parent="."]
-self_modulate = Color(0.1541844, 0.67874146, 1, 1)
-material = SubResource("ShaderMaterial_20rot")
-layout_mode = 2
-texture = ExtResource("2_2rv6t")
-region_rect = Rect2(28.052288, 15.77631, 308.9211, 193.4603)
-patch_margin_left = 88
-patch_margin_top = 70
-patch_margin_right = 117
-patch_margin_bottom = 84
+script = ExtResource("1_2rv6t")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
 theme_override_constants/margin_left = 25
 theme_override_constants/margin_top = 25
 theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 50
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer"]
+material = SubResource("ShaderMaterial_20rot")
+layout_mode = 2
+texture = ExtResource("2_2rv6t")
+region_rect = Rect2(20, 8, 324, 204)
+patch_margin_left = 88
+patch_margin_top = 70
+patch_margin_right = 117
+patch_margin_bottom = 84
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 50
 theme_override_constants/margin_bottom = 25
 
-[node name="Label" type="Label" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_qy27g")
 theme_override_font_sizes/font_size = 36
-text = "HELLO, THERE!"
+text = "Someone want join to party!"
 horizontal_alignment = 1
-autowrap_mode = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Buttons" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 2
+
+[node name="ColorRect" type="Control" parent="Buttons"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.5
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Buttons"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 25
+
+[node name="ColorRect2" type="HBoxContainer" parent="Buttons/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 2
+
+[node name="Accept Button" type="Button" parent="Buttons/MarginContainer/ColorRect2"]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_qy27g")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_2rv6t")
+text = "Accept"

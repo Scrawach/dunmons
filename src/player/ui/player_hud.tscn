@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://2dpaau0tgd4s"]
+
+[ext_resource type="PackedScene" uid="uid://crwf1tvkf4smk" path="res://common/dialogue_panel.tscn" id="1_frykf"]
+[ext_resource type="Script" uid="uid://h12py2rrahp3" path="res://player/ui/player_hud.gd" id="1_ttjji"]
+[ext_resource type="PackedScene" uid="uid://bs7alng86owkv" path="res://player/ui/naming_panel.tscn" id="3_kliqd"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ttjji"]
+bg_color = Color(0, 0, 0, 1)
+
+[node name="Player HUD" type="CanvasLayer"]
+script = ExtResource("1_ttjji")
+
+[node name="Background" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ttjji")
+
+[node name="Dialogue Panel" parent="." instance=ExtResource("1_frykf")]
+unique_name_in_owner = true
+visible = false
+
+[node name="Naming Panel" parent="." instance=ExtResource("3_kliqd")]
+unique_name_in_owner = true
+visible = false
