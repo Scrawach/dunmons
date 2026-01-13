@@ -1,0 +1,55 @@
+[gd_scene load_steps=6 format=3 uid="uid://culmlpynfrj01"]
+
+[ext_resource type="FontFile" uid="uid://duefpn463vu3a" path="res://fonts/Chewy-Regular.ttf" id="1_uw3n4"]
+[ext_resource type="Script" uid="uid://b48x14skv2eio" path="res://common/animated_line_edit.gd" id="2_43thi"]
+[ext_resource type="Script" uid="uid://cd8gx0ua40fgi" path="res://common/animated_label.gd" id="3_vbm7q"]
+
+[sub_resource type="Theme" id="Theme_13pjf"]
+Label/font_sizes/font_size = 24
+Label/fonts/font = ExtResource("1_uw3n4")
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_87uxe"]
+color = Color(1, 1, 1, 1)
+grow_begin = -5.0
+grow_end = -5.0
+thickness = 2
+vertical = true
+
+[node name="Animated Line Edit" type="PanelContainer"]
+offset_left = 77.0
+offset_top = 52.0
+offset_right = 145.5625
+offset_bottom = 92.0
+theme = SubResource("Theme_13pjf")
+script = ExtResource("2_43thi")
+
+[node name="LineEdit" type="LineEdit" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/caret_color = Color(0.9490196, 0.9490196, 0.9490196, 0)
+expand_to_text_length = true
+secret = true
+secret_character = " "
+
+[node name="Container" type="HBoxContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="AnimatedLabel" type="Label" parent="Container"]
+layout_mode = 2
+script = ExtResource("3_vbm7q")
+metadata/_custom_type_script = "uid://cd8gx0ua40fgi"
+
+[node name="Custom Caret" type="Control" parent="."]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Custom Caret" type="PanelContainer" parent="Custom Caret"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(2, 0)
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxLine_87uxe")

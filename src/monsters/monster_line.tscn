@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://c51kjclr1a0mq"]
 
-[ext_resource type="Script" uid="uid://d22tgufensiqq" path="res://monster_line.gd" id="1_l8k7s"]
+[ext_resource type="Script" uid="uid://d22tgufensiqq" path="res://monsters/monster_line.gd" id="1_l8k7s"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_l8k7s"]
 

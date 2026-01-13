@@ -1,8 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://c4x78xdv4cpx4"]
+[gd_scene load_steps=10 format=3 uid="uid://c4x78xdv4cpx4"]
 
 [ext_resource type="PackedScene" uid="uid://cpq3bvvv5605v" path="res://monsters/monster_base.tscn" id="1_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://c51kjclr1a0mq" path="res://monsters/monster_line.tscn" id="2_h2yge"]
 [ext_resource type="Script" uid="uid://b65182a2jjw81" path="res://monsters/drag_and_drop_3d.gd" id="3_h2yge"]
+[ext_resource type="PackedScene" uid="uid://dpn34cacjhahy" path="res://locations/proto_location.tscn" id="4_7mycd"]
+[ext_resource type="Script" uid="uid://d3kcr1y2o7ue" path="res://gameloop/game.gd" id="4_lquwl"]
+[ext_resource type="Script" uid="uid://dtc6b60kuy673" path="res://gameloop/battle/battle.gd" id="5_7mycd"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7dm0k"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -16,8 +19,6 @@ background_mode = 2
 sky = SubResource("Sky_ig7tw")
 tonemap_mode = 2
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_h2yge"]
-
 [node name="Main" type="Node"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -29,44 +30,40 @@ shadow_enabled = true
 
 [node name="World3D" type="Node3D" parent="."]
 
-[node name="Prison Location" type="Node3D" parent="World3D"]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="World3D/Prison Location"]
-mesh = SubResource("PlaneMesh_h2yge")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="World3D/Prison Location"]
+[node name="Player Monster Line" type="Node3D" parent="World3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
-mesh = SubResource("PlaneMesh_h2yge")
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="World3D/Prison Location"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
-mesh = SubResource("PlaneMesh_h2yge")
-
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="World3D/Prison Location"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2, -2)
-mesh = SubResource("PlaneMesh_h2yge")
-
-[node name="MeshInstance3D5" type="MeshInstance3D" parent="World3D/Prison Location"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2, 0)
-mesh = SubResource("PlaneMesh_h2yge")
-
-[node name="MeshInstance3D6" type="MeshInstance3D" parent="World3D/Prison Location"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2, 2)
-mesh = SubResource("PlaneMesh_h2yge")
-
-[node name="Monster Line" parent="World3D" node_paths=PackedStringArray("monsters") instance=ExtResource("2_h2yge")]
+[node name="Monster Line" parent="World3D/Player Monster Line" node_paths=PackedStringArray("monsters") instance=ExtResource("2_h2yge")]
 monsters = [NodePath("Monster Base")]
 
-[node name="Monster Base" parent="World3D/Monster Line" instance=ExtResource("1_0xm2m")]
+[node name="Monster Base" parent="World3D/Player Monster Line/Monster Line" instance=ExtResource("1_0xm2m")]
+monster_name = "TEST_PLAYER"
 
-[node name="DragAndDrop3D" type="Node3D" parent="World3D"]
+[node name="Camera Point" type="Node3D" parent="World3D/Player Monster Line/Monster Line"]
+transform = Transform3D(-3.7855173e-08, -0.49999997, 0.8660254, -2.1855694e-08, 0.8660253, 0.5, -1, 0, -4.371139e-08, 0, 0, -2)
+
+[node name="Camera Length" type="Node3D" parent="World3D/Player Monster Line/Monster Line/Camera Point"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="Camera3D" type="Camera3D" parent="World3D/Player Monster Line/Monster Line/Camera Point/Camera Length"]
+projection = 1
+size = 16.0
+
+[node name="DragAndDrop3D" type="Node3D" parent="World3D/Player Monster Line"]
 script = ExtResource("3_h2yge")
 metadata/_custom_type_script = "uid://b65182a2jjw81"
 
-[node name="Camera Point" type="Node3D" parent="."]
-transform = Transform3D(-3.7855173e-08, -0.49999997, 0.8660254, -2.1855694e-08, 0.8660253, 0.5, -1, 0, -4.371139e-08, 0, 0, 0)
+[node name="Proto Location" parent="World3D" instance=ExtResource("4_7mycd")]
 
-[node name="Camera Length" type="Node3D" parent="Camera Point"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+[node name="Game" type="Node" parent="." node_paths=PackedStringArray("battle", "world_3d", "player_line", "current_location")]
+script = ExtResource("4_lquwl")
+battle = NodePath("Battle")
+world_3d = NodePath("../World3D")
+player_line = NodePath("../World3D/Player Monster Line/Monster Line")
+current_location = NodePath("../World3D/Proto Location")
+location_template = ExtResource("4_7mycd")
+metadata/_custom_type_script = "uid://d3kcr1y2o7ue"
 
-[node name="Camera3D" type="Camera3D" parent="Camera Point/Camera Length"]
+[node name="Battle" type="Node" parent="Game"]
+script = ExtResource("5_7mycd")
+metadata/_custom_type_script = "uid://dtc6b60kuy673"

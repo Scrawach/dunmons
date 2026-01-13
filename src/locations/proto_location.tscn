@@ -1,0 +1,87 @@
+[gd_scene load_steps=6 format=3 uid="uid://dpn34cacjhahy"]
+
+[ext_resource type="Script" uid="uid://ce2hwiwg04a0o" path="res://locations/location.gd" id="1_3qhbs"]
+[ext_resource type="PackedScene" uid="uid://c51kjclr1a0mq" path="res://monsters/monster_line.tscn" id="2_u8axl"]
+[ext_resource type="PackedScene" uid="uid://cpq3bvvv5605v" path="res://monsters/monster_base.tscn" id="3_wfq2e"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_3qhbs"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_3qhbs"]
+size = Vector3(2, 2, 2)
+
+[node name="Proto Location" type="Node3D" node_paths=PackedStringArray("player_position", "enemies")]
+script = ExtResource("1_3qhbs")
+player_position = NodePath("Player Position")
+enemies = NodePath("Enemy Monster Line")
+length = 14.0
+
+[node name="Player Position" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+
+[node name="Enemy Monster Line" parent="." node_paths=PackedStringArray("monsters") instance=ExtResource("2_u8axl")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -2)
+monsters = [NodePath("Monster Base")]
+
+[node name="Monster Base" parent="Enemy Monster Line" instance=ExtResource("3_wfq2e")]
+monster_name = "TEST_ENEMY"
+
+[node name="Decorations" type="Node3D" parent="."]
+
+[node name="Floor" type="Node3D" parent="Decorations"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Decorations/Floor"]
+mesh = SubResource("PlaneMesh_3qhbs")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Decorations/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+mesh = SubResource("PlaneMesh_3qhbs")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Decorations/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+mesh = SubResource("PlaneMesh_3qhbs")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="Decorations/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6)
+mesh = SubResource("PlaneMesh_3qhbs")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Decorations/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+mesh = SubResource("PlaneMesh_3qhbs")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Decorations/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
+mesh = SubResource("PlaneMesh_3qhbs")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="Decorations/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
+mesh = SubResource("PlaneMesh_3qhbs")
+
+[node name="Walls" type="Node3D" parent="Decorations"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Decorations/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1, 0)
+mesh = SubResource("BoxMesh_3qhbs")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Decorations/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1, 2)
+mesh = SubResource("BoxMesh_3qhbs")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Decorations/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1, 4)
+mesh = SubResource("BoxMesh_3qhbs")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="Decorations/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1, 6)
+mesh = SubResource("BoxMesh_3qhbs")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Decorations/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1, -2)
+mesh = SubResource("BoxMesh_3qhbs")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Decorations/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1, -4)
+mesh = SubResource("BoxMesh_3qhbs")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="Decorations/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1, -6)
+mesh = SubResource("BoxMesh_3qhbs")

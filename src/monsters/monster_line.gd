@@ -12,12 +12,18 @@ func _ready() -> void:
 		append(monster)
 
 func get_first() -> Monster:
-	return null
+	return monsters.front()
 
 func append(monster: Monster) -> void:
 	monster.dragged.connect(_on_dragged)
 	monster.end_dragged.connect(_on_end_dragged)
 	pass
+
+func has_creatures() -> bool:
+	for monster in monsters:
+		if not monster.is_alive:
+			return false
+	return true
 
 func _on_dragged(monster: Monster) -> void:
 	## TODO: Change monster positions

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   sodipodi:docname="panel.svg"
+   inkscape:version="1.0 (4035a4fb49, 2020-05-01)"
+   id="svg8"
+   version="1.1"
+   viewBox="0 0 96.322243 59.530422"
+   height="59.530422mm"
+   width="96.322243mm">
+  <defs
+     id="defs2">
+    <filter
+       id="filter980"
+       inkscape:label="Roughen"
+       style="color-interpolation-filters:sRGB">
+      <feTurbulence
+         id="feTurbulence976"
+         result="turbulence"
+         baseFrequency="0.001 0.013"
+         seed="1"
+         numOctaves="5"
+         type="fractalNoise" />
+      <feDisplacementMap
+         id="feDisplacementMap978"
+         xChannelSelector="R"
+         yChannelSelector="G"
+         scale="8.55863"
+         in2="turbulence"
+         in="SourceGraphic" />
+    </filter>
+  </defs>
+  <sodipodi:namedview
+     inkscape:window-maximized="1"
+     inkscape:window-y="0"
+     inkscape:window-x="0"
+     inkscape:window-height="1027"
+     inkscape:window-width="1920"
+     inkscape:pagecheckerboard="true"
+     showgrid="false"
+     inkscape:document-rotation="0"
+     inkscape:current-layer="layer1"
+     inkscape:document-units="mm"
+     inkscape:cy="98.91248"
+     inkscape:cx="495.68792"
+     inkscape:zoom="1.4"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     transform="translate(-0.36601514,0.01905056)"
+     id="layer1"
+     inkscape:groupmode="layer"
+     inkscape:label="Layer 1">
+    <path
+       d="m 22.989799,4.9418178 h 51.074672 c 8.086699,0 14.59693,6.5102312 14.59693,14.5969302 v 20.414825 c 0,8.086699 -6.510231,14.596929 -14.59693,14.596929 H 22.989799 c -8.086699,0 -14.5969303,-6.51023 -14.5969303,-14.596929 V 19.538748 c 0,-8.086699 6.5102313,-14.5969302 14.5969303,-14.5969302 z"
+       style="opacity:0.996;fill:#ffffff;stroke:none;stroke-width:0.329999;stroke-miterlimit:4;stroke-dasharray:none;filter:url(#filter980)"
+       id="rect889" />
+  </g>
+</svg>

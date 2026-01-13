@@ -8,6 +8,8 @@ signal end_dragged()
 @export var dragging_speed: float = 12.0
 @export var rotation_speed: float = 10.0
 
+@onready var collision_shape_3d: CollisionShape3D = $CollisionShape3D
+
 var target_drag_position: Vector3
 var is_dragging: bool
 
@@ -22,6 +24,15 @@ func end_drag() -> void:
 func drag(target_position: Vector3) -> void:
 	dragged.emit(target_position)
 	target_drag_position = target_position
+
+func enable() -> void:
+	collision_shape_3d.disabled = false
+	monitorable = true
+
+func disable() -> void:
+	collision_shape_3d.disabled = true
+	monitorable = false
+	
 
 func _process(delta: float) -> void:
 	if not is_dragging:
