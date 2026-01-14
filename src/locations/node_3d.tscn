@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://cg4jqudogp1by"]
+[gd_scene load_steps=28 format=3 uid="uid://cg4jqudogp1by"]
 
 [ext_resource type="PackedScene" uid="uid://bnmoe0q622isu" path="res://locations/decorations.glb" id="1_0aecw"]
 [ext_resource type="PackedScene" uid="uid://bgcpcag06irx1" path="res://locations/decorations1.glb" id="1_ekmnv"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://dg0ispoldorvu" path="res://locations/demon1.glb" id="5_qhms3"]
 [ext_resource type="Shader" uid="uid://c6fkq5hwqe4ry" path="res://shaders/vignette.gdshader" id="6_nwffv"]
 [ext_resource type="Material" uid="uid://bkvyobbkqdj3l" path="res://locations/sand_mesh.tres" id="8_4psnk"]
+[ext_resource type="FontFile" uid="uid://duefpn463vu3a" path="res://fonts/Chewy-Regular.ttf" id="12_gcbea"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3mixg"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -102,6 +103,19 @@ shader_parameter/outer_radius = 1.0
 shader_parameter/vignette_strength = 0.5
 shader_parameter/dither_strength = 0.03
 shader_parameter/vignette_color = Color(0, 0, 0.13333334, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gcbea"]
+bg_color = Color(1, 1, 1, 1)
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4xkjg"]
+bg_color = Color(1, 1, 1, 1)
+draw_center = false
 
 [node name="Node3D" type="Node3D"]
 
@@ -201,6 +215,169 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -90.0
+offset_top = 113.0
+offset_right = 106.0
+offset_bottom = 206.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("12_gcbea")
+theme_override_font_sizes/font_size = 72
+text = "BATTLE"
+
+[node name="ColorRect3" type="ColorRect" parent="CanvasLayer"]
+self_modulate = Color(1, 1, 1, 0)
+offset_left = 623.0
+offset_top = 294.0
+offset_right = 672.0
+offset_bottom = 306.0
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer/ColorRect3"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -25.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.97, 0.029099973, 0.029099973, 1)
+
+[node name="PanelContainer2" type="PanelContainer" parent="CanvasLayer/ColorRect3"]
+visible = false
+layout_mode = 0
+offset_left = -14.0
+offset_right = -1.0
+offset_bottom = 12.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_gcbea")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/ColorRect3/PanelContainer2"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="PanelContainer2" type="PanelContainer" parent="CanvasLayer/ColorRect3/PanelContainer2/MarginContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4xkjg")
+
+[node name="Control" type="Control" parent="CanvasLayer/ColorRect3/PanelContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/ColorRect3/PanelContainer2/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -2.5
+offset_top = -4.0
+offset_right = 55.5
+offset_bottom = 80.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.095, 0.095)
+theme_override_fonts/font = ExtResource("12_gcbea")
+theme_override_font_sizes/font_size = 65
+text = "10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/ColorRect3"]
+modulate = Color(0.8, 0.16, 0.16, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_gcbea")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/ColorRect3/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="PanelContainer2" type="PanelContainer" parent="CanvasLayer/ColorRect3/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4xkjg")
+
+[node name="Control" type="Control" parent="CanvasLayer/ColorRect3/PanelContainer/MarginContainer/PanelContainer2"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/ColorRect3/PanelContainer/MarginContainer/PanelContainer2/Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 4.0
+theme_override_constants/separation = 2
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/ColorRect3/PanelContainer/MarginContainer/PanelContainer2/Control/HBoxContainer"]
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/ColorRect3"]
+visible = false
+layout_mode = 0
+offset_top = -6.0
+offset_right = 49.0
+offset_bottom = -2.0
+color = Color(0.49, 0.49, 0.49, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="CanvasLayer/ColorRect3/ColorRect"]
+layout_mode = 0
+offset_right = 37.0
+offset_bottom = 4.0
+color = Color(0.21233337, 0.49, 0, 1)
+
+[node name="ColorRect4" type="ColorRect" parent="CanvasLayer"]
+visible = false
+self_modulate = Color(1, 1, 1, 0)
+offset_left = 623.0
+offset_top = 374.0
+offset_right = 672.0
+offset_bottom = 386.0
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer/ColorRect4"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -25.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.97, 0.029099973, 0.029099973, 1)
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/ColorRect4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_gcbea")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/ColorRect4/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="PanelContainer2" type="PanelContainer" parent="CanvasLayer/ColorRect4/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4xkjg")
 
 [editable path="sand"]
 [editable path="decorations1/demon"]
