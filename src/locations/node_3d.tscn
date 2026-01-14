@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://cg4jqudogp1by"]
+[gd_scene load_steps=33 format=3 uid="uid://cg4jqudogp1by"]
 
 [ext_resource type="PackedScene" uid="uid://bnmoe0q622isu" path="res://locations/decorations.glb" id="1_0aecw"]
 [ext_resource type="PackedScene" uid="uid://bgcpcag06irx1" path="res://locations/decorations1.glb" id="1_ekmnv"]
@@ -10,6 +10,7 @@
 [ext_resource type="Material" uid="uid://dlelrtvcgwl50" path="res://locations/sand.tres" id="5_nwffv"]
 [ext_resource type="PackedScene" uid="uid://dg0ispoldorvu" path="res://locations/demon1.glb" id="5_qhms3"]
 [ext_resource type="Shader" uid="uid://c6fkq5hwqe4ry" path="res://shaders/vignette.gdshader" id="6_nwffv"]
+[ext_resource type="PackedScene" uid="uid://drcqylqookeag" path="res://locations/circle_zone.glb" id="7_4xkjg"]
 [ext_resource type="Material" uid="uid://bkvyobbkqdj3l" path="res://locations/sand_mesh.tres" id="8_4psnk"]
 [ext_resource type="FontFile" uid="uid://duefpn463vu3a" path="res://fonts/Chewy-Regular.ttf" id="12_gcbea"]
 
@@ -89,6 +90,48 @@ _data = {
 &"idle": SubResource("Animation_wi035")
 }
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4xkjg"]
+shading_mode = 0
+albedo_color = Color(0.63, 0, 0, 0.627451)
+
+[sub_resource type="Animation" id="Animation_4xkjg"]
+resource_name = "idle"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1.3, 1, 1.3), Vector3(1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_yaynj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4g5xl"]
+_data = {
+&"RESET": SubResource("Animation_yaynj"),
+&"idle": SubResource("Animation_4xkjg")
+}
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e161c"]
 shading_mode = 0
 albedo_color = Color(0.82191056, 2.623126e-06, 7.70092e-07, 1)
@@ -161,6 +204,20 @@ libraries = {
 }
 autoplay = "idle"
 
+[node name="circle_zone" parent="decorations1/demon" instance=ExtResource("7_4xkjg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.006287575, 0.07365811, 0.28929377)
+
+[node name="Circle" parent="decorations1/demon/circle_zone" index="0"]
+transform = Transform3D(0.9681565, 0, -0.25034624, 0, 1.0000001, 0, 0.25034624, 0, 0.9681565, 0, -0.0747588, 0)
+surface_material_override/0 = SubResource("StandardMaterial3D_4xkjg")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="decorations1/demon/circle_zone"]
+libraries = {
+&"": SubResource("AnimationLibrary_4g5xl")
+}
+autoplay = "idle"
+speed_scale = 0.3
+
 [node name="decorations" parent="." instance=ExtResource("1_0aecw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 0)
 
@@ -176,19 +233,6 @@ visible = false
 [node name="Demon_001" parent="decorations/demon1" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_e161c")
 
-[node name="Camera Point" type="Node3D" parent="."]
-transform = Transform3D(0.49999997, -0.61237246, 0.61237246, 0, 0.70710677, 0.70710677, -0.86602545, -0.35355335, 0.35355335, 0, 0, -7)
-visible = false
-
-[node name="Camera Length" type="Node3D" parent="Camera Point"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 16)
-
-[node name="Camera3D" type="Camera3D" parent="Camera Point/Camera Length"]
-projection = 1
-size = 25.0
-near = 0.1
-far = 30.0
-
 [node name="Camera Point2" type="Node3D" parent="."]
 transform = Transform3D(0.49999997, -0.61237246, 0.61237246, 0, 0.70710677, 0.70710677, -0.86602545, -0.35355335, 0.35355335, 0, 0, -7)
 
@@ -196,6 +240,7 @@ transform = Transform3D(0.49999997, -0.61237246, 0.61237246, 0, 0.70710677, 0.70
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 16)
 
 [node name="Camera3D" type="Camera3D" parent="Camera Point2/Camera Length"]
+cull_mask = 1048573
 projection = 1
 size = 25.0
 near = 1.0
@@ -379,7 +424,139 @@ theme_override_constants/margin_bottom = 2
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_4xkjg")
 
+[node name="Monster Info Panel" type="PanelContainer" parent="CanvasLayer"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Monster Info Panel"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Monster Info Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Monster Info Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Monster Info Panel/VBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer/Monster Info Panel/VBoxContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 140)
+layout_mode = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="CanvasLayer/Monster Info Panel/VBoxContainer/MarginContainer/HBoxContainer/SubViewportContainer"]
+handle_input_locally = false
+msaa_3d = 2
+size = Vector2i(100, 140)
+render_target_update_mode = 0
+
+[node name="demon" parent="CanvasLayer/Monster Info Panel/VBoxContainer/MarginContainer/HBoxContainer/SubViewportContainer/SubViewport" instance=ExtResource("3_wi035")]
+transform = Transform3D(0.9940982, 0, -0.10848519, 0, 1, 0, 0.10848519, 0, 0.9940982, 1.0226779, 0.3036059, -8.169632)
+
+[node name="Sphere_002" parent="CanvasLayer/Monster Info Panel/VBoxContainer/MarginContainer/HBoxContainer/SubViewportContainer/SubViewport/demon" index="0"]
+transform = Transform3D(0.99424297, 0, 0.10714908, 0, 1, 0, -0.10714908, 0, 0.99424297, 0, 0, 0)
+layers = 2
+surface_material_override/0 = SubResource("StandardMaterial3D_qhms3")
+surface_material_override/1 = SubResource("StandardMaterial3D_4psnk")
+surface_material_override/2 = SubResource("StandardMaterial3D_h1vth")
+surface_material_override/3 = SubResource("StandardMaterial3D_ekmnv")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Monster Info Panel/VBoxContainer/MarginContainer/HBoxContainer/SubViewportContainer/SubViewport/demon"]
+libraries = {
+&"": SubResource("AnimationLibrary_vmate")
+}
+autoplay = "idle"
+
+[node name="Camera3D" type="Camera3D" parent="CanvasLayer/Monster Info Panel/VBoxContainer/MarginContainer/HBoxContainer/SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.6521173, -5.3624015)
+cull_mask = 1048574
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Monster Info Panel/VBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Monster Info Panel/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Monster Info Panel/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Monster Info Panel/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/PanelContainer"]
+layout_mode = 2
+text = "HP"
+
+[node name="Label" type="Label" parent="CanvasLayer/Monster Info Panel/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+text = "100"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/Monster Info Panel/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Monster Info Panel/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Monster Info Panel/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer2/PanelContainer"]
+layout_mode = 2
+text = "HP"
+
+[node name="Label" type="Label" parent="CanvasLayer/Monster Info Panel/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+text = "100"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="CanvasLayer/Monster Info Panel/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Monster Info Panel/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Monster Info Panel/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer3/PanelContainer"]
+layout_mode = 2
+text = "HP"
+
+[node name="Label" type="Label" parent="CanvasLayer/Monster Info Panel/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+text = "100"
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="CanvasLayer/Monster Info Panel/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Monster Info Panel/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer4"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Monster Info Panel/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer4/PanelContainer"]
+layout_mode = 2
+text = "HP"
+
+[node name="Label" type="Label" parent="CanvasLayer/Monster Info Panel/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer4"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+text = "100"
+
 [editable path="sand"]
 [editable path="decorations1/demon"]
+[editable path="decorations1/demon/circle_zone"]
 [editable path="decorations"]
 [editable path="decorations/demon1"]
+[editable path="CanvasLayer/Monster Info Panel/VBoxContainer/MarginContainer/HBoxContainer/SubViewportContainer/SubViewport/demon"]
