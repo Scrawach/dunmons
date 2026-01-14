@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c4x78xdv4cpx4"]
+[gd_scene load_steps=9 format=3 uid="uid://c4x78xdv4cpx4"]
 
 [ext_resource type="PackedScene" uid="uid://cpq3bvvv5605v" path="res://monsters/monster_base.tscn" id="1_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://2dpaau0tgd4s" path="res://player/ui/player_hud.tscn" id="1_272bh"]
@@ -8,33 +8,32 @@
 [ext_resource type="Script" uid="uid://d3kcr1y2o7ue" path="res://gameloop/game.gd" id="4_lquwl"]
 [ext_resource type="Script" uid="uid://dtc6b60kuy673" path="res://gameloop/battle/battle.gd" id="5_7mycd"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7dm0k"]
-sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
-ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
-
-[sub_resource type="Sky" id="Sky_ig7tw"]
-sky_material = SubResource("ProceduralSkyMaterial_7dm0k")
-
-[sub_resource type="Environment" id="Environment_0xm2m"]
-background_mode = 2
-sky = SubResource("Sky_ig7tw")
-tonemap_mode = 2
+[sub_resource type="Environment" id="Environment_272bh"]
+ambient_light_source = 1
+fog_mode = 1
+fog_light_color = Color(0.8980392, 0.41960785, 0.43529412, 1)
+fog_density = 1.0
+fog_height = -0.1
+fog_height_density = 2.0
+fog_depth_curve = 15.454974
+fog_depth_begin = 0.0
+fog_depth_end = 20.0
 
 [node name="Main" type="Node"]
 
 [node name="Player HUD" parent="." instance=ExtResource("1_272bh")]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_0xm2m")
+environment = SubResource("Environment_272bh")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
-shadow_enabled = true
+transform = Transform3D(0.9438529, 0.3228734, -0.06996109, 0, 0.21176836, 0.9773199, 0.33036616, -0.9224462, 0.19987816, 4.772633, 0, -11.328466)
 
 [node name="World3D" type="Node3D" parent="."]
 
 [node name="Player Monster Line" type="Node3D" parent="World3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+visible = false
 
 [node name="Monster Line" parent="World3D/Player Monster Line" node_paths=PackedStringArray("monsters") instance=ExtResource("2_h2yge")]
 monsters = [NodePath("Monster Base")]
@@ -43,12 +42,13 @@ monsters = [NodePath("Monster Base")]
 monster_name = "TEST_PLAYER"
 
 [node name="Camera Point" type="Node3D" parent="World3D/Player Monster Line/Monster Line"]
-transform = Transform3D(-3.7855173e-08, -0.49999997, 0.8660254, -2.1855694e-08, 0.8660253, 0.5, -1, 0, -4.371139e-08, 0, 0, -2)
+transform = Transform3D(0.49999997, -0.36599815, 0.7848855, 0, 0.9063077, 0.42261824, -0.86602545, -0.2113091, 0.45315382, 0, 0, -2)
 
 [node name="Camera Length" type="Node3D" parent="World3D/Player Monster Line/Monster Line/Camera Point"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6)
 
 [node name="Camera3D" type="Camera3D" parent="World3D/Player Monster Line/Monster Line/Camera Point/Camera Length"]
+transform = Transform3D(1, 0, 0, 0, 1.0000001, -2.9802322e-08, 0, 0, 1, -2.5484294e-07, 0.09807634, 5.8301277)
 projection = 1
 size = 16.0
 

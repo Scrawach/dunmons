@@ -1,8 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://dpn34cacjhahy"]
+[gd_scene load_steps=12 format=3 uid="uid://dpn34cacjhahy"]
 
 [ext_resource type="Script" uid="uid://ce2hwiwg04a0o" path="res://locations/location.gd" id="1_3qhbs"]
 [ext_resource type="PackedScene" uid="uid://c51kjclr1a0mq" path="res://monsters/monster_line.tscn" id="2_u8axl"]
 [ext_resource type="PackedScene" uid="uid://cpq3bvvv5605v" path="res://monsters/monster_base.tscn" id="3_wfq2e"]
+[ext_resource type="PackedScene" uid="uid://bjfkvi22scmt6" path="res://locations/floor.glb" id="4_wfq2e"]
+[ext_resource type="PackedScene" uid="uid://k2o0djqhmlo8" path="res://locations/wall.glb" id="5_xv7ww"]
+[ext_resource type="Material" uid="uid://bkccc1blayxxl" path="res://locations/M_stones.tres" id="6_xv7ww"]
+[ext_resource type="Material" uid="uid://bqdbicwtofo2q" path="res://locations/M_platform.tres" id="7_nj2hx"]
+[ext_resource type="Material" uid="uid://b42p5sxbjdw2x" path="res://locations/M_column.tres" id="8_wwp1l"]
+[ext_resource type="PackedScene" uid="uid://1itty7sy2bp8" path="res://locations/dungeon_base_part.tscn" id="9_c4knv"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_3qhbs"]
 
@@ -20,6 +26,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
 
 [node name="Enemy Monster Line" parent="." node_paths=PackedStringArray("monsters") instance=ExtResource("2_u8axl")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -2)
+visible = false
 monsters = [NodePath("Monster Base")]
 
 [node name="Monster Base" parent="Enemy Monster Line" instance=ExtResource("3_wfq2e")]
@@ -28,60 +35,200 @@ monster_name = "TEST_ENEMY"
 [node name="Decorations" type="Node3D" parent="."]
 
 [node name="Floor" type="Node3D" parent="Decorations"]
+visible = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Decorations/Floor"]
+visible = false
 mesh = SubResource("PlaneMesh_3qhbs")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="Decorations/Floor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+visible = false
 mesh = SubResource("PlaneMesh_3qhbs")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="Decorations/Floor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+visible = false
 mesh = SubResource("PlaneMesh_3qhbs")
 
 [node name="MeshInstance3D7" type="MeshInstance3D" parent="Decorations/Floor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6)
+visible = false
 mesh = SubResource("PlaneMesh_3qhbs")
 
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="Decorations/Floor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+visible = false
 mesh = SubResource("PlaneMesh_3qhbs")
 
 [node name="MeshInstance3D5" type="MeshInstance3D" parent="Decorations/Floor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
+visible = false
 mesh = SubResource("PlaneMesh_3qhbs")
 
 [node name="MeshInstance3D6" type="MeshInstance3D" parent="Decorations/Floor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
+visible = false
 mesh = SubResource("PlaneMesh_3qhbs")
 
+[node name="floor3" parent="Decorations/Floor" instance=ExtResource("4_wfq2e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.5169818, -6)
+
+[node name="Platform_Base" parent="Decorations/Floor/floor3" index="0"]
+surface_material_override/0 = ExtResource("7_nj2hx")
+
+[node name="Floor_Base" parent="Decorations/Floor/floor3" index="1"]
+surface_material_override/0 = ExtResource("6_xv7ww")
+
+[node name="wall3" parent="Decorations/Floor/floor3" instance=ExtResource("5_xv7ww")]
+
+[node name="Wall_Base" parent="Decorations/Floor/floor3/wall3" index="0"]
+surface_material_override/0 = ExtResource("6_xv7ww")
+
+[node name="Platform_Wall_002" parent="Decorations/Floor/floor3/wall3" index="1"]
+surface_material_override/0 = ExtResource("7_nj2hx")
+
+[node name="Platform_Wall" parent="Decorations/Floor/floor3/wall3" index="2"]
+surface_material_override/0 = ExtResource("7_nj2hx")
+
+[node name="Platform_Wall_001" parent="Decorations/Floor/floor3/wall3" index="3"]
+surface_material_override/0 = ExtResource("7_nj2hx")
+
+[node name="Wall_Column" parent="Decorations/Floor/floor3/wall3" index="4"]
+surface_material_override/0 = ExtResource("8_wwp1l")
+
+[node name="Wall_Top" parent="Decorations/Floor/floor3/wall3" index="5"]
+surface_material_override/0 = ExtResource("8_wwp1l")
+
+[node name="Wall_Bot" parent="Decorations/Floor/floor3/wall3" index="6"]
+surface_material_override/0 = ExtResource("8_wwp1l")
+
+[node name="floor4" parent="Decorations/Floor" instance=ExtResource("4_wfq2e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.5169818, 0)
+
+[node name="Platform_Base" parent="Decorations/Floor/floor4" index="0"]
+surface_material_override/0 = ExtResource("7_nj2hx")
+
+[node name="Floor_Base" parent="Decorations/Floor/floor4" index="1"]
+surface_material_override/0 = ExtResource("6_xv7ww")
+
+[node name="wall3" parent="Decorations/Floor/floor4" instance=ExtResource("5_xv7ww")]
+
+[node name="Wall_Base" parent="Decorations/Floor/floor4/wall3" index="0"]
+surface_material_override/0 = ExtResource("6_xv7ww")
+
+[node name="Platform_Wall_002" parent="Decorations/Floor/floor4/wall3" index="1"]
+surface_material_override/0 = ExtResource("7_nj2hx")
+
+[node name="Platform_Wall" parent="Decorations/Floor/floor4/wall3" index="2"]
+surface_material_override/0 = ExtResource("7_nj2hx")
+
+[node name="Platform_Wall_001" parent="Decorations/Floor/floor4/wall3" index="3"]
+surface_material_override/0 = ExtResource("7_nj2hx")
+
+[node name="Wall_Column" parent="Decorations/Floor/floor4/wall3" index="4"]
+surface_material_override/0 = ExtResource("8_wwp1l")
+
+[node name="Wall_Top" parent="Decorations/Floor/floor4/wall3" index="5"]
+surface_material_override/0 = ExtResource("8_wwp1l")
+
+[node name="Wall_Bot" parent="Decorations/Floor/floor4/wall3" index="6"]
+surface_material_override/0 = ExtResource("8_wwp1l")
+
+[node name="floor5" parent="Decorations/Floor" instance=ExtResource("4_wfq2e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.5169818, 6)
+
+[node name="Platform_Base" parent="Decorations/Floor/floor5" index="0"]
+surface_material_override/0 = ExtResource("7_nj2hx")
+
+[node name="Floor_Base" parent="Decorations/Floor/floor5" index="1"]
+surface_material_override/0 = ExtResource("6_xv7ww")
+
+[node name="wall3" parent="Decorations/Floor/floor5" instance=ExtResource("5_xv7ww")]
+
+[node name="Wall_Base" parent="Decorations/Floor/floor5/wall3" index="0"]
+surface_material_override/0 = ExtResource("6_xv7ww")
+
+[node name="Platform_Wall_002" parent="Decorations/Floor/floor5/wall3" index="1"]
+surface_material_override/0 = ExtResource("7_nj2hx")
+
+[node name="Platform_Wall" parent="Decorations/Floor/floor5/wall3" index="2"]
+surface_material_override/0 = ExtResource("7_nj2hx")
+
+[node name="Platform_Wall_001" parent="Decorations/Floor/floor5/wall3" index="3"]
+surface_material_override/0 = ExtResource("7_nj2hx")
+
+[node name="Wall_Column" parent="Decorations/Floor/floor5/wall3" index="4"]
+surface_material_override/0 = ExtResource("8_wwp1l")
+
+[node name="Wall_Top" parent="Decorations/Floor/floor5/wall3" index="5"]
+surface_material_override/0 = ExtResource("8_wwp1l")
+
+[node name="Wall_Bot" parent="Decorations/Floor/floor5/wall3" index="6"]
+surface_material_override/0 = ExtResource("8_wwp1l")
+
 [node name="Walls" type="Node3D" parent="Decorations"]
+visible = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Decorations/Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1, 0)
+visible = false
 mesh = SubResource("BoxMesh_3qhbs")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="Decorations/Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1, 2)
+visible = false
 mesh = SubResource("BoxMesh_3qhbs")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="Decorations/Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1, 4)
+visible = false
 mesh = SubResource("BoxMesh_3qhbs")
 
 [node name="MeshInstance3D7" type="MeshInstance3D" parent="Decorations/Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1, 6)
+visible = false
 mesh = SubResource("BoxMesh_3qhbs")
 
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="Decorations/Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1, -2)
+visible = false
 mesh = SubResource("BoxMesh_3qhbs")
 
 [node name="MeshInstance3D5" type="MeshInstance3D" parent="Decorations/Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1, -4)
+visible = false
 mesh = SubResource("BoxMesh_3qhbs")
 
 [node name="MeshInstance3D6" type="MeshInstance3D" parent="Decorations/Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1, -6)
+visible = false
 mesh = SubResource("BoxMesh_3qhbs")
+
+[node name="Dungeon Base Part" parent="Decorations" instance=ExtResource("9_c4knv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.7235122, -6)
+
+[node name="Dungeon Base Part5" parent="Decorations" instance=ExtResource("9_c4knv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.7235122, -12)
+
+[node name="Dungeon Base Part6" parent="Decorations" instance=ExtResource("9_c4knv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.7235122, -18)
+
+[node name="Dungeon Base Part7" parent="Decorations" instance=ExtResource("9_c4knv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.7235122, 18)
+
+[node name="Dungeon Base Part2" parent="Decorations" instance=ExtResource("9_c4knv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.7235122, 0)
+
+[node name="Dungeon Base Part3" parent="Decorations" instance=ExtResource("9_c4knv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.7235122, 6)
+
+[node name="Dungeon Base Part4" parent="Decorations" instance=ExtResource("9_c4knv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.7235122, 12)
+
+[editable path="Decorations/Floor/floor3"]
+[editable path="Decorations/Floor/floor3/wall3"]
+[editable path="Decorations/Floor/floor4"]
+[editable path="Decorations/Floor/floor4/wall3"]
+[editable path="Decorations/Floor/floor5"]
+[editable path="Decorations/Floor/floor5/wall3"]

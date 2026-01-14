@@ -1,0 +1,208 @@
+[gd_scene load_steps=25 format=3 uid="uid://cg4jqudogp1by"]
+
+[ext_resource type="PackedScene" uid="uid://bnmoe0q622isu" path="res://locations/decorations.glb" id="1_0aecw"]
+[ext_resource type="PackedScene" uid="uid://bgcpcag06irx1" path="res://locations/decorations1.glb" id="1_ekmnv"]
+[ext_resource type="Script" uid="uid://c1wht4xtvlpme" path="res://locations/location_part.gd" id="2_e161c"]
+[ext_resource type="PackedScene" uid="uid://buwdmh5r15ib3" path="res://locations/plant.glb" id="3_e161c"]
+[ext_resource type="PackedScene" uid="uid://c8qaxe7xdeoiv" path="res://locations/demon.glb" id="3_wi035"]
+[ext_resource type="Material" uid="uid://cgil37e5yjuyd" path="res://locations/sand_stone.tres" id="4_4psnk"]
+[ext_resource type="PackedScene" uid="uid://cdk4n2qtr0sd8" path="res://locations/sand.glb" id="4_vmate"]
+[ext_resource type="Material" uid="uid://dlelrtvcgwl50" path="res://locations/sand.tres" id="5_nwffv"]
+[ext_resource type="PackedScene" uid="uid://dg0ispoldorvu" path="res://locations/demon1.glb" id="5_qhms3"]
+[ext_resource type="Shader" uid="uid://c6fkq5hwqe4ry" path="res://shaders/vignette.gdshader" id="6_nwffv"]
+[ext_resource type="Material" uid="uid://bkvyobbkqdj3l" path="res://locations/sand_mesh.tres" id="8_4psnk"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3mixg"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_wi035"]
+sky_material = SubResource("ProceduralSkyMaterial_3mixg")
+
+[sub_resource type="Environment" id="Environment_ho76u"]
+background_mode = 1
+background_color = Color(0.95686275, 0.63529414, 0.38039216, 1)
+sky = SubResource("Sky_wi035")
+ambient_light_source = 2
+ambient_light_color = Color(0.72156864, 0.34901962, 0.34509805, 1)
+ambient_light_energy = 0.5
+tonemap_mode = 2
+fog_enabled = true
+fog_mode = 1
+fog_light_color = Color(0.95686275, 0.63529414, 0.38039216, 1)
+fog_light_energy = 0.0
+fog_density = 0.8719
+fog_depth_curve = 0.7320431
+fog_depth_begin = 0.0
+fog_depth_end = 50.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qhms3"]
+shading_mode = 0
+albedo_color = Color(0.61, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4psnk"]
+shading_mode = 0
+albedo_color = Color(0.76862746, 0.15686275, 0.2784314, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h1vth"]
+shading_mode = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ekmnv"]
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_ho76u"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sphere_002:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_wi035"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sphere_002:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.16666669, 0.6333333, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1.1, 0.9, 1.1), Vector3(0.9, 1.1, 0.9), Vector3(1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vmate"]
+_data = {
+&"RESET": SubResource("Animation_ho76u"),
+&"idle": SubResource("Animation_wi035")
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e161c"]
+shading_mode = 0
+albedo_color = Color(0.82191056, 2.623126e-06, 7.70092e-07, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_0aecw"]
+size = Vector2(100, 100)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qhms3"]
+shader = ExtResource("6_nwffv")
+shader_parameter/inner_radius = 0.2
+shader_parameter/outer_radius = 1.0
+shader_parameter/vignette_strength = 0.5
+shader_parameter/dither_strength = 0.03
+shader_parameter/vignette_color = Color(0, 0, 0.13333334, 1)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.57357645, -0.70940644, 0.40957597, 0, 0.4999999, 0.86602545, -0.819152, 0.49673173, -0.2867882, 7.371601, 0, -5.653407)
+light_angular_distance = 5.45
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ho76u")
+
+[node name="sand" parent="." instance=ExtResource("4_vmate")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 0)
+
+[node name="Sand" parent="sand" index="0"]
+surface_material_override/0 = ExtResource("8_4psnk")
+
+[node name="decorations1" parent="." instance=ExtResource("1_ekmnv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 0)
+script = ExtResource("2_e161c")
+
+[node name="plant" parent="decorations1" instance=ExtResource("3_e161c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.575714, 0, 2.766708)
+
+[node name="plant2" parent="decorations1" instance=ExtResource("3_e161c")]
+transform = Transform3D(0.63317823, 0, 0.774006, 0, 1, 0, -0.774006, 0, 0.63317823, -7.7005033, 0, -13.224989)
+
+[node name="plant4" parent="decorations1" instance=ExtResource("3_e161c")]
+transform = Transform3D(0.16098122, 0.016092533, -0.40917724, -0.0058916607, 0.4397056, 0.014975246, 0.4094512, 0, 0.161089, -4.2393503, 0.4518323, -6.846324)
+
+[node name="demon" parent="decorations1" instance=ExtResource("3_wi035")]
+transform = Transform3D(0.9151569, 0, 0.40309817, 0, 1, 0, -0.40309817, 0, 0.9151569, 1.0226779, 0.3036059, -8.281776)
+
+[node name="Sphere_002" parent="decorations1/demon" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_qhms3")
+surface_material_override/1 = SubResource("StandardMaterial3D_4psnk")
+surface_material_override/2 = SubResource("StandardMaterial3D_h1vth")
+surface_material_override/3 = SubResource("StandardMaterial3D_ekmnv")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="decorations1/demon"]
+libraries = {
+&"": SubResource("AnimationLibrary_vmate")
+}
+autoplay = "idle"
+
+[node name="decorations" parent="." instance=ExtResource("1_0aecw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 0)
+
+[node name="Decorations" parent="decorations" index="0"]
+transform = Transform3D(0.99639285, 0, -0.08485958, 0, 1, 0, 0.08485958, 0, 0.99639285, 1.1935762, 0, -0.88512385)
+visible = false
+surface_material_override/0 = ExtResource("4_4psnk")
+
+[node name="demon1" parent="decorations" instance=ExtResource("5_qhms3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6.585188)
+visible = false
+
+[node name="Demon_001" parent="decorations/demon1" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_e161c")
+
+[node name="Camera Point" type="Node3D" parent="."]
+transform = Transform3D(0.49999997, -0.61237246, 0.61237246, 0, 0.70710677, 0.70710677, -0.86602545, -0.35355335, 0.35355335, 0, 0, -7)
+visible = false
+
+[node name="Camera Length" type="Node3D" parent="Camera Point"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 16)
+
+[node name="Camera3D" type="Camera3D" parent="Camera Point/Camera Length"]
+projection = 1
+size = 25.0
+near = 0.1
+far = 30.0
+
+[node name="Camera Point2" type="Node3D" parent="."]
+transform = Transform3D(0.49999997, -0.61237246, 0.61237246, 0, 0.70710677, 0.70710677, -0.86602545, -0.35355335, 0.35355335, 0, 0, -7)
+
+[node name="Camera Length" type="Node3D" parent="Camera Point2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 16)
+
+[node name="Camera3D" type="Camera3D" parent="Camera Point2/Camera Length"]
+projection = 1
+size = 25.0
+near = 1.0
+far = 30.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
+mesh = SubResource("PlaneMesh_0aecw")
+surface_material_override/0 = ExtResource("5_nwffv")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_qhms3")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[editable path="sand"]
+[editable path="decorations1/demon"]
+[editable path="decorations"]
+[editable path="decorations/demon1"]
