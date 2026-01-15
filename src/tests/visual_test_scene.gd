@@ -23,4 +23,4 @@ func _unhandled_input(event: InputEvent) -> void:
 		elif event.keycode == KEY_2:
 			dummy.die()
 		elif event.keycode == KEY_3:
-			dummy.revive()
+			dummy.restore_health(randi_range(1, 3))

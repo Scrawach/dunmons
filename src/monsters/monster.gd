@@ -48,6 +48,13 @@ func take_damage(value: int) -> void:
 		die()
 	monster_world_ui.update_health_progress_bar(float(health) / data.health)
 
+func restore_health(value: int) -> void:
+	if is_death:
+		is_death = false
+	health = min(data.health, health + value)
+	stat_changed.emit(self)
+	monster_world_ui.update_health_progress_bar(float(health) / data.health)
+
 func attack_async(_target: Monster) -> void:
 	stamina = 0.0
 	base_animation_tree.set("parameters/Attack/request", 1)
