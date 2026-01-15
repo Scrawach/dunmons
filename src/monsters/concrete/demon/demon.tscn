@@ -19,4 +19,7 @@ body = NodePath("../Model Root/demon/Demon_001")
 [node name="Emotion" parent="." index="2" node_paths=PackedStringArray("face")]
 face = NodePath("../Model Root/demon/Demon_001/Face")
 
+[node name="HitEffect" parent="." index="4" node_paths=PackedStringArray("body")]
+body = NodePath("../Model Root/demon/Demon_001")
+
 [editable path="Model Root/demon"]

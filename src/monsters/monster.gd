@@ -3,6 +3,7 @@ extends Node3D
 
 signal stat_changed(monster: Monster)
 signal died(monster: Monster)
+signal hit()
 
 @export var data: MonsterInfo
 @export var hit_scene: PackedScene
@@ -43,6 +44,7 @@ func take_damage(value: int) -> void:
 		return
 	
 	spawn_floating_damage_numbers(value)
+	hit.emit()
 	health = max(0, health - value)
 	stat_changed.emit(self)
 	if health <= 0:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://cpq3bvvv5605v"]
+[gd_scene load_steps=38 format=3 uid="uid://cpq3bvvv5605v"]
 
 [ext_resource type="Script" uid="uid://brh32yejypr87" path="res://monsters/monster.gd" id="1_qg1te"]
 [ext_resource type="Resource" uid="uid://tch0ei3beu1s" path="res://monsters/data/default.tres" id="2_jus1s"]
@@ -7,7 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://dkxg5n17pg2fn" path="res://monsters/assets/faces.svg" id="6_yonl5"]
 [ext_resource type="Texture2D" uid="uid://c78uywdwojndk" path="res://monsters/assets/faces_blink.svg" id="7_p7hi2"]
 [ext_resource type="PackedScene" uid="uid://0afkj1wx1g6h" path="res://monsters/ui/monster_world_ui.tscn" id="8_janau"]
+[ext_resource type="Script" uid="uid://xixq75xd6wy6" path="res://monsters/hit_effect.gd" id="9_cam5p"]
 [ext_resource type="PackedScene" uid="uid://b2gw3gp2wjl8j" path="res://common/hit_label_3d.tscn" id="9_etepe"]
+[ext_resource type="Material" uid="uid://cm5tfcoeautd5" path="res://monsters/assets/M_hit.tres" id="10_hx5qy"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_janau"]
 
@@ -325,3 +327,9 @@ metadata/_custom_type_script = "uid://psf2sui574x3"
 [node name="Monster World UI" parent="." node_paths=PackedStringArray("monster") instance=ExtResource("8_janau")]
 unique_name_in_owner = true
 monster = NodePath("..")
+
+[node name="HitEffect" type="Node" parent="." node_paths=PackedStringArray("monster")]
+script = ExtResource("9_cam5p")
+monster = NodePath("..")
+material = ExtResource("10_hx5qy")
+metadata/_custom_type_script = "uid://xixq75xd6wy6"

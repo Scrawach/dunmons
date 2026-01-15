@@ -18,4 +18,7 @@ body = NodePath("../Model Root/golem/Stone Golem")
 [node name="Emotion" parent="." index="2" node_paths=PackedStringArray("face")]
 face = NodePath("../Model Root/golem/Stone Golem/Face_001")
 
+[node name="HitEffect" parent="." index="4" node_paths=PackedStringArray("body")]
+body = NodePath("../Model Root/golem/Stone Golem")
+
 [editable path="Model Root/golem"]
