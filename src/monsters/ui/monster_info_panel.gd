@@ -1,5 +1,5 @@
 class_name MonsterInfoPanel
-extends PanelContainer
+extends SmoothPanel
 
 const MONSTER_HEIGHT_OFFSET: float = 85
 const TAG_SCENE := preload("res://common/tags/ui/tag_container.tscn")
@@ -23,7 +23,7 @@ func initialize(data: MonsterInfo) -> void:
 	description_label.text = data.description
 	attack_stat.text = str(data.attack)
 	health_stat.text = str(data.health)
-	speed_stat.text = str(data.speed)
+	speed_stat.text = "%0.2f" % data.stamina
 	add_tags(data.tags)
 
 func move_to(viewport_position: Vector2) -> void:
@@ -31,7 +31,6 @@ func move_to(viewport_position: Vector2) -> void:
 	viewport_position.x -= center_point
 	viewport_position.y -= size.y + MONSTER_HEIGHT_OFFSET
 	position = viewport_position
-	pass
 
 func add_tags(tags: Array[Tags.Type]) -> void:
 	for tag in tags:
@@ -57,6 +56,7 @@ func add_tag_description(tag_name: String, color: Color, description: String) ->
 	description_instance.tag_description = description
 
 func clear() -> void:
+	reset_size()
 	for child in tags_container.get_children():
 		child.queue_free()
 	for child in tag_info_container.get_children():

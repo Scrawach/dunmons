@@ -19,13 +19,14 @@ func _on_monster_hover(monster: Monster) -> void:
 	monster_info_panel.clear()
 	var viewport_position := get_viewport().get_camera_3d().unproject_position(monster.position)
 	monster_info_panel.initialize(monster.data)
-	monster_info_panel.show()
+	monster_info_panel.smooth_show(0.25)
 	
 	await get_tree().process_frame
+	monster_info_panel.reset_size()
 	monster_info_panel.move_to(viewport_position)
 
 func _on_monster_unhover(_monster: Monster) -> void:
-	monster_info_panel.hide()
+	monster_info_panel.smooth_hide(0.15)
 
 func show_dialogue(message: String) -> void:
 	dialogue_panel.smooth_show()

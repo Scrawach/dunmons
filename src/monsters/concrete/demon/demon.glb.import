@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://uq7q7y5xuccg"
-path="res://.godot/imported/golem.glb-dfe00eca60068e8f5c12f89fda13fcfe.scn"
+uid="uid://bbcvtd7mxnui3"
+path="res://.godot/imported/demon.glb-8f81f1ac4017fcab00bcac76a700cda5.scn"
 
 [deps]
 
-source_file="res://monsters/assets/golem.glb"
-dest_files=["res://.godot/imported/golem.glb-dfe00eca60068e8f5c12f89fda13fcfe.scn"]
+source_file="res://monsters/concrete/demon/demon.glb"
+dest_files=["res://.godot/imported/demon.glb-8f81f1ac4017fcab00bcac76a700cda5.scn"]
 
 [params]
 
@@ -44,10 +44,10 @@ _subresources={
 "use_external/fallback_path": "res://monsters/assets/M_face.tres",
 "use_external/path": "uid://pl1klw8u0ps2"
 },
-"StoneGolem": {
+"Skin": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://monsters/assets/M_stones.tres",
-"use_external/path": "uid://bkccc1blayxxl"
+"use_external/fallback_path": "res://monsters/concrete/demon/M_demon_skin.tres",
+"use_external/path": "uid://c00clylo6h1re"
 }
 }
 }

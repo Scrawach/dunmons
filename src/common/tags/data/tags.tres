@@ -11,8 +11,8 @@ colors = Dictionary[int, Color]({
 4: Color(0.27000004, 0.6, 0, 1)
 })
 descriptions = Dictionary[int, String]({
-0: "Nothing To Do",
-1: "Deal +1 damage against GRASS types",
-2: "Deal +1 damage against FIRE types"
+1: "Deals +1 damage against GRASS type.",
+2: "Deals +1 damage against FIRE type.",
+4: "Deals +1 damage against WATER type."
 })
 metadata/_custom_type_script = "uid://c0j6e3uw43cp1"

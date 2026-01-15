@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://0bcb6pixpecp"]
+
+[ext_resource type="PackedScene" uid="uid://1a3gukicw8be" path="res://monsters/monster_base.tscn" id="1_fdwxe"]
+[ext_resource type="Resource" uid="uid://d3dnb6xtjegsp" path="res://monsters/concrete/demon/demon_info.tres" id="2_7s3rk"]
+[ext_resource type="PackedScene" uid="uid://bbcvtd7mxnui3" path="res://monsters/concrete/demon/demon.glb" id="2_gcmhi"]
+
+[node name="Demon" instance=ExtResource("1_fdwxe")]
+data = ExtResource("2_7s3rk")
+
+[node name="MeshInstance3D" parent="Model Root" index="0"]
+visible = false
+
+[node name="demon" parent="Model Root" index="3" instance=ExtResource("2_gcmhi")]
+transform = Transform3D(1, 0, 0, 0, 1.0000001, 0, 0, 0, 1, 0, 0, 0)

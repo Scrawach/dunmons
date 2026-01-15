@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="MonsterInfo" load_steps=2 format=3 uid="uid://d3dnb6xtjegsp"]
+
+[ext_resource type="Script" uid="uid://ctaw5qsb30nkg" path="res://monsters/data/monster_info.gd" id="1_g06q2"]
+
+[resource]
+script = ExtResource("1_g06q2")
+name = "DEMON"
+description = "Not like water"
+tags = Array[int]([1])
+health = 10
+attack = 2
+stamina = 1.0
+metadata/_custom_type_script = "uid://ctaw5qsb30nkg"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://cg4jqudogp1by"]
+[gd_scene load_steps=26 format=3 uid="uid://cg4jqudogp1by"]
 
 [ext_resource type="Script" uid="uid://yq2mo2nef66u" path="res://tests/visual_test_scene.gd" id="1_gkivm"]
 [ext_resource type="PackedScene" uid="uid://2dpaau0tgd4s" path="res://player/ui/player_hud.tscn" id="1_rh67g"]
@@ -12,6 +12,8 @@
 [ext_resource type="Shader" uid="uid://c6fkq5hwqe4ry" path="res://shaders/vignette.gdshader" id="11_trw0e"]
 [ext_resource type="FontFile" uid="uid://duefpn463vu3a" path="res://fonts/Chewy-Regular.ttf" id="12_a63fl"]
 [ext_resource type="PackedScene" uid="uid://1a3gukicw8be" path="res://monsters/monster_base.tscn" id="13_ac1o8"]
+[ext_resource type="PackedScene" uid="uid://0bcb6pixpecp" path="res://monsters/concrete/demon/demon.tscn" id="13_dije2"]
+[ext_resource type="PackedScene" uid="uid://caj80doynbabw" path="res://monsters/concrete/golem/golem.tscn" id="14_rcdbj"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3mixg"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -59,8 +61,9 @@ bg_color = Color(1, 1, 1, 1)
 draw_center = false
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4xkjg"]
+transparency = 1
 shading_mode = 0
-albedo_color = Color(0.76862746, 0.15686275, 0, 0.627451)
+albedo_color = Color(0.77, 0.15400003, 0, 0.6784314)
 
 [sub_resource type="Animation" id="Animation_yaynj"]
 length = 0.001
@@ -308,9 +311,10 @@ layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_4xkjg")
 
 [node name="Monster Base" parent="." instance=ExtResource("13_ac1o8")]
-transform = Transform3D(1.0000001, 0, 0, 0, 1, 0, 0, 0, 1.0000001, 3.5992942, 0, -8.001179)
+transform = Transform3D(1.0000001, 0, 0, 0, 1, 0, 0, 0, 1.0000001, 3.599, 0, -8.001)
 
 [node name="Location" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3110218, 0)
 
 [node name="decorations1" parent="Location" instance=ExtResource("4_n16x1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 0)
@@ -350,6 +354,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
 mesh = SubResource("PlaneMesh_0aecw")
 skeleton = NodePath("../..")
 surface_material_override/0 = ExtResource("10_0n882")
+
+[node name="Demon" parent="." instance=ExtResource("13_dije2")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 1, 0, -6)
+
+[node name="Golem" parent="." instance=ExtResource("14_rcdbj")]
+transform = Transform3D(-0.50000006, 0, 0.8660254, 0, 1, 0, -0.8660254, 0, -0.50000006, 1, 0, -2)
 
 [editable path="Location/decorations1/circle_zone"]
 [editable path="Location/Decoration Sand"]

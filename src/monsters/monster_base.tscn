@@ -1,13 +1,15 @@
-[gd_scene load_steps=15 format=3 uid="uid://1a3gukicw8be"]
+[gd_scene load_steps=28 format=3 uid="uid://1a3gukicw8be"]
 
 [ext_resource type="Script" uid="uid://brh32yejypr87" path="res://monsters/monster.gd" id="1_qg1te"]
 [ext_resource type="Resource" uid="uid://tch0ei3beu1s" path="res://monsters/data/default.tres" id="2_jus1s"]
 [ext_resource type="Script" uid="uid://d1ccxqa3v8eby" path="res://monsters/monster_info_hover.gd" id="3_6c25d"]
-[ext_resource type="PackedScene" uid="uid://bbcvtd7mxnui3" path="res://monsters/assets/demon.glb" id="3_jus1s"]
 [ext_resource type="Script" uid="uid://psf2sui574x3" path="res://monsters/visuals/emotion.gd" id="5_g75ok"]
 [ext_resource type="Texture2D" uid="uid://dkxg5n17pg2fn" path="res://monsters/assets/faces.svg" id="6_yonl5"]
 [ext_resource type="Texture2D" uid="uid://c78uywdwojndk" path="res://monsters/assets/faces_blink.svg" id="7_p7hi2"]
 [ext_resource type="PackedScene" uid="uid://djfa171555qfs" path="res://player/ui/monster_world_ui.tscn" id="8_janau"]
+[ext_resource type="PackedScene" uid="uid://b2gw3gp2wjl8j" path="res://common/hit_label_3d.tscn" id="9_etepe"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_janau"]
 
 [sub_resource type="Animation" id="Animation_ujn5a"]
 length = 0.001
@@ -23,6 +25,46 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector3(1, 1, 1)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_janau"]
+resource_name = "attack"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.16666667, 0.23333333, 0.3, 0.36666667, 0.43333334, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1.15, 0.9, 1.15), Vector3(1.3, 0.7, 1.3), Vector3(0.9, 1.8, 0.9), Vector3(0.9, 1.3, 0.9), Vector3(1.2, 0.75, 1.2), Vector3(0.9, 1.1, 0.9), Vector3(1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.13333334, 0.23333332, 0.26666668, 0.3, 0.40000004, 0.4666667, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-0.26179942, 0, 0), Vector3(0.7853982, 0, 0), Vector3(0.87266463, 0, 0), Vector3(0.7853982, 0, 0), Vector3(-0.2617994, 0, 0), Vector3(0.08726646, 0, 0), Vector3(0, 0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_p7hi2"]
 resource_name = "death"
@@ -37,7 +79,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.13333334, 0.23333333, 0.40000004, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(1, 1, 1), Vector3(1.1, 0.9, 1.1), Vector3(0.85, 1.2, 0.85), Vector3(1.9, 0.1, 1.9), Vector3(1.6, 0.1, 1.6)]
+"values": [Vector3(1, 1, 1), Vector3(1.1, 0.9, 1.1), Vector3(0.85, 1.2, 0.85), Vector3(2, 0.1, 3), Vector3(1.6, 0.2, 2)]
 }
 
 [sub_resource type="Animation" id="Animation_sbht7"]
@@ -59,23 +101,78 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ijtq2"]
 _data = {
 &"RESET": SubResource("Animation_ujn5a"),
+&"attack": SubResource("Animation_janau"),
 &"death": SubResource("Animation_p7hi2"),
 &"idle": SubResource("Animation_sbht7")
 }
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_janau"]
+animation = &"attack"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_etepe"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_etepe"]
+animation = &"death"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hx5qy"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_cam5p"]
+animation = &"death"
+play_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_71p1i"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lvog1"]
+advance_mode = 2
+advance_expression = "is_death == true"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_88rtb"]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hx5qy"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_cqyxk"]
+advance_mode = 2
+advance_expression = "is_death == false"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_px60s"]
+states/Start/position = Vector2(201, 94)
+states/death/node = SubResource("AnimationNodeAnimation_etepe")
+states/death/position = Vector2(579, 87)
+states/idle/node = SubResource("AnimationNodeAnimation_hx5qy")
+states/idle/position = Vector2(377, 87)
+states/revive/node = SubResource("AnimationNodeAnimation_cam5p")
+states/revive/position = Vector2(467, 143)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_71p1i"), "idle", "death", SubResource("AnimationNodeStateMachineTransition_lvog1"), "death", "End", SubResource("AnimationNodeStateMachineTransition_88rtb"), "revive", "idle", SubResource("AnimationNodeStateMachineTransition_hx5qy"), "death", "revive", SubResource("AnimationNodeStateMachineTransition_cqyxk")]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_hx5qy"]
+graph_offset = Vector2(-554.075, -94.81035)
+nodes/output/position = Vector2(780, 160)
+nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_px60s")
+nodes/StateMachine/position = Vector2(-200, -20)
+nodes/Attack/node = SubResource("AnimationNodeOneShot_etepe")
+nodes/Attack/position = Vector2(60, 100)
+"nodes/Attack Animation/node" = SubResource("AnimationNodeAnimation_janau")
+"nodes/Attack Animation/position" = Vector2(-200, 260)
+node_connections = [&"output", 0, &"Attack", &"Attack", 0, &"StateMachine", &"Attack", 1, &"Attack Animation"]
+
 [sub_resource type="SphereShape3D" id="SphereShape3D_jus1s"]
 radius = 1.5682002
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_etepe"]
-viewport_path = NodePath("SubViewport")
 
 [node name="Monster Base" type="Node3D"]
 script = ExtResource("1_qg1te")
 data = ExtResource("2_jus1s")
+hit_scene = ExtResource("9_etepe")
 
 [node name="Model Root" type="Node3D" parent="."]
 
-[node name="demon" parent="Model Root" instance=ExtResource("3_jus1s")]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model Root"]
+transform = Transform3D(0.99700207, 0, 0, 0, 1.0057727, 0, 0, 0, 0.99700207, 0, 0.49631643, 0)
+mesh = SubResource("BoxMesh_janau")
 
 [node name="BaseAnimationPlayer" type="AnimationPlayer" parent="Model Root"]
 unique_name_in_owner = true
@@ -83,6 +180,16 @@ libraries = {
 &"": SubResource("AnimationLibrary_ijtq2")
 }
 autoplay = "idle"
+
+[node name="BaseAnimationTree" type="AnimationTree" parent="Model Root"]
+unique_name_in_owner = true
+root_node = NodePath("%BaseAnimationTree/..")
+tree_root = SubResource("AnimationNodeBlendTree_hx5qy")
+advance_expression_base_node = NodePath("../..")
+anim_player = NodePath("../BaseAnimationPlayer")
+parameters/Attack/active = false
+parameters/Attack/internal_active = false
+parameters/Attack/request = 0
 
 [node name="MonsterInfoHover" type="Area3D" parent="." node_paths=PackedStringArray("monster")]
 script = ExtResource("3_6c25d")
@@ -94,9 +201,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.052011, 0)
 shape = SubResource("SphereShape3D_jus1s")
 debug_color = Color(1, 0.6313726, 0, 1)
 
-[node name="Emotion" type="Node" parent="." node_paths=PackedStringArray("face")]
+[node name="Emotion" type="Node" parent="."]
 script = ExtResource("5_g75ok")
-face = NodePath("../Model Root/demon/Demon_001/Face")
 textures = Dictionary[int, Texture2D]({
 0: ExtResource("6_yonl5"),
 1: ExtResource("7_p7hi2")
@@ -104,9 +210,7 @@ textures = Dictionary[int, Texture2D]({
 offset_step = 128
 metadata/_custom_type_script = "uid://psf2sui574x3"
 
-[node name="Monster World UI" parent="." instance=ExtResource("8_janau")]
+[node name="Monster World UI" parent="." node_paths=PackedStringArray("monster") instance=ExtResource("8_janau")]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.1636195, 0)
-texture = SubResource("ViewportTexture_etepe")
-
-[editable path="Model Root/demon"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.2, 0)
+monster = NodePath("..")

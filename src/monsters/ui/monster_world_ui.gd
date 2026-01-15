@@ -1,9 +1,21 @@
 class_name MonsterWorldUI
 extends Sprite3D
 
-@onready var stamina_progress_handle: Control = %"Stamina Progress Handle"
-@onready var stamina_progress_bar: Control = %"Stamina Progress Bar"
+@export var monster: Monster
+
+@onready var health_bar: ProgressBar = %"Health Bar"
+@onready var stamina_bar: ProgressBar = %"Stamina Bar"
+
+func _ready() -> void:
+	monster.died.connect(_on_died)
+
+func _on_died(_monster: Monster) -> void:
+	var tween := create_tween()
+	tween.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_SPRING)
+	tween.tween_property(self, "scale", Vector3.ZERO, 0.45)
 
 func update_stamina_progress_bar(progress: float) -> void:
-	var target_size := stamina_progress_handle.size.x * clampf(progress, 0, 1)
-	stamina_progress_bar.size.x = target_size
+	stamina_bar.value = stamina_bar.max_value * progress
+
+func update_health_progress_bar(progress: float) -> void:
+	health_bar.value = health_bar.max_value * progress
