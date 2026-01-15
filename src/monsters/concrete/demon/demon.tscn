@@ -16,4 +16,7 @@ transform = Transform3D(1, 0, 0, 0, 1.0000001, 0, 0, 0, 1, 0, 0, 0)
 [node name="MonsterInfoHover" parent="." index="1" node_paths=PackedStringArray("body")]
 body = NodePath("../Model Root/demon/Demon_001")
 
+[node name="Emotion" parent="." index="2" node_paths=PackedStringArray("face")]
+face = NodePath("../Model Root/demon/Demon_001/Face")
+
 [editable path="Model Root/demon"]

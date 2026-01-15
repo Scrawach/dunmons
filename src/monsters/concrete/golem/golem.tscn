@@ -15,4 +15,7 @@ visible = false
 [node name="MonsterInfoHover" parent="." index="1" node_paths=PackedStringArray("body")]
 body = NodePath("../Model Root/golem/Stone Golem")
 
+[node name="Emotion" parent="." index="2" node_paths=PackedStringArray("face")]
+face = NodePath("../Model Root/golem/Stone Golem/Face_001")
+
 [editable path="Model Root/golem"]

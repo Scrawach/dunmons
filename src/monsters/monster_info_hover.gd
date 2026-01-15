@@ -1,6 +1,8 @@
 class_name MonsterInfoHover
 extends Area3D
 
+const HIGHLIGHT = preload("uid://bwl5uabgtog7a")
+
 @export var monster: Monster
 @export var body: MeshInstance3D
 
@@ -29,11 +31,11 @@ func _on_mouse_exited() -> void:
 	unhighlight()
 
 func highlight() -> void:
-	if highlight_material == null:
+	if body == null:
 		return
-	highlight_material.set_shader_parameter(&"highlight_progress", 1.0)
+	body.material_overlay = HIGHLIGHT
 
 func unhighlight() -> void:
-	if highlight_material == null:
+	if body == null:
 		return
-	highlight_material.set_shader_parameter(&"highlight_progress", 0.0)
+	body.material_overlay = null

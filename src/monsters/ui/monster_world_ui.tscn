@@ -1,9 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://djfa171555qfs"]
+[gd_scene load_steps=8 format=3 uid="uid://0afkj1wx1g6h"]
 
-[ext_resource type="Script" uid="uid://dihd4y85t4oiy" path="res://monsters/ui/monster_world_ui.gd" id="1_w5tqj"]
+[ext_resource type="Script" uid="uid://dihd4y85t4oiy" path="res://monsters/ui/monster_world_ui.gd" id="1_ppq64"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_w5tqj"]
-viewport_path = NodePath("SubViewport")
+[sub_resource type="ViewportTexture" id="ViewportTexture_janau"]
+viewport_path = NodePath("World Sprite3D/SubViewport")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w5tqj"]
 bg_color = Color(1, 1, 1, 1)
@@ -29,17 +29,20 @@ bg_color = Color(0.23392546, 0.23392549, 0.23392531, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_841lo"]
 bg_color = Color(1, 1, 1, 1)
 
-[node name="Monster World UI" type="Sprite3D"]
+[node name="Monster World UI" type="Node3D"]
+script = ExtResource("1_ppq64")
+
+[node name="World Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.2, 0)
 billboard = 1
 no_depth_test = true
-texture = SubResource("ViewportTexture_w5tqj")
-script = ExtResource("1_w5tqj")
+texture = SubResource("ViewportTexture_janau")
 
-[node name="SubViewport" type="SubViewport" parent="."]
+[node name="SubViewport" type="SubViewport" parent="World Sprite3D"]
 transparent_bg = true
 size = Vector2i(256, 128)
 
-[node name="Monster UI Container" type="Control" parent="SubViewport"]
+[node name="Monster UI Container" type="Control" parent="World Sprite3D/SubViewport"]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -51,7 +54,7 @@ offset_right = 100.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="SubViewport/Monster UI Container"]
+[node name="PanelContainer" type="PanelContainer" parent="World Sprite3D/SubViewport/Monster UI Container"]
 self_modulate = Color(0, 0, 0, 0.39215687)
 custom_minimum_size = Vector2(32, 12)
 layout_mode = 1
@@ -62,34 +65,34 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_w5tqj")
 
-[node name="PanelContainer" type="PanelContainer" parent="SubViewport/Monster UI Container/PanelContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="World Sprite3D/SubViewport/Monster UI Container/PanelContainer"]
 visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_2mspu")
 
-[node name="MarginContainer" type="MarginContainer" parent="SubViewport/Monster UI Container/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="World Sprite3D/SubViewport/Monster UI Container/PanelContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="PanelContainer" type="PanelContainer" parent="SubViewport/Monster UI Container/PanelContainer/MarginContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="World Sprite3D/SubViewport/Monster UI Container/PanelContainer/MarginContainer"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_vvcvd")
 
-[node name="MarginContainer2" type="MarginContainer" parent="SubViewport/Monster UI Container/PanelContainer/MarginContainer/PanelContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="World Sprite3D/SubViewport/Monster UI Container/PanelContainer/MarginContainer/PanelContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="VBoxContainer" type="VBoxContainer" parent="SubViewport/Monster UI Container/PanelContainer/MarginContainer/PanelContainer/MarginContainer2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="World Sprite3D/SubViewport/Monster UI Container/PanelContainer/MarginContainer/PanelContainer/MarginContainer2"]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="Health Bar" type="ProgressBar" parent="SubViewport/Monster UI Container/PanelContainer/MarginContainer/PanelContainer/MarginContainer2/VBoxContainer"]
+[node name="Health Bar" type="ProgressBar" parent="World Sprite3D/SubViewport/Monster UI Container/PanelContainer/MarginContainer/PanelContainer/MarginContainer2/VBoxContainer"]
 unique_name_in_owner = true
 modulate = Color(1, 0.26666665, 0, 1)
 custom_minimum_size = Vector2(0, 24)
@@ -99,7 +102,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_841lo")
 value = 50.0
 show_percentage = false
 
-[node name="Stamina Bar" type="ProgressBar" parent="SubViewport/Monster UI Container/PanelContainer/MarginContainer/PanelContainer/MarginContainer2/VBoxContainer"]
+[node name="Stamina Bar" type="ProgressBar" parent="World Sprite3D/SubViewport/Monster UI Container/PanelContainer/MarginContainer/PanelContainer/MarginContainer2/VBoxContainer"]
 unique_name_in_owner = true
 modulate = Color(0.45000005, 1, 0, 1)
 custom_minimum_size = Vector2(0, 16)

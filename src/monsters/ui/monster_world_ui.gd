@@ -1,5 +1,5 @@
 class_name MonsterWorldUI
-extends Sprite3D
+extends Node3D
 
 @export var monster: Monster
 

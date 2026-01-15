@@ -3,9 +3,12 @@
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_fqo78"]
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_qmmdx"]
+width = 1024
+height = 1024
 noise = SubResource("FastNoiseLite_fqo78")
+seamless = true
 
 [resource]
 albedo_color = Color(0.81, 0.5184, 0.32399997, 1)
-metallic = 0.3
+metallic = 0.5
 metallic_texture = SubResource("NoiseTexture2D_qmmdx")

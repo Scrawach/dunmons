@@ -18,4 +18,4 @@ shader_parameter/pattern = SubResource("NoiseTexture2D_6j5h1")
 shader_parameter/highlight_color = Color(1, 1, 1, 1)
 shader_parameter/highlight_power = 2.5000000223518
 shader_parameter/highlight_speed = 0.20000000298024
-shader_parameter/highlight_progress = 0.0
+shader_parameter/highlight_progress = 1.0
