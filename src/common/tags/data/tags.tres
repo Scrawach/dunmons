@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Tags" load_steps=2 format=3 uid="uid://c6vtdw5ubp0ea"]
+
+[ext_resource type="Script" uid="uid://c0j6e3uw43cp1" path="res://common/tags/data/tags.gd" id="1_h3ph0"]
+
+[resource]
+script = ExtResource("1_h3ph0")
+colors = Dictionary[int, Color]({
+1: Color(0.6, 0, 0, 1),
+2: Color(0, 0.53, 0.6, 1),
+3: Color(0.46, 0.46, 0.46, 1),
+4: Color(0.27000004, 0.6, 0, 1)
+})
+descriptions = Dictionary[int, String]({
+0: "Nothing To Do",
+1: "Deal +1 damage against GRASS types",
+2: "Deal +1 damage against FIRE types"
+})
+metadata/_custom_type_script = "uid://c0j6e3uw43cp1"

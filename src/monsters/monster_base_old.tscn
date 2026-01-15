@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://cpq3bvvv5605v"]
+
+[ext_resource type="Script" uid="uid://df646db52nxhf" path="res://monsters/monster_old.gd" id="1_qg1te"]
+[ext_resource type="Script" uid="uid://cp7uxorhel0cs" path="res://monsters/dragging_area_3d.gd" id="2_u016e"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_8ul3s"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_qg1te"]
+radius = 1.0
+
+[node name="Monster Base" type="Node3D"]
+script = ExtResource("1_qg1te")
+monster_name = null
+health = null
+damage = null
+
+[node name="Model Root" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model Root"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_8ul3s")
+skeleton = NodePath("../..")
+
+[node name="Dragging Area3D" type="Area3D" parent="." node_paths=PackedStringArray("body")]
+unique_name_in_owner = true
+monitoring = false
+script = ExtResource("2_u016e")
+body = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Dragging Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("SphereShape3D_qg1te")

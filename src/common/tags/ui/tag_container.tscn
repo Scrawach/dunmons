@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://c1yjxlk2ur3hx"]
+
+[ext_resource type="Script" uid="uid://b8h7lis2750wa" path="res://common/tags/ui/tag_container.gd" id="1_302fn"]
+[ext_resource type="FontFile" uid="uid://duefpn463vu3a" path="res://fonts/Chewy-Regular.ttf" id="1_fq7km"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4w7t7"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="Tag Container" type="PanelContainer"]
+self_modulate = Color(0.6, 0, 0, 1)
+custom_minimum_size = Vector2(50, 30)
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4w7t7")
+script = ExtResource("1_302fn")
+tag = "Fire"
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+
+[node name="Label" type="Label" parent="MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_fq7km")
+theme_override_font_sizes/font_size = 16
+text = "Fire"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true

@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://c4x78xdv4cpx4"]
 
-[ext_resource type="PackedScene" uid="uid://cpq3bvvv5605v" path="res://monsters/monster_base.tscn" id="1_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://cpq3bvvv5605v" path="res://monsters/monster_base_old.tscn" id="1_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://2dpaau0tgd4s" path="res://player/ui/player_hud.tscn" id="1_272bh"]
 [ext_resource type="PackedScene" uid="uid://c51kjclr1a0mq" path="res://monsters/monster_line.tscn" id="2_h2yge"]
 [ext_resource type="Script" uid="uid://b65182a2jjw81" path="res://monsters/drag_and_drop_3d.gd" id="3_h2yge"]

@@ -1,0 +1,18 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://cm8s2wypjifxn"]
+
+[ext_resource type="FontFile" uid="uid://duefpn463vu3a" path="res://fonts/Chewy-Regular.ttf" id="1_xniuh"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xi0ys"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 3
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[resource]
+Label/fonts/font = ExtResource("1_xniuh")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_xi0ys")

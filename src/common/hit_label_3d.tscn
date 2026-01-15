@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://b2gw3gp2wjl8j"]
+
+[ext_resource type="FontFile" uid="uid://duefpn463vu3a" path="res://fonts/Chewy-Regular.ttf" id="1_02hpv"]
+[ext_resource type="Script" uid="uid://myua18e8ccvn" path="res://common/hit_label_3d.gd" id="2_8tmc8"]
+
+[node name="Hit Label3D" type="Label3D"]
+billboard = 1
+no_depth_test = true
+render_priority = 2
+outline_render_priority = 1
+modulate = Color(1, 0, 0, 1)
+outline_modulate = Color(0, 0, 0, 0.49019608)
+text = "5"
+font = ExtResource("1_02hpv")
+font_size = 164
+outline_size = 64
+script = ExtResource("2_8tmc8")

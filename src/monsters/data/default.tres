@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="MonsterInfo" load_steps=2 format=3 uid="uid://tch0ei3beu1s"]
+
+[ext_resource type="Script" uid="uid://ctaw5qsb30nkg" path="res://monsters/data/monster_info.gd" id="1_dep4o"]
+
+[resource]
+script = ExtResource("1_dep4o")
+name = "SUPER AUTO BOT"
+description = "Not like then comape with other game"
+tags = Array[int]([1])
+health = 10
+attack = 5
+speed = 1
+metadata/_custom_type_script = "uid://ctaw5qsb30nkg"

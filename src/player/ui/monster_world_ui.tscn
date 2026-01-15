@@ -1,0 +1,91 @@
+[gd_scene load_steps=5 format=3 uid="uid://djfa171555qfs"]
+
+[ext_resource type="Script" uid="uid://dihd4y85t4oiy" path="res://monsters/ui/monster_world_ui.gd" id="1_w5tqj"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_2mspu"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vvcvd"]
+bg_color = Color(1, 1, 1, 1)
+draw_center = false
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2mspu"]
+bg_color = Color(0, 0, 0, 0.19607843)
+expand_margin_left = 32.0
+expand_margin_top = 32.0
+expand_margin_right = 32.0
+expand_margin_bottom = 32.0
+
+[node name="Monster World UI" type="Sprite3D"]
+billboard = 1
+no_depth_test = true
+texture = SubResource("ViewportTexture_2mspu")
+script = ExtResource("1_w5tqj")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(256, 128)
+
+[node name="Monster UI Container" type="Control" parent="SubViewport"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_right = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="SubViewport/Monster UI Container"]
+custom_minimum_size = Vector2(32, 12)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_vvcvd")
+
+[node name="PanelContainer" type="PanelContainer" parent="SubViewport/Monster UI Container/PanelContainer"]
+visible = false
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_2mspu")
+
+[node name="MarginContainer" type="MarginContainer" parent="SubViewport/Monster UI Container/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SubViewport/Monster UI Container/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="ColorRect" type="ColorRect" parent="SubViewport/Monster UI Container/PanelContainer/MarginContainer/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+color = Color(0.043137256, 0.22352941, 0.32941177, 1)
+
+[node name="Stamina Progress Handle" type="ColorRect" parent="SubViewport/Monster UI Container/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+color = Color(0, 0, 0, 0.39215687)
+
+[node name="Stamina Progress Bar" type="ColorRect" parent="SubViewport/Monster UI Container/PanelContainer/MarginContainer/VBoxContainer/Stamina Progress Handle"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 16.0
+grow_vertical = 2

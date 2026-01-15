@@ -1,14 +1,33 @@
-[gd_scene load_steps=5 format=3 uid="uid://2dpaau0tgd4s"]
+[gd_scene load_steps=8 format=3 uid="uid://2dpaau0tgd4s"]
 
-[ext_resource type="PackedScene" uid="uid://crwf1tvkf4smk" path="res://common/dialogue_panel.tscn" id="1_frykf"]
+[ext_resource type="PackedScene" uid="uid://crwf1tvkf4smk" path="res://common/ui/dialogue_panel.tscn" id="1_frykf"]
 [ext_resource type="Script" uid="uid://h12py2rrahp3" path="res://player/ui/player_hud.gd" id="1_ttjji"]
+[ext_resource type="Shader" uid="uid://c6fkq5hwqe4ry" path="res://shaders/vignette.gdshader" id="2_vp0yt"]
 [ext_resource type="PackedScene" uid="uid://bs7alng86owkv" path="res://player/ui/naming_panel.tscn" id="3_kliqd"]
+[ext_resource type="PackedScene" uid="uid://cgp5junta311l" path="res://monsters/ui/monster_info_panel.tscn" id="5_70ums"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_70ums"]
+shader = ExtResource("2_vp0yt")
+shader_parameter/inner_radius = 0.2
+shader_parameter/outer_radius = 1.0
+shader_parameter/vignette_strength = 0.5
+shader_parameter/dither_strength = 0.03
+shader_parameter/vignette_color = Color(0, 0, 0.13333334, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ttjji"]
 bg_color = Color(0, 0, 0, 1)
 
 [node name="Player HUD" type="CanvasLayer"]
 script = ExtResource("1_ttjji")
+
+[node name="Vignette" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_70ums")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
 [node name="Background" type="PanelContainer" parent="."]
 unique_name_in_owner = true
@@ -26,5 +45,9 @@ unique_name_in_owner = true
 visible = false
 
 [node name="Naming Panel" parent="." instance=ExtResource("3_kliqd")]
+unique_name_in_owner = true
+visible = false
+
+[node name="Monster Info Panel" parent="." instance=ExtResource("5_70ums")]
 unique_name_in_owner = true
 visible = false

@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://1a6bixny0lvb"]
+
+[ext_resource type="Theme" uid="uid://cm8s2wypjifxn" path="res://monsters/ui/info_panel_theme.tres" id="1_livbv"]
+[ext_resource type="Script" uid="uid://ix0m8ad8pijw" path="res://monsters/ui/stat_container.gd" id="1_qyw7d"]
+[ext_resource type="Texture2D" uid="uid://b5i7lajdbfpml" path="res://monsters/ui/icons/sword_32px.svg" id="1_suk7s"]
+[ext_resource type="FontFile" uid="uid://duefpn463vu3a" path="res://fonts/Chewy-Regular.ttf" id="2_qyw7d"]
+
+[node name="Stat Container" type="PanelContainer"]
+self_modulate = Color(0.25370002, 0.35948, 0.43, 1)
+custom_minimum_size = Vector2(40, 0)
+mouse_filter = 2
+theme = ExtResource("1_livbv")
+script = ExtResource("1_qyw7d")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="Texture" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("1_suk7s")
+expand_mode = 3
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_qyw7d")
+theme_override_font_sizes/font_size = 22
+text = "2"

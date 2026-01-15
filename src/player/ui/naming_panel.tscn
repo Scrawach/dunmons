@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://v1xppvl17fqy" path="res://player/ui/naming_panel.gd" id="1_v508v"]
 [ext_resource type="FontFile" uid="uid://duefpn463vu3a" path="res://fonts/Chewy-Regular.ttf" id="2_alpdr"]
-[ext_resource type="PackedScene" uid="uid://culmlpynfrj01" path="res://common/animated_line_edit.tscn" id="3_8duao"]
+[ext_resource type="PackedScene" uid="uid://culmlpynfrj01" path="res://common/ui/animated_line_edit.tscn" id="3_8duao"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vp0yt"]
 corner_radius_top_left = 25

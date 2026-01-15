@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" uid="uid://ce2hwiwg04a0o" path="res://locations/location.gd" id="1_3qhbs"]
 [ext_resource type="PackedScene" uid="uid://c51kjclr1a0mq" path="res://monsters/monster_line.tscn" id="2_u8axl"]
-[ext_resource type="PackedScene" uid="uid://cpq3bvvv5605v" path="res://monsters/monster_base.tscn" id="3_wfq2e"]
+[ext_resource type="PackedScene" uid="uid://cpq3bvvv5605v" path="res://monsters/monster_base_old.tscn" id="3_wfq2e"]
 [ext_resource type="PackedScene" uid="uid://bjfkvi22scmt6" path="res://locations/floor.glb" id="4_wfq2e"]
 [ext_resource type="PackedScene" uid="uid://k2o0djqhmlo8" path="res://locations/wall.glb" id="5_xv7ww"]
-[ext_resource type="Material" uid="uid://bkccc1blayxxl" path="res://locations/M_stones.tres" id="6_xv7ww"]
-[ext_resource type="Material" uid="uid://bqdbicwtofo2q" path="res://locations/M_platform.tres" id="7_nj2hx"]
-[ext_resource type="Material" uid="uid://b42p5sxbjdw2x" path="res://locations/M_column.tres" id="8_wwp1l"]
+[ext_resource type="Material" uid="uid://bkccc1blayxxl" path="res://monsters/assets/M_stones.tres" id="6_xv7ww"]
+[ext_resource type="Material" path="res://locations/M_platform.tres" id="7_nj2hx"]
+[ext_resource type="Material" uid="uid://b42p5sxbjdw2x" path="res://locations/assets/M_column.tres" id="8_wwp1l"]
 [ext_resource type="PackedScene" uid="uid://1itty7sy2bp8" path="res://locations/dungeon_base_part.tscn" id="9_c4knv"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_3qhbs"]
@@ -31,6 +31,8 @@ monsters = [NodePath("Monster Base")]
 
 [node name="Monster Base" parent="Enemy Monster Line" instance=ExtResource("3_wfq2e")]
 monster_name = "TEST_ENEMY"
+health = null
+damage = null
 
 [node name="Decorations" type="Node3D" parent="."]
 

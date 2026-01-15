@@ -1,29 +1,112 @@
-[gd_scene load_steps=5 format=3 uid="uid://cpq3bvvv5605v"]
+[gd_scene load_steps=15 format=3 uid="uid://1a3gukicw8be"]
 
-[ext_resource type="Script" uid="uid://df646db52nxhf" path="res://monsters/monster.gd" id="1_qg1te"]
-[ext_resource type="Script" uid="uid://cp7uxorhel0cs" path="res://monsters/dragging_area_3d.gd" id="2_u016e"]
+[ext_resource type="Script" uid="uid://brh32yejypr87" path="res://monsters/monster.gd" id="1_qg1te"]
+[ext_resource type="Resource" uid="uid://tch0ei3beu1s" path="res://monsters/data/default.tres" id="2_jus1s"]
+[ext_resource type="Script" uid="uid://d1ccxqa3v8eby" path="res://monsters/monster_info_hover.gd" id="3_6c25d"]
+[ext_resource type="PackedScene" uid="uid://bbcvtd7mxnui3" path="res://monsters/assets/demon.glb" id="3_jus1s"]
+[ext_resource type="Script" uid="uid://psf2sui574x3" path="res://monsters/visuals/emotion.gd" id="5_g75ok"]
+[ext_resource type="Texture2D" uid="uid://dkxg5n17pg2fn" path="res://monsters/assets/faces.svg" id="6_yonl5"]
+[ext_resource type="Texture2D" uid="uid://c78uywdwojndk" path="res://monsters/assets/faces_blink.svg" id="7_p7hi2"]
+[ext_resource type="PackedScene" uid="uid://djfa171555qfs" path="res://player/ui/monster_world_ui.tscn" id="8_janau"]
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_8ul3s"]
+[sub_resource type="Animation" id="Animation_ujn5a"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_qg1te"]
-radius = 1.0
+[sub_resource type="Animation" id="Animation_p7hi2"]
+resource_name = "death"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.13333334, 0.23333333, 0.40000004, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1.1, 0.9, 1.1), Vector3(0.85, 1.2, 0.85), Vector3(1.9, 0.1, 1.9), Vector3(1.6, 0.1, 1.6)]
+}
+
+[sub_resource type="Animation" id="Animation_sbht7"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.16666667, 0.6333334, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1.1, 0.9, 1.1), Vector3(0.9, 1.1, 0.9), Vector3(1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ijtq2"]
+_data = {
+&"RESET": SubResource("Animation_ujn5a"),
+&"death": SubResource("Animation_p7hi2"),
+&"idle": SubResource("Animation_sbht7")
+}
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_jus1s"]
+radius = 1.5682002
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_etepe"]
+viewport_path = NodePath("SubViewport")
 
 [node name="Monster Base" type="Node3D"]
 script = ExtResource("1_qg1te")
+data = ExtResource("2_jus1s")
 
 [node name="Model Root" type="Node3D" parent="."]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Model Root"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("CapsuleMesh_8ul3s")
-skeleton = NodePath("../..")
+[node name="demon" parent="Model Root" instance=ExtResource("3_jus1s")]
 
-[node name="Dragging Area3D" type="Area3D" parent="." node_paths=PackedStringArray("body")]
+[node name="BaseAnimationPlayer" type="AnimationPlayer" parent="Model Root"]
 unique_name_in_owner = true
-monitoring = false
-script = ExtResource("2_u016e")
-body = NodePath("..")
+libraries = {
+&"": SubResource("AnimationLibrary_ijtq2")
+}
+autoplay = "idle"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Dragging Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("SphereShape3D_qg1te")
+[node name="MonsterInfoHover" type="Area3D" parent="." node_paths=PackedStringArray("monster")]
+script = ExtResource("3_6c25d")
+monster = NodePath("..")
+metadata/_custom_type_script = "uid://d1ccxqa3v8eby"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MonsterInfoHover"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.052011, 0)
+shape = SubResource("SphereShape3D_jus1s")
+debug_color = Color(1, 0.6313726, 0, 1)
+
+[node name="Emotion" type="Node" parent="." node_paths=PackedStringArray("face")]
+script = ExtResource("5_g75ok")
+face = NodePath("../Model Root/demon/Demon_001/Face")
+textures = Dictionary[int, Texture2D]({
+0: ExtResource("6_yonl5"),
+1: ExtResource("7_p7hi2")
+})
+offset_step = 128
+metadata/_custom_type_script = "uid://psf2sui574x3"
+
+[node name="Monster World UI" parent="." instance=ExtResource("8_janau")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.1636195, 0)
+texture = SubResource("ViewportTexture_etepe")
+
+[editable path="Model Root/demon"]

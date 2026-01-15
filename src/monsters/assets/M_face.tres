@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://pl1klw8u0ps2"]
+
+[ext_resource type="Texture2D" uid="uid://dkxg5n17pg2fn" path="res://monsters/assets/faces.svg" id="1_oy0tq"]
+
+[resource]
+resource_local_to_scene = true
+transparency = 1
+shading_mode = 0
+albedo_texture = ExtResource("1_oy0tq")

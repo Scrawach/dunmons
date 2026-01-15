@@ -13,13 +13,6 @@ func _ready() -> void:
 		base_position.append(child.position)
 		base_scale.append(child.scale)
 
-func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventKey and event.is_pressed():
-		if event.keycode == KEY_Q:
-			smooth_show()
-		elif event.keycode == KEY_E:
-			smooth_hide()
-
 func smooth_show() -> void:
 	stop_if_needed()
 	var index: int = 0
