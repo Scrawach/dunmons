@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://1a3gukicw8be"]
+[gd_scene load_steps=34 format=3 uid="uid://cpq3bvvv5605v"]
 
 [ext_resource type="Script" uid="uid://brh32yejypr87" path="res://monsters/monster.gd" id="1_qg1te"]
 [ext_resource type="Resource" uid="uid://tch0ei3beu1s" path="res://monsters/data/default.tres" id="2_jus1s"]
@@ -32,6 +32,18 @@ tracks/1/path = NodePath(".:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -98,12 +110,54 @@ tracks/0/keys = {
 "values": [Vector3(1, 1, 1), Vector3(1.1, 0.9, 1.1), Vector3(0.9, 1.1, 0.9), Vector3(1, 1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_etepe"]
+resource_name = "walk"
+length = 0.40000334
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -0.34906584, 0.34906584), Vector3(0, 0.34906584, -0.34906584), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.10000001, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.1268208, 0.2656737), Vector3(0, 0, 0), Vector3(0, 0.127, 0.126), Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(0.9, 1.05, 0.9), Vector3(1.15, 1, 1.15), Vector3(0.9, 1.05, 0.9), Vector3(1, 1, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ijtq2"]
 _data = {
 &"RESET": SubResource("Animation_ujn5a"),
 &"attack": SubResource("Animation_janau"),
 &"death": SubResource("Animation_p7hi2"),
-&"idle": SubResource("Animation_sbht7")
+&"idle": SubResource("Animation_sbht7"),
+&"walk": SubResource("Animation_etepe")
 }
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_janau"]
@@ -120,6 +174,9 @@ animation = &"idle"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_cam5p"]
 animation = &"death"
 play_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_71p1i"]
+animation = &"walk"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_71p1i"]
 advance_mode = 2
@@ -139,6 +196,18 @@ advance_mode = 2
 advance_mode = 2
 advance_expression = "is_death == false"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_px60s"]
+advance_mode = 2
+advance_expression = "is_walking == true"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_o71ry"]
+advance_mode = 2
+advance_expression = "is_death == true"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_c31it"]
+advance_mode = 2
+advance_expression = "is_walking == false"
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_px60s"]
 states/Start/position = Vector2(201, 94)
 states/death/node = SubResource("AnimationNodeAnimation_etepe")
@@ -147,7 +216,10 @@ states/idle/node = SubResource("AnimationNodeAnimation_hx5qy")
 states/idle/position = Vector2(377, 87)
 states/revive/node = SubResource("AnimationNodeAnimation_cam5p")
 states/revive/position = Vector2(467, 143)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_71p1i"), "idle", "death", SubResource("AnimationNodeStateMachineTransition_lvog1"), "death", "End", SubResource("AnimationNodeStateMachineTransition_88rtb"), "revive", "idle", SubResource("AnimationNodeStateMachineTransition_hx5qy"), "death", "revive", SubResource("AnimationNodeStateMachineTransition_cqyxk")]
+states/walk/node = SubResource("AnimationNodeAnimation_71p1i")
+states/walk/position = Vector2(451, 3)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_71p1i"), "idle", "death", SubResource("AnimationNodeStateMachineTransition_lvog1"), "death", "End", SubResource("AnimationNodeStateMachineTransition_88rtb"), "revive", "idle", SubResource("AnimationNodeStateMachineTransition_hx5qy"), "death", "revive", SubResource("AnimationNodeStateMachineTransition_cqyxk"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_px60s"), "walk", "death", SubResource("AnimationNodeStateMachineTransition_o71ry"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_c31it")]
+graph_offset = Vector2(-67, -123)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_hx5qy"]
 graph_offset = Vector2(-554.075, -94.81035)
@@ -162,6 +234,9 @@ node_connections = [&"output", 0, &"Attack", &"Attack", 0, &"StateMachine", &"At
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_jus1s"]
 radius = 1.5682002
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_janau"]
+viewport_path = NodePath("SubViewport")
 
 [node name="Monster Base" type="Node3D"]
 script = ExtResource("1_qg1te")
@@ -194,7 +269,6 @@ parameters/Attack/request = 0
 [node name="MonsterInfoHover" type="Area3D" parent="." node_paths=PackedStringArray("monster")]
 script = ExtResource("3_6c25d")
 monster = NodePath("..")
-metadata/_custom_type_script = "uid://d1ccxqa3v8eby"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MonsterInfoHover"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.052011, 0)
@@ -213,4 +287,5 @@ metadata/_custom_type_script = "uid://psf2sui574x3"
 [node name="Monster World UI" parent="." node_paths=PackedStringArray("monster") instance=ExtResource("8_janau")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.2, 0)
+texture = SubResource("ViewportTexture_janau")
 monster = NodePath("..")

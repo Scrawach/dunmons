@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cpq3bvvv5605v"]
+[gd_scene load_steps=5 format=3 uid="uid://dwqhyi5tnyt3t"]
 
 [ext_resource type="Script" uid="uid://df646db52nxhf" path="res://monsters/monster_old.gd" id="1_qg1te"]
 [ext_resource type="Script" uid="uid://cp7uxorhel0cs" path="res://monsters/dragging_area_3d.gd" id="2_u016e"]

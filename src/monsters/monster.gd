@@ -15,6 +15,7 @@ var damage: int
 var stamina: float
 
 var is_death: bool
+var is_walking: bool
 
 func _ready() -> void:
 	health = data.health
