@@ -40,7 +40,12 @@ func simulate_async(player: MonsterLine, enemies: MonsterLine) -> BattleResult:
 
 func process_attack(attacker: Monster, target: Monster) -> void:
 	await attacker.attack_async(target)
-	await target.take_damage_async(5)
+	var damage := calculate_damage(attacker, target)
+	await target.take_damage_async(damage)
+
+func calculate_damage(attacker: Monster, target: Monster) -> int:
+	var base_damage := randi_range(attacker.damage_min, attacker.damage_max)
+	return base_damage
 
 func _on_monster_hit(power: int) -> void:
 	camera_point.shake(power * 0.1)

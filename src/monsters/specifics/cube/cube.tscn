@@ -15,3 +15,9 @@ visible = false
 [node name="Cube" type="MeshInstance3D" parent="Model Root" index="3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.64666814, 0)
 mesh = SubResource("BoxMesh_7k3ok")
+
+[node name="MonsterInfoHover" parent="." index="1" node_paths=PackedStringArray("body")]
+body = NodePath("../Model Root/Cube")
+
+[node name="HitEffect" parent="Visual" index="1" node_paths=PackedStringArray("body")]
+body = NodePath("../../Model Root/Cube")

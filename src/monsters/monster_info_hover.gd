@@ -6,16 +6,12 @@ const HIGHLIGHT = preload("uid://bwl5uabgtog7a")
 @export var monster: Monster
 @export var body: MeshInstance3D
 
-var highlight_material: ShaderMaterial
 var is_hovered: bool
 var highlight_tween: Tween
 
 func _ready() -> void:
 	mouse_entered.connect(_on_mouse_entered)
 	mouse_exited.connect(_on_mouse_exited)
-	
-	if body:
-		highlight_material = body.get_active_material(0).next_pass
 
 func _exit_tree() -> void:
 	if is_hovered:
