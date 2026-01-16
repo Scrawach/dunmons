@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://0afkj1wx1g6h"]
+[gd_scene load_steps=10 format=3 uid="uid://0afkj1wx1g6h"]
 
 [ext_resource type="Script" uid="uid://dihd4y85t4oiy" path="res://monsters/ui/monster_world_ui.gd" id="1_ppq64"]
 
@@ -23,11 +23,16 @@ border_width_right = 4
 border_width_bottom = 4
 border_color = Color(1, 1, 1, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gykuq"]
-bg_color = Color(0.23392546, 0.23392549, 0.23392531, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ppq64"]
+bg_color = Color(0.23529412, 0.0627451, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_841lo"]
 bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q7jn8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gykuq"]
+bg_color = Color(0.23392546, 0.23392549, 0.23392531, 1)
 
 [node name="Monster World UI" type="Node3D"]
 script = ExtResource("1_ppq64")
@@ -94,12 +99,26 @@ theme_override_constants/separation = 8
 
 [node name="Health Bar" type="ProgressBar" parent="World Sprite3D/SubViewport/Monster UI Container/PanelContainer/MarginContainer/PanelContainer/MarginContainer2/VBoxContainer"]
 unique_name_in_owner = true
-modulate = Color(1, 0.26666665, 0, 1)
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
-theme_override_styles/background = SubResource("StyleBoxFlat_gykuq")
+theme_override_styles/background = SubResource("StyleBoxFlat_ppq64")
 theme_override_styles/fill = SubResource("StyleBoxFlat_841lo")
-value = 50.0
+value = 60.0
+show_percentage = false
+
+[node name="Health Bar Main" type="ProgressBar" parent="World Sprite3D/SubViewport/Monster UI Container/PanelContainer/MarginContainer/PanelContainer/MarginContainer2/VBoxContainer/Health Bar"]
+unique_name_in_owner = true
+self_modulate = Color(1, 0.26666668, 0, 1)
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_q7jn8")
+theme_override_styles/fill = SubResource("StyleBoxFlat_841lo")
+value = 55.0
 show_percentage = false
 
 [node name="Stamina Bar" type="ProgressBar" parent="World Sprite3D/SubViewport/Monster UI Container/PanelContainer/MarginContainer/PanelContainer/MarginContainer2/VBoxContainer"]

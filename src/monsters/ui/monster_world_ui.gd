@@ -6,6 +6,8 @@ extends Node3D
 @export var is_blocked: bool = true
 
 @onready var health_bar: ProgressBar = %"Health Bar"
+@onready var health_bar_main: ProgressBar = %"Health Bar Main"
+
 @onready var stamina_bar: ProgressBar = %"Stamina Bar"
 
 var tween: Tween
@@ -18,8 +20,10 @@ func _ready() -> void:
 
 func _on_health_changed(value: Health) -> void:
 	stop_if_needed()
+	var progress := health_bar.max_value * value.get_ratio()
 	tween = create_tween()
-	tween.tween_property(health_bar, "value", health_bar.max_value * value.get_ratio(), 0.3)
+	health_bar_main.value = progress
+	tween.tween_property(health_bar, "value", progress, 0.3)
 	
 	if value.is_empty() and not is_hiding:
 		smooth_hide()
