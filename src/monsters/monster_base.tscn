@@ -1,15 +1,19 @@
-[gd_scene load_steps=38 format=3 uid="uid://cpq3bvvv5605v"]
+[gd_scene load_steps=45 format=3 uid="uid://cpq3bvvv5605v"]
 
 [ext_resource type="Script" uid="uid://brh32yejypr87" path="res://monsters/monster.gd" id="1_qg1te"]
 [ext_resource type="Resource" uid="uid://tch0ei3beu1s" path="res://monsters/data/default.tres" id="2_jus1s"]
 [ext_resource type="Script" uid="uid://d1ccxqa3v8eby" path="res://monsters/monster_info_hover.gd" id="3_6c25d"]
+[ext_resource type="PackedScene" uid="uid://qsktg54howv0" path="res://common/heal_label_3d.tscn" id="4_lvog1"]
 [ext_resource type="Script" uid="uid://psf2sui574x3" path="res://monsters/visuals/emotion.gd" id="5_g75ok"]
 [ext_resource type="Texture2D" uid="uid://dkxg5n17pg2fn" path="res://monsters/assets/faces.svg" id="6_yonl5"]
 [ext_resource type="Texture2D" uid="uid://c78uywdwojndk" path="res://monsters/assets/faces_blink.svg" id="7_p7hi2"]
 [ext_resource type="PackedScene" uid="uid://0afkj1wx1g6h" path="res://monsters/ui/monster_world_ui.tscn" id="8_janau"]
-[ext_resource type="Script" path="res://monsters/hit_effect.gd" id="9_cam5p"]
+[ext_resource type="Script" uid="uid://xixq75xd6wy6" path="res://monsters/hit_effect.gd" id="9_cam5p"]
 [ext_resource type="PackedScene" uid="uid://b2gw3gp2wjl8j" path="res://common/hit_label_3d.tscn" id="9_etepe"]
 [ext_resource type="Material" uid="uid://cm5tfcoeautd5" path="res://monsters/assets/M_hit.tres" id="10_hx5qy"]
+[ext_resource type="Script" uid="uid://c3qputg4lrkwf" path="res://monsters/components/health.gd" id="11_hx5qy"]
+[ext_resource type="Script" uid="uid://dy7h7atq6vons" path="res://monsters/components/stamina.gd" id="12_71p1i"]
+[ext_resource type="Material" uid="uid://dladrsv7iv8yq" path="res://monsters/assets/M_heal.tres" id="14_88rtb"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_janau"]
 
@@ -82,7 +86,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_p7hi2"]
 resource_name = "death"
-length = 0.5
+length = 0.40000334
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -90,10 +94,22 @@ tracks/0/path = NodePath(".:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.13333334, 0.23333333, 0.40000004, 0.5),
+"times": PackedFloat32Array(0, 0.1, 0.20000002, 0.3, 0.4),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(1, 1, 1), Vector3(1.1, 0.9, 1.1), Vector3(0.85, 1.2, 0.85), Vector3(1.3, 0.1, 1.3), Vector3(1.1, 0.2, 1.1)]
+"values": [Vector3(1, 1, 1), Vector3(1.2, 0.9, 1.2), Vector3(0.8, 1.4, 0.8), Vector3(1.3, 0.1, 1.3), Vector3(1.1, 0.2, 1.1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.10000001, 0.20000002, 0.40000004),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.08726646, 0, 0), Vector3(-0.2617994, 0, 0), Vector3(0.2617994, 0, 0), Vector3(0, 0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_sbht7"]
@@ -138,6 +154,34 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 2, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_px60s"]
+resource_name = "take_damage"
+length = 0.40000334
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.13333334, 0.26666668, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-0.5235988, 0, 0), Vector3(-0.7853982, 0, 0), Vector3(0.08726646, 0, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.16666667, 0.26666668, 0.33333334, 0.40000004),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(0.8, 1.2, 0.8), Vector3(1, 1, 1), Vector3(1.2, 0.85, 1.2), Vector3(0.8, 1.2, 0.8), Vector3(1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_etepe"]
@@ -188,6 +232,7 @@ _data = {
 &"death": SubResource("Animation_p7hi2"),
 &"idle": SubResource("Animation_sbht7"),
 &"stomp": SubResource("Animation_cam5p"),
+&"take_damage": SubResource("Animation_px60s"),
 &"walk": SubResource("Animation_etepe")
 }
 
@@ -257,8 +302,14 @@ animation = &"stomp"
 
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_88rtb"]
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_cqyxk"]
+animation = &"take_damage"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_px60s"]
+
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_hx5qy"]
-nodes/output/position = Vector2(780, 160)
+graph_offset = Vector2(-344.4957, -51.46234)
+nodes/output/position = Vector2(740, 440)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_px60s")
 nodes/StateMachine/position = Vector2(-520, 0)
 nodes/Attack/node = SubResource("AnimationNodeOneShot_etepe")
@@ -269,7 +320,11 @@ nodes/Stomp/node = SubResource("AnimationNodeOneShot_88rtb")
 nodes/Stomp/position = Vector2(120, 260)
 "nodes/Stomp Animation/node" = SubResource("AnimationNodeAnimation_lvog1")
 "nodes/Stomp Animation/position" = Vector2(-160, 480)
-node_connections = [&"output", 0, &"Stomp", &"Attack", 0, &"StateMachine", &"Attack", 1, &"Attack Animation", &"Stomp", 0, &"Attack", &"Stomp", 1, &"Stomp Animation"]
+"nodes/Take Damage/node" = SubResource("AnimationNodeOneShot_px60s")
+"nodes/Take Damage/position" = Vector2(440, 460)
+"nodes/Take Damage Animation/node" = SubResource("AnimationNodeAnimation_cqyxk")
+"nodes/Take Damage Animation/position" = Vector2(120, 620)
+node_connections = [&"output", 0, &"Take Damage", &"Attack", 0, &"StateMachine", &"Attack", 1, &"Attack Animation", &"Stomp", 0, &"Attack", &"Stomp", 1, &"Stomp Animation", &"Take Damage", 0, &"Stomp", &"Take Damage", 1, &"Take Damage Animation"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_jus1s"]
 radius = 1.5682002
@@ -278,6 +333,7 @@ radius = 1.5682002
 script = ExtResource("1_qg1te")
 data = ExtResource("2_jus1s")
 hit_scene = ExtResource("9_etepe")
+heal_scene = ExtResource("4_lvog1")
 
 [node name="Model Root" type="Node3D" parent="."]
 
@@ -304,6 +360,9 @@ parameters/Attack/request = 0
 parameters/Stomp/active = false
 parameters/Stomp/internal_active = false
 parameters/Stomp/request = 0
+"parameters/Take Damage/active" = false
+"parameters/Take Damage/internal_active" = false
+"parameters/Take Damage/request" = 0
 
 [node name="MonsterInfoHover" type="Area3D" parent="." node_paths=PackedStringArray("monster")]
 script = ExtResource("3_6c25d")
@@ -314,7 +373,27 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.052011, 0)
 shape = SubResource("SphereShape3D_jus1s")
 debug_color = Color(1, 0.6313726, 0, 1)
 
-[node name="Emotion" type="Node" parent="."]
+[node name="Monster World UI" parent="." node_paths=PackedStringArray("health", "stamina") instance=ExtResource("8_janau")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+health = NodePath("../Components/Health")
+stamina = NodePath("../Components/Stamina")
+
+[node name="Components" type="Node" parent="."]
+
+[node name="Health" type="Node" parent="Components"]
+unique_name_in_owner = true
+script = ExtResource("11_hx5qy")
+metadata/_custom_type_script = "uid://c3qputg4lrkwf"
+
+[node name="Stamina" type="Node" parent="Components"]
+unique_name_in_owner = true
+script = ExtResource("12_71p1i")
+metadata/_custom_type_script = "uid://dy7h7atq6vons"
+
+[node name="Visual" type="Node" parent="."]
+
+[node name="Emotion" type="Node" parent="Visual"]
 script = ExtResource("5_g75ok")
 textures = Dictionary[int, Texture2D]({
 0: ExtResource("6_yonl5"),
@@ -323,11 +402,8 @@ textures = Dictionary[int, Texture2D]({
 offset_step = 128
 metadata/_custom_type_script = "uid://psf2sui574x3"
 
-[node name="Monster World UI" parent="." node_paths=PackedStringArray("monster") instance=ExtResource("8_janau")]
-unique_name_in_owner = true
-monster = NodePath("..")
-
-[node name="HitEffect" type="Node" parent="." node_paths=PackedStringArray("monster")]
+[node name="HitEffect" type="Node" parent="Visual" node_paths=PackedStringArray("health")]
 script = ExtResource("9_cam5p")
-monster = NodePath("..")
-material = ExtResource("10_hx5qy")
+health = NodePath("../../Components/Health")
+hit_material = ExtResource("10_hx5qy")
+heal_material = ExtResource("14_88rtb")

@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://qsktg54howv0"]
+
+[ext_resource type="FontFile" uid="uid://duefpn463vu3a" path="res://fonts/Chewy-Regular.ttf" id="1_tu7xp"]
+[ext_resource type="Script" uid="uid://myua18e8ccvn" path="res://common/floating_label_3d.gd" id="2_ujl3r"]
+
+[node name="Heal Label3D" type="Label3D"]
+billboard = 1
+no_depth_test = true
+render_priority = 2
+outline_render_priority = 1
+modulate = Color(0.4509804, 1, 0, 1)
+outline_modulate = Color(0, 0, 0, 0.49019608)
+text = "5"
+font = ExtResource("1_tu7xp")
+font_size = 164
+outline_size = 64
+script = ExtResource("2_ujl3r")

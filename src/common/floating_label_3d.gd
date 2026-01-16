@@ -1,4 +1,4 @@
-class_name HitLabel3D
+class_name FloatingLabel3D
 extends Label3D
 
 func launch(new_text: String) -> void:

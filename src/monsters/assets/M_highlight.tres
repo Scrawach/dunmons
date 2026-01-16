@@ -9,13 +9,14 @@ frequency = 0.03
 width = 128
 height = 128
 noise = SubResource("FastNoiseLite_uw6c8")
+seamless = true
 
 [resource]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("1_3i7cu")
 shader_parameter/pattern = SubResource("NoiseTexture2D_6j5h1")
-shader_parameter/highlight_color = Color(1, 1, 1, 1)
-shader_parameter/highlight_power = 2.5000000223518
+shader_parameter/highlight_color = Color(0.752, 0.728, 0.8, 1)
+shader_parameter/highlight_power = 3.0000000298024
 shader_parameter/highlight_speed = 0.20000000298024
 shader_parameter/highlight_progress = 1.0

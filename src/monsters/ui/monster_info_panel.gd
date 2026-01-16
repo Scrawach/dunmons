@@ -21,7 +21,10 @@ func initialize(data: MonsterInfo) -> void:
 	clear()
 	name_label.text = data.name
 	description_label.text = data.description
-	attack_stat.text = str(data.attack)
+	if data.attack_max != data.attack_min:
+		attack_stat.text = "%s-%s" % [data.attack_min, data.attack_max]
+	else:
+		attack_stat.text = str(data.attack_max)
 	health_stat.text = str(data.health)
 	speed_stat.text = "%0.2f" % data.stamina
 	add_tags(data.tags)

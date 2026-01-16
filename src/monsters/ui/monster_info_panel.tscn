@@ -119,13 +119,15 @@ alignment = 1
 [node name="Attack Stat" parent="MarginContainer/VBoxContainer/Stats Container" instance=ExtResource("3_ix1oq")]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
 icon = ExtResource("7_4ctf7")
-text = "5"
+text = "1-2"
 
 [node name="Health Stat" parent="MarginContainer/VBoxContainer/Stats Container" instance=ExtResource("3_ix1oq")]
 unique_name_in_owner = true
 self_modulate = Color(0.5, 0.15, 0.15, 1)
 layout_mode = 2
+size_flags_horizontal = 3
 icon = ExtResource("4_mu1hy")
 text = "5"
 
@@ -133,5 +135,6 @@ text = "5"
 unique_name_in_owner = true
 self_modulate = Color(0.15991673, 0.5, 0.11500001, 1)
 layout_mode = 2
+size_flags_horizontal = 3
 icon = ExtResource("9_c00fg")
 text = "5"

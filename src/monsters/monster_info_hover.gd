@@ -8,6 +8,7 @@ const HIGHLIGHT = preload("uid://bwl5uabgtog7a")
 
 var highlight_material: ShaderMaterial
 var is_hovered: bool
+var highlight_tween: Tween
 
 func _ready() -> void:
 	mouse_entered.connect(_on_mouse_entered)
@@ -34,8 +35,23 @@ func highlight() -> void:
 	if body == null:
 		return
 	body.material_overlay = HIGHLIGHT
+	start_smooth_highlight()
 
 func unhighlight() -> void:
 	if body == null:
 		return
+	stop_highlight_if_needed()
 	body.material_overlay = null
+
+func start_smooth_highlight() -> void:
+	stop_highlight_if_needed()
+	highlight_tween = create_tween()
+	highlight_tween.tween_method(setup_highlight_progress, 0.0, 1.0, 0.15)
+
+func setup_highlight_progress(value: float) -> void:
+	HIGHLIGHT.set_shader_parameter("highlight_progress", value)
+
+func stop_highlight_if_needed() -> void:
+	if highlight_tween:
+		highlight_tween.custom_step(9999)
+		highlight_tween.kill()
