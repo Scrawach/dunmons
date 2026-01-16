@@ -102,6 +102,7 @@ script = ExtResource("10_efxa6")
 player_hud = NodePath("../../Player HUD")
 metadata/_custom_type_script = "uid://8psrkms5uwum"
 
-[node name="Battle" type="Node" parent="Game"]
+[node name="Battle" type="Node" parent="Game" node_paths=PackedStringArray("camera_point")]
 script = ExtResource("5_7mycd")
+camera_point = NodePath("../../World3D/Camera Point")
 metadata/_custom_type_script = "uid://dtc6b60kuy673"

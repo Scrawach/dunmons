@@ -2,6 +2,7 @@ class_name CameraPoint
 extends Node3D
 
 @onready var camera_3d: Camera3D = $"Camera Length/Camera3D"
+@onready var camera_shaker: CameraShaker = $CameraShaker
 
 var tween: Tween
 
@@ -12,6 +13,9 @@ var base_position: Vector3
 func _ready() -> void:
 	base_size = camera_3d.size
 	base_rotation = self.rotation.y
+
+func shake(power: float) -> void:
+	camera_shaker.shake(power)
 
 func move_to(target: Vector3, duration: float = 3.0) -> void:
 	stop_if_needed()
