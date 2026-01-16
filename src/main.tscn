@@ -1,71 +1,112 @@
-[gd_scene load_steps=9 format=3 uid="uid://c4x78xdv4cpx4"]
+[gd_scene load_steps=15 format=3 uid="uid://c4x78xdv4cpx4"]
 
-[ext_resource type="PackedScene" uid="uid://cpq3bvvv5605v" path="res://monsters/monster_base_old.tscn" id="1_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://2dpaau0tgd4s" path="res://player/ui/player_hud.tscn" id="1_272bh"]
-[ext_resource type="PackedScene" uid="uid://c51kjclr1a0mq" path="res://monsters/monster_line.tscn" id="2_h2yge"]
-[ext_resource type="Script" uid="uid://b65182a2jjw81" path="res://monsters/drag_and_drop_3d.gd" id="3_h2yge"]
-[ext_resource type="PackedScene" uid="uid://dpn34cacjhahy" path="res://locations/proto_location.tscn" id="4_7mycd"]
 [ext_resource type="Script" uid="uid://d3kcr1y2o7ue" path="res://gameloop/game.gd" id="4_lquwl"]
+[ext_resource type="Script" uid="uid://cbmmrcqm4l1fk" path="res://locations/sands.gd" id="5_5vw27"]
 [ext_resource type="Script" uid="uid://dtc6b60kuy673" path="res://gameloop/battle/battle.gd" id="5_7mycd"]
+[ext_resource type="Script" uid="uid://lcb0fddktdjg" path="res://camera/camera_point.gd" id="5_272bh"]
+[ext_resource type="Material" uid="uid://dlelrtvcgwl50" path="res://locations/assets/M_sand.tres" id="5_ycdy4"]
+[ext_resource type="PackedScene" uid="uid://butm8yj1yughq" path="res://locations/specifics/ruins_location.tscn" id="6_w48qg"]
+[ext_resource type="PackedScene" uid="uid://caj80doynbabw" path="res://monsters/specifics/golem/golem.tscn" id="7_4c57u"]
+[ext_resource type="PackedScene" uid="uid://0bcb6pixpecp" path="res://monsters/specifics/demon/demon.tscn" id="7_vivmo"]
+[ext_resource type="PackedScene" uid="uid://q1sisca1uwsi" path="res://monsters/specifics/cube/cube.tscn" id="8_4c57u"]
 
-[sub_resource type="Environment" id="Environment_272bh"]
-ambient_light_source = 1
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3mixg"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_wi035"]
+sky_material = SubResource("ProceduralSkyMaterial_3mixg")
+
+[sub_resource type="Environment" id="Environment_ho76u"]
+background_mode = 1
+background_color = Color(0.95686275, 0.63529414, 0.38039216, 1)
+sky = SubResource("Sky_wi035")
+ambient_light_source = 2
+ambient_light_color = Color(0.72156864, 0.34901962, 0.34509805, 1)
+ambient_light_energy = 0.5
+tonemap_mode = 2
+fog_enabled = true
 fog_mode = 1
-fog_light_color = Color(0.8980392, 0.41960785, 0.43529412, 1)
-fog_density = 1.0
-fog_height = -0.1
-fog_height_density = 2.0
-fog_depth_curve = 15.454974
+fog_light_color = Color(0.95686275, 0.63529414, 0.38039216, 1)
+fog_light_energy = 0.0
+fog_density = 0.8719
+fog_depth_curve = 0.7320431
 fog_depth_begin = 0.0
-fog_depth_end = 20.0
+fog_depth_end = 50.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_0aecw"]
+size = Vector2(100, 100)
 
 [node name="Main" type="Node"]
 
 [node name="Player HUD" parent="." instance=ExtResource("1_272bh")]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_272bh")
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.9438529, 0.3228734, -0.06996109, 0, 0.21176836, 0.9773199, 0.33036616, -0.9224462, 0.19987816, 4.772633, 0, -11.328466)
+transform = Transform3D(-0.57357645, -0.7094065, 0.40957597, 0, 0.49999997, 0.86602545, -0.819152, 0.49673182, -0.2867882, 7.371601, 0, -5.653407)
+light_angular_distance = 5.45
+shadow_enabled = true
+directional_shadow_max_distance = 8192.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ho76u")
 
 [node name="World3D" type="Node3D" parent="."]
 
-[node name="Player Monster Line" type="Node3D" parent="World3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
-visible = false
+[node name="Ruins Location" parent="World3D" instance=ExtResource("6_w48qg")]
 
-[node name="Monster Line" parent="World3D/Player Monster Line" node_paths=PackedStringArray("monsters") instance=ExtResource("2_h2yge")]
-monsters = [NodePath("Monster Base")]
+[node name="Demon" parent="World3D" instance=ExtResource("7_vivmo")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 3.6412606, 0, 20.13366)
 
-[node name="Monster Base" parent="World3D/Player Monster Line/Monster Line" instance=ExtResource("1_0xm2m")]
-monster_name = "TEST_PLAYER"
+[node name="Camera Point" type="Node3D" parent="World3D"]
+transform = Transform3D(0.49999997, -0.61237246, 0.61237246, 0, 0.70710677, 0.70710677, -0.86602545, -0.35355335, 0.35355335, 0, 0, -7)
+script = ExtResource("5_272bh")
 
-[node name="Camera Point" type="Node3D" parent="World3D/Player Monster Line/Monster Line"]
-transform = Transform3D(0.49999997, -0.36599815, 0.7848855, 0, 0.9063077, 0.42261824, -0.86602545, -0.2113091, 0.45315382, 0, 0, -2)
+[node name="Camera Length" type="Node3D" parent="World3D/Camera Point"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 18)
 
-[node name="Camera Length" type="Node3D" parent="World3D/Player Monster Line/Monster Line/Camera Point"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6)
-
-[node name="Camera3D" type="Camera3D" parent="World3D/Player Monster Line/Monster Line/Camera Point/Camera Length"]
-transform = Transform3D(1, 0, 0, 0, 1.0000001, -2.9802322e-08, 0, 0, 1, -2.5484294e-07, 0.09807634, 5.8301277)
+[node name="Camera3D" type="Camera3D" parent="World3D/Camera Point/Camera Length"]
+cull_mask = 1048573
 projection = 1
-size = 16.0
+current = true
+size = 25.0
+near = 0.1
+far = 40.0
 
-[node name="DragAndDrop3D" type="Node3D" parent="World3D/Player Monster Line"]
-script = ExtResource("3_h2yge")
-metadata/_custom_type_script = "uid://b65182a2jjw81"
+[node name="Sands" type="Node3D" parent="World3D" node_paths=PackedStringArray("sands")]
+script = ExtResource("5_5vw27")
+sands = [NodePath("Sand"), NodePath("Sand2")]
 
-[node name="Proto Location" parent="World3D" instance=ExtResource("4_7mycd")]
+[node name="Sand" type="MeshInstance3D" parent="World3D/Sands"]
+transform = Transform3D(1, 0, -2.9802322e-08, 0, 0.99999994, 0, 0, 0, 1, -1.1920929e-07, -0.16102183, 0)
+mesh = SubResource("PlaneMesh_0aecw")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_ycdy4")
 
-[node name="Game" type="Node" parent="." node_paths=PackedStringArray("battle", "world_3d", "player_line", "current_location", "player_hud")]
+[node name="Sand2" type="MeshInstance3D" parent="World3D/Sands"]
+transform = Transform3D(1, 0, -2.9802322e-08, 0, 0.99999994, 0, 0, 0, 1, -1.1920929e-07, -0.16102183, -100)
+mesh = SubResource("PlaneMesh_0aecw")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_ycdy4")
+
+[node name="Golem" parent="World3D" instance=ExtResource("7_4c57u")]
+
+[node name="Golem2" parent="World3D" instance=ExtResource("7_4c57u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3008862, 0, -7.920223)
+
+[node name="Cube" parent="World3D" instance=ExtResource("8_4c57u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6016083, 0, -1.3486362)
+
+[node name="Game" type="Node" parent="." node_paths=PackedStringArray("player_monsters", "camera_point", "world", "sands", "start_location", "target")]
 script = ExtResource("4_lquwl")
-battle = NodePath("Battle")
-world_3d = NodePath("../World3D")
-player_line = NodePath("../World3D/Player Monster Line/Monster Line")
-current_location = NodePath("../World3D/Proto Location")
-location_template = ExtResource("4_7mycd")
-player_hud = NodePath("../Player HUD")
+player_monsters = [NodePath("../World3D/Demon"), NodePath("../World3D/Golem"), NodePath("../World3D/Cube")]
+camera_point = NodePath("../World3D/Camera Point")
+enemies = Array[PackedScene]([ExtResource("8_4c57u"), ExtResource("7_vivmo"), ExtResource("7_4c57u")])
+world = NodePath("../World3D")
+sands = NodePath("../World3D/Sands")
+start_location = NodePath("../World3D/Ruins Location")
+location_scenes = Array[PackedScene]([ExtResource("6_w48qg")])
+target = NodePath("../World3D/Golem2")
 metadata/_custom_type_script = "uid://d3kcr1y2o7ue"
 
 [node name="Battle" type="Node" parent="Game"]

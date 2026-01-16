@@ -1,17 +1,12 @@
-[gd_scene load_steps=25 format=3 uid="uid://cg4jqudogp1by"]
+[gd_scene load_steps=16 format=3 uid="uid://cg4jqudogp1by"]
 
 [ext_resource type="Script" uid="uid://yq2mo2nef66u" path="res://tests/visual_test_scene.gd" id="1_gkivm"]
 [ext_resource type="PackedScene" uid="uid://2dpaau0tgd4s" path="res://player/ui/player_hud.tscn" id="1_rh67g"]
-[ext_resource type="PackedScene" uid="uid://cdk4n2qtr0sd8" path="res://locations/assets/sand.glb" id="2_dije2"]
-[ext_resource type="Material" uid="uid://bkvyobbkqdj3l" path="res://locations/assets/M_sand_small.tres" id="3_rcdbj"]
-[ext_resource type="PackedScene" uid="uid://bgcpcag06irx1" path="res://locations/assets/decorations1.glb" id="4_n16x1"]
-[ext_resource type="Script" uid="uid://c1wht4xtvlpme" path="res://locations/location_part.gd" id="5_lgwr6"]
-[ext_resource type="PackedScene" uid="uid://buwdmh5r15ib3" path="res://locations/assets/plant.glb" id="6_r31ha"]
-[ext_resource type="PackedScene" uid="uid://drcqylqookeag" path="res://locations/assets/circle_zone.glb" id="9_qw6i8"]
+[ext_resource type="PackedScene" uid="uid://butm8yj1yughq" path="res://locations/specifics/ruins_location.tscn" id="6_sn6c6"]
 [ext_resource type="Material" uid="uid://dlelrtvcgwl50" path="res://locations/assets/M_sand.tres" id="10_0n882"]
 [ext_resource type="Shader" uid="uid://c6fkq5hwqe4ry" path="res://shaders/vignette.gdshader" id="11_trw0e"]
 [ext_resource type="FontFile" uid="uid://duefpn463vu3a" path="res://fonts/Chewy-Regular.ttf" id="12_a63fl"]
-[ext_resource type="PackedScene" uid="uid://0bcb6pixpecp" path="res://monsters/concrete/demon/demon.tscn" id="13_dije2"]
+[ext_resource type="PackedScene" uid="uid://0bcb6pixpecp" path="res://monsters/specifics/demon/demon.tscn" id="13_dije2"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3mixg"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -58,58 +53,14 @@ border_color = Color(1, 1, 1, 1)
 bg_color = Color(1, 1, 1, 1)
 draw_center = false
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4xkjg"]
-transparency = 1
-shading_mode = 0
-albedo_color = Color(0.77, 0.15400003, 0, 0.6784314)
-
-[sub_resource type="Animation" id="Animation_yaynj"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_4xkjg"]
-resource_name = "idle"
-length = 0.4
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(1, 1, 1), Vector3(1.3, 1, 1.3), Vector3(1, 1, 1)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_4g5xl"]
-_data = {
-&"RESET": SubResource("Animation_yaynj"),
-&"idle": SubResource("Animation_4xkjg")
-}
-
 [sub_resource type="PlaneMesh" id="PlaneMesh_0aecw"]
 size = Vector2(100, 100)
 
 [sub_resource type="SphereMesh" id="SphereMesh_dije2"]
 radius = 1.0
 
-[node name="Visual Test Scene" type="Node3D" node_paths=PackedStringArray("location", "dummy", "marker1", "marker2")]
+[node name="Visual Test Scene" type="Node3D" node_paths=PackedStringArray("dummy", "marker1", "marker2")]
 script = ExtResource("1_gkivm")
-location = NodePath("Location/decorations1")
 dummy = NodePath("Demon")
 marker1 = NodePath("Marker3D")
 marker2 = NodePath("Marker3D2")
@@ -313,50 +264,16 @@ theme_override_constants/margin_bottom = 2
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_4xkjg")
 
-[node name="Location" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3110218, 0)
-
-[node name="decorations1" parent="Location" instance=ExtResource("4_n16x1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 0)
-script = ExtResource("5_lgwr6")
-
-[node name="plant" parent="Location/decorations1" instance=ExtResource("6_r31ha")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.575714, 0, 2.766708)
-
-[node name="plant2" parent="Location/decorations1" instance=ExtResource("6_r31ha")]
-transform = Transform3D(0.63317823, 0, 0.774006, 0, 1, 0, -0.774006, 0, 0.63317823, -7.7005033, 0, -13.224989)
-
-[node name="plant4" parent="Location/decorations1" instance=ExtResource("6_r31ha")]
-transform = Transform3D(0.16098122, 0.016092533, -0.40917724, -0.0058916607, 0.4397056, 0.014975246, 0.4094512, 0, 0.161089, -4.2393503, 0.4518323, -6.846324)
-
-[node name="circle_zone" parent="Location/decorations1" instance=ExtResource("9_qw6i8")]
-transform = Transform3D(0.9151568, 0, 0.4030981, 0, 1, 0, -0.4030981, 0, 0.9151568, 1.1450458, 0.37726402, -8.019562)
-
-[node name="Circle" parent="Location/decorations1/circle_zone" index="0"]
-transform = Transform3D(0.9681565, 0, -0.25034624, 0, 1.0000001, 0, 0.25034624, 0, 0.9681565, 0, -0.0747588, 0)
-surface_material_override/0 = SubResource("StandardMaterial3D_4xkjg")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Location/decorations1/circle_zone"]
-libraries = {
-&"": SubResource("AnimationLibrary_4g5xl")
-}
-autoplay = "idle"
-speed_scale = 0.3
-
-[node name="Decoration Sand" parent="Location" instance=ExtResource("2_dije2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 0)
-
-[node name="Sand" parent="Location/Decoration Sand" index="0"]
-surface_material_override/0 = ExtResource("3_rcdbj")
-
-[node name="Sand" type="MeshInstance3D" parent="Location"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
+[node name="Sand" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1610218, 0)
 mesh = SubResource("PlaneMesh_0aecw")
-skeleton = NodePath("../..")
 surface_material_override/0 = ExtResource("10_0n882")
 
+[node name="Ruins Location" parent="." instance=ExtResource("6_sn6c6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3110218, 0)
+
 [node name="Demon" parent="." instance=ExtResource("13_dije2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6412606, 0, -7.8663416)
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 3.6412606, 0, 20.13366)
 
 [node name="Marker3D" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.142316, 4.7683716e-07, 2.4923344)
@@ -371,6 +288,3 @@ metadata/_edit_group_ = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Marker3D2"]
 mesh = SubResource("SphereMesh_dije2")
-
-[editable path="Location/decorations1/circle_zone"]
-[editable path="Location/Decoration Sand"]

@@ -1,0 +1,83 @@
+[gd_scene load_steps=8 format=3 uid="uid://cg7i87r6sxo73"]
+
+[ext_resource type="PackedScene" uid="uid://bgcpcag06irx1" path="res://locations/assets/decorations1.glb" id="1_o7gov"]
+[ext_resource type="Script" uid="uid://c1wht4xtvlpme" path="res://locations/location_part.gd" id="2_ownbi"]
+[ext_resource type="PackedScene" uid="uid://buwdmh5r15ib3" path="res://locations/assets/plant.glb" id="3_3rvw5"]
+[ext_resource type="PackedScene" uid="uid://cdk4n2qtr0sd8" path="res://locations/assets/sand.glb" id="4_8omfr"]
+[ext_resource type="Material" uid="uid://bkvyobbkqdj3l" path="res://locations/assets/M_sand_small.tres" id="5_el786"]
+[ext_resource type="PackedScene" uid="uid://caj80doynbabw" path="res://monsters/specifics/golem/golem.tscn" id="6_j3hl8"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_dije2"]
+radius = 1.0
+
+[node name="Ruins Location" type="Node3D"]
+
+[node name="decorations1" parent="." instance=ExtResource("1_o7gov")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 0)
+script = ExtResource("2_ownbi")
+
+[node name="plant" parent="decorations1" instance=ExtResource("3_3rvw5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.575714, 0, 2.766708)
+
+[node name="plant2" parent="decorations1" instance=ExtResource("3_3rvw5")]
+transform = Transform3D(0.63317823, 0, 0.774006, 0, 1, 0, -0.774006, 0, 0.63317823, -7.7005033, 0, -13.224989)
+
+[node name="plant4" parent="decorations1" instance=ExtResource("3_3rvw5")]
+transform = Transform3D(0.16098122, 0.016092533, -0.40917724, -0.0058916607, 0.4397056, 0.014975246, 0.4094512, 0, 0.161089, -4.2393503, 0.4518323, -6.846324)
+
+[node name="Decoration Sand" parent="." instance=ExtResource("4_8omfr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 0)
+
+[node name="Sand" parent="Decoration Sand" index="0"]
+surface_material_override/0 = ExtResource("5_el786")
+
+[node name="Player Positions" type="Node3D" parent="."]
+
+[node name="Player Position" type="Marker3D" parent="Player Positions"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7150831, 4.7683716e-07, -3.5076656)
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player Positions/Player Position"]
+mesh = SubResource("SphereMesh_dije2")
+
+[node name="Player Position2" type="Marker3D" parent="Player Positions"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7150831, 4.7683716e-07, -0.50766563)
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player Positions/Player Position2"]
+mesh = SubResource("SphereMesh_dije2")
+
+[node name="Player Position3" type="Marker3D" parent="Player Positions"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7150831, 4.7683716e-07, 2.4923344)
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player Positions/Player Position3"]
+mesh = SubResource("SphereMesh_dije2")
+
+[node name="Enemy Positions" type="Node3D" parent="."]
+
+[node name="Enemy Position" type="Marker3D" parent="Enemy Positions"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7150831, 4.7683716e-07, -10.507666)
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Enemy Positions/Enemy Position"]
+mesh = SubResource("SphereMesh_dije2")
+
+[node name="Golem" parent="Enemy Positions/Enemy Position" instance=ExtResource("6_j3hl8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2720738, 0)
+
+[node name="Enemy Position2" type="Marker3D" parent="Enemy Positions"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7150831, 4.7683716e-07, -13.507666)
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Enemy Positions/Enemy Position2"]
+mesh = SubResource("SphereMesh_dije2")
+
+[node name="Enemy Position3" type="Marker3D" parent="Enemy Positions"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7150831, 4.7683716e-07, -16.507666)
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Enemy Positions/Enemy Position3"]
+mesh = SubResource("SphereMesh_dije2")
+
+[editable path="Decoration Sand"]

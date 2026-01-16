@@ -1,56 +1,74 @@
 class_name Game
 extends Scenario
 
-@export var battle: Battle
-@export var world_3d: Node3D
-@export var player_line: MonsterLine
-@export var current_location: Location
-@export var location_template: PackedScene
-@export var player_hud: PlayerHUD
+@export var player_monsters: Array[Monster]
+@export var camera_point: CameraPoint
+@export var enemies: Array[PackedScene]
+
+@export var world: Node3D
+@export var sands: Sands
+@export var start_location: Location
+@export var location_scenes: Array[PackedScene]
+
+@export var target: Monster
+
+var previous_location: Location
+var reached_distance: float
 
 func _ready() -> void:
 	execute_async()
 
-func execute_async() -> void:
-	process_join_to_party_async()
-	return
-	while true:
-		battle.setup(player_line, current_location.enemies)
-		var result := await battle.execute_async()
-		
-		if not result.is_player_win:
-			game_over()
-			return
-		
-		await process_join_to_party_async()
-		current_location = await move_to_next_location_async()
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_pressed() and event is InputEventKey:
+		if event.keycode == KEY_Q:
+			camera_point.zoom_to(target)
+		elif event.keycode == KEY_W:
+			camera_point.zoom_out()
 
-func move_to_next_location_async() -> Location:
-	var instance: Location = location_template.instantiate() as Location
-	world_3d.add_child(instance)
-	instance.position = current_location.position - Vector3(0, 0, instance.length)
-	var tween := create_tween()
-	tween.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SPRING)
-	tween.tween_property(player_line, "global_position:z", instance.player_position.global_position.z, 2.0)
-	await wait_async(2.0)
+func execute_async() -> void:
+	return
+	start_location.initialize()
+	await move_to(start_location)
+	while true:
+		var location := make_new_location(reached_distance)
+		spawn_enemies(location)
+		location.initialize()
+		await move_to(location)
+		sands.move_if_needed(reached_distance)
+
+func make_new_location(offset: float) -> Location:
+	var random := location_scenes.pick_random() as PackedScene
+	var instance := random.instantiate() as Location
+	world.add_child(instance)
+	instance.position.z = -offset
 	return instance
 
-func process_join_to_party_async() -> void:
-	await wait_until(func(): return Input.is_anything_pressed())
-	print("someone want join to party")
-	player_hud.show_background()
-	player_hud.show_dialogue("Someone want join to party!")
-	await wait_async(0.1)
-	await wait_until(func(): return Input.is_anything_pressed())
-	player_hud.hide_dialogue()
-	await wait_async(0.1)
-	await wait_until(func(): return Input.is_anything_pressed())
-	player_hud.show_naming()
-	await wait_async(0.1)
-	await wait_until(func(): return Input.is_anything_pressed())
-	player_hud.hide_naming()
-	player_hud.hide_background()
+func move_to(target: Location) -> void:
+	var travel_points := target.get_travel_points()
+	for i in player_monsters.size():
+		player_monsters[i].move_to(travel_points[i])
+	camera_point.move_to(target.camera_point.global_position, 4.0)
+	
+	await wait_async(1.0)
+	if previous_location:
+		previous_location.smooth_hide()
+	await wait_async(1.0)
+	
+	target.smooth_show()
+	
+	while player_monsters.front().is_walking:
+		await wait_async(0.5)
+	
+	reached_distance += target.length
+	if previous_location:
+		previous_location.queue_free()
+	previous_location = target
 
-func game_over() -> void:
-	print("game over")
-	pass
+func spawn_enemies(location: Location) -> void:
+	var enemy_count := randi_range(1, 3)
+	var points := location.get_enemy_points()
+	for i in enemy_count:
+		var random := enemies.pick_random() as PackedScene
+		var instance := random.instantiate() as Monster
+		location.spawn_point.add_child(instance)
+		instance.global_position = points[i]

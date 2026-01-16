@@ -17,6 +17,8 @@ const TAG_DESCRIPTION_SCENE := preload("res://common/tags/ui/tag_info_panel.tscn
 @onready var health_stat: StatContainer = %"Health Stat"
 @onready var speed_stat: StatContainer = %"Speed Stat"
 
+var target: Monster
+
 func initialize(data: MonsterInfo) -> void:
 	clear()
 	name_label.text = data.name
@@ -28,6 +30,26 @@ func initialize(data: MonsterInfo) -> void:
 	health_stat.text = str(data.health)
 	speed_stat.text = "%0.2f" % data.stamina
 	add_tags(data.tags)
+
+func attach_to(monster: Monster) -> void:
+	clear()
+	target = monster
+	initialize(monster.data)
+	smooth_show(0.25)
+	await get_tree().process_frame
+	reset_size()
+
+func deattach() -> void:
+	target = null
+	smooth_hide(0.15)
+
+
+func _physics_process(delta: float) -> void:
+	if target == null:
+		return
+	
+	var viewport_position := get_viewport().get_camera_3d().unproject_position(target.global_position)
+	move_to(viewport_position)
 
 func move_to(viewport_position: Vector2) -> void:
 	var center_point := size.x / 2.0

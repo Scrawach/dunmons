@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://bbcvtd7mxnui3"
-path="res://.godot/imported/demon.glb-8f81f1ac4017fcab00bcac76a700cda5.scn"
+path="res://.godot/imported/demon.glb-c98e0248c47785fc07af541c304a8277.scn"
 
 [deps]
 
-source_file="res://monsters/concrete/demon/demon.glb"
-dest_files=["res://.godot/imported/demon.glb-8f81f1ac4017fcab00bcac76a700cda5.scn"]
+source_file="res://monsters/specifics/demon/demon.glb"
+dest_files=["res://.godot/imported/demon.glb-c98e0248c47785fc07af541c304a8277.scn"]
 
 [params]
 
@@ -46,7 +46,7 @@ _subresources={
 },
 "Skin": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://monsters/concrete/demon/M_demon_skin.tres",
+"use_external/fallback_path": "res://monsters/specifics/demon/M_demon_skin.tres",
 "use_external/path": "uid://cgx6audg8begw"
 }
 }

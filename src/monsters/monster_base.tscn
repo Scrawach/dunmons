@@ -376,6 +376,7 @@ debug_color = Color(1, 0.6313726, 0, 1)
 [node name="Monster World UI" parent="." node_paths=PackedStringArray("health", "stamina") instance=ExtResource("8_janau")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+visible = false
 health = NodePath("../Components/Health")
 stamina = NodePath("../Components/Stamina")
 

@@ -87,4 +87,5 @@ func spawn_floating_numbers(scene: PackedScene, value: int) -> void:
 	hit_instance.launch(str(value))
 
 func play_oneshot_animation(animation_name: String) -> void:
-	base_animation_tree.set("parameters/%s/request" % animation_name, 1)
+	const FIRE_CODE := 1
+	base_animation_tree.set("parameters/%s/request" % animation_name, FIRE_CODE)

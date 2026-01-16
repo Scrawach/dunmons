@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://uq7q7y5xuccg"
-path="res://.godot/imported/golem.glb-67fd30d10e896ad53a485a4c4364f453.scn"
+path="res://.godot/imported/golem.glb-ffe20eaea8d11fd3c0b0780841865101.scn"
 
 [deps]
 
-source_file="res://monsters/concrete/golem/golem.glb"
-dest_files=["res://.godot/imported/golem.glb-67fd30d10e896ad53a485a4c4364f453.scn"]
+source_file="res://monsters/specifics/golem/golem.glb"
+dest_files=["res://.godot/imported/golem.glb-ffe20eaea8d11fd3c0b0780841865101.scn"]
 
 [params]
 
@@ -46,7 +46,7 @@ _subresources={
 },
 "StoneGolem": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://monsters/concrete/golem/M_golem.tres",
+"use_external/fallback_path": "res://monsters/specifics/golem/M_golem.tres",
 "use_external/path": "uid://dmrv7bjgspgf4"
 }
 }
