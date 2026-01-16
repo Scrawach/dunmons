@@ -1,8 +1,21 @@
 class_name Battle
 extends Scenario
 
+const TARGET_SCENE := preload("uid://s3jr88n1yai7")
+
 @export var tick_duration: float = 0.1
 @export var camera_point: CameraPoint
+
+var player_target: TargetCircle
+var enemy_target: TargetCircle
+
+func _ready() -> void:
+	player_target = TARGET_SCENE.instantiate() as TargetCircle
+	enemy_target = TARGET_SCENE.instantiate() as TargetCircle
+	add_child(player_target)
+	add_child(enemy_target)
+	player_target.hide()
+	enemy_target.hide()
 
 func simulate_async(player: MonsterLine, enemies: MonsterLine) -> BattleResult:
 	while player.has_creatures() and enemies.has_creatures():
@@ -13,6 +26,10 @@ func simulate_async(player: MonsterLine, enemies: MonsterLine) -> BattleResult:
 		
 		player_monster.health.hit.connect(_on_monster_hit)
 		enemy_monster.health.hit.connect(_on_monster_hit)
+		
+		player_target.show_under(player_monster)
+		enemy_target.show_under(enemy_monster)
+		
 		while not player_monster.is_death and not enemy_monster.is_death:
 			await wait_async(tick_duration)
 			player_monster.restore_stamine(tick_duration)
@@ -25,7 +42,9 @@ func simulate_async(player: MonsterLine, enemies: MonsterLine) -> BattleResult:
 				await process_attack(enemy_monster, player_monster)
 		player_monster.health.hit.disconnect(_on_monster_hit)
 		enemy_monster.health.hit.disconnect(_on_monster_hit)
-		
+	
+	enemy_target.smooth_hide()
+	player_target.smooth_hide()
 	
 	for monster in player.monsters:
 		monster.monster_world_ui.block()

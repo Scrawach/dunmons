@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://drcqylqookeag"
-path="res://.godot/imported/circle_zone.glb-9b127f743aee99a2d4fef6d4fea897f3.scn"
+path="res://.godot/imported/circle_zone.glb-02b3c1e614f683ec424108b09c547f07.scn"
 
 [deps]
 
-source_file="res://locations/assets/circle_zone.glb"
-dest_files=["res://.godot/imported/circle_zone.glb-9b127f743aee99a2d4fef6d4fea897f3.scn"]
+source_file="res://gameloop/battle/circle_zone.glb"
+dest_files=["res://.godot/imported/circle_zone.glb-02b3c1e614f683ec424108b09c547f07.scn"]
 
 [params]
 

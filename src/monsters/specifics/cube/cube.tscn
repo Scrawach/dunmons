@@ -6,10 +6,10 @@
 [ext_resource type="Material" uid="uid://pl1klw8u0ps2" path="res://monsters/assets/M_face.tres" id="3_xk186"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_7k3ok"]
-size = Vector3(1.5, 1.5, 1.5)
+size = Vector3(1.2, 1.2, 1.2)
 
 [sub_resource type="QuadMesh" id="QuadMesh_mrr43"]
-size = Vector2(1.4, 1.4)
+size = Vector2(1.2, 1.2)
 
 [node name="Cube" instance=ExtResource("1_7k3ok")]
 data = ExtResource("2_2fflt")
@@ -18,12 +18,12 @@ data = ExtResource("2_2fflt")
 visible = false
 
 [node name="Cube" type="MeshInstance3D" parent="Model Root" index="3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.64666814, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.607, 0)
 mesh = SubResource("BoxMesh_7k3ok")
 surface_material_override/0 = ExtResource("3_mrr43")
 
 [node name="Face" type="MeshInstance3D" parent="Model Root/Cube" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.785)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.61)
 mesh = SubResource("QuadMesh_mrr43")
 surface_material_override/0 = ExtResource("3_xk186")
 

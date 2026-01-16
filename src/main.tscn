@@ -104,5 +104,6 @@ metadata/_custom_type_script = "uid://8psrkms5uwum"
 
 [node name="Battle" type="Node" parent="Game" node_paths=PackedStringArray("camera_point")]
 script = ExtResource("5_7mycd")
+tick_duration = 0.05
 camera_point = NodePath("../../World3D/Camera Point")
 metadata/_custom_type_script = "uid://dtc6b60kuy673"
