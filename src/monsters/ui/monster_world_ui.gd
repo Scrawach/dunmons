@@ -11,6 +11,8 @@ extends Node3D
 @onready var stamina_bar: ProgressBar = %"Stamina Bar"
 
 var tween: Tween
+var progress_tween: Tween
+
 var is_hiding: bool
 
 func _ready() -> void:
@@ -19,11 +21,13 @@ func _ready() -> void:
 	stamina.changed.connect(_on_stamina_changed)
 
 func _on_health_changed(value: Health) -> void:
-	stop_if_needed()
+	if progress_tween:
+		progress_tween.kill()
+	
 	var progress := health_bar.max_value * value.get_ratio()
-	tween = create_tween()
+	progress_tween = create_tween()
 	health_bar_main.value = progress
-	tween.tween_property(health_bar, "value", progress, 0.3)
+	progress_tween.tween_property(health_bar, "value", progress, 0.3)
 	
 	if value.is_empty() and not is_hiding:
 		smooth_hide()
