@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://cgp5junta311l"]
+[gd_scene load_steps=13 format=3 uid="uid://cgp5junta311l"]
 
 [ext_resource type="Theme" uid="uid://cm8s2wypjifxn" path="res://monsters/ui/info_panel_theme.tres" id="1_7qf6v"]
 [ext_resource type="FontFile" uid="uid://duefpn463vu3a" path="res://fonts/Chewy-Regular.ttf" id="2_6qdba"]
 [ext_resource type="Script" uid="uid://bcjgdkea7hvr1" path="res://monsters/ui/monster_info_panel.gd" id="2_mu1hy"]
 [ext_resource type="Resource" uid="uid://c6vtdw5ubp0ea" path="res://common/tags/data/tags.tres" id="3_c00fg"]
 [ext_resource type="PackedScene" uid="uid://1a6bixny0lvb" path="res://monsters/ui/stat_container.tscn" id="3_ix1oq"]
+[ext_resource type="PackedScene" uid="uid://c177ob1mnp7k4" path="res://common/tags/ui/tag_info_panel.tscn" id="4_c00fg"]
 [ext_resource type="Texture2D" uid="uid://iaftij0r6qnn" path="res://monsters/ui/icons/heart_32px.svg" id="4_mu1hy"]
 [ext_resource type="Texture2D" uid="uid://b5i7lajdbfpml" path="res://monsters/ui/icons/sword_32px.svg" id="7_4ctf7"]
 [ext_resource type="Texture2D" uid="uid://d1qy6etw846o4" path="res://monsters/ui/icons/boots_32px.svg" id="9_c00fg"]
@@ -16,11 +17,14 @@ bg_color = Color(1, 1, 1, 1)
 border_width_right = 2
 border_width_bottom = 2
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c00fg"]
+
 [node name="Monster Info Panel" type="PanelContainer"]
 self_modulate = Color(0.8039216, 0.78039217, 0.8509804, 1)
 material = SubResource("ShaderMaterial_c00fg")
-offset_right = 228.0
-offset_bottom = 166.0
+custom_minimum_size = Vector2(240, 0)
+offset_right = 240.0
+offset_bottom = 185.0
 mouse_filter = 2
 theme = ExtResource("1_7qf6v")
 script = ExtResource("2_mu1hy")
@@ -55,7 +59,11 @@ layout_mode = 1
 anchors_preset = -1
 offset_right = -20.0
 grow_horizontal = 0
+mouse_filter = 2
 theme_override_constants/separation = 10
+
+[node name="Tag Info Panel" parent="Control/Tag Info Container" instance=ExtResource("4_c00fg")]
+layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
@@ -68,7 +76,7 @@ theme_override_constants/margin_bottom = 10
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 mouse_filter = 2
-theme_override_constants/separation = 8
+theme_override_constants/separation = 4
 
 [node name="Tags Container" type="HFlowContainer" parent="MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
@@ -111,6 +119,48 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
+[node name="Health Bar Stat" type="PanelContainer" parent="MarginContainer/VBoxContainer"]
+self_modulate = Color(0.5019608, 0.14901961, 0.14901961, 1)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_c00fg")
+
+[node name="Health ProgressBar" type="ProgressBar" parent="MarginContainer/VBoxContainer/Health Bar Stat"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 1
+value = 60.0
+show_percentage = false
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/Health Bar Stat"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Health Bar Stat/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="Texture" type="TextureRect" parent="MarginContainer/VBoxContainer/Health Bar Stat/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("4_mu1hy")
+expand_mode = 3
+
+[node name="Health Label" type="Label" parent="MarginContainer/VBoxContainer/Health Bar Stat/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_6qdba")
+theme_override_font_sizes/font_size = 16
+text = "99/99"
+
 [node name="Stats Container" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 mouse_filter = 2
@@ -121,15 +171,8 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 icon = ExtResource("7_4ctf7")
-text = "1-2"
-
-[node name="Health Stat" parent="MarginContainer/VBoxContainer/Stats Container" instance=ExtResource("3_ix1oq")]
-unique_name_in_owner = true
-self_modulate = Color(0.5, 0.15, 0.15, 1)
-layout_mode = 2
-size_flags_horizontal = 3
-icon = ExtResource("4_mu1hy")
-text = "5"
+text = "11-22"
+progress = 1.0
 
 [node name="Speed Stat" parent="MarginContainer/VBoxContainer/Stats Container" instance=ExtResource("3_ix1oq")]
 unique_name_in_owner = true
@@ -137,4 +180,5 @@ self_modulate = Color(0.15991673, 0.5, 0.11500001, 1)
 layout_mode = 2
 size_flags_horizontal = 3
 icon = ExtResource("9_c00fg")
-text = "5"
+text = "1.25"
+progress = 1.0

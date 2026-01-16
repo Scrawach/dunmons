@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=3 format=3 uid="uid://cm8s2wypjifxn"]
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://cm8s2wypjifxn"]
 
 [ext_resource type="FontFile" uid="uid://duefpn463vu3a" path="res://fonts/Chewy-Regular.ttf" id="1_xniuh"]
 
@@ -13,6 +13,32 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xniuh"]
+bg_color = Color(0.2, 0.060000002, 0.060000002, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 3
+border_color = Color(0.1, 0.030000001, 0.030000001, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vs3aq"]
+bg_color = Color(0.49803922, 0.14901961, 0.14901961, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 3
+border_color = Color(0.4, 0.12156863, 0.12156863, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
 [resource]
 Label/fonts/font = ExtResource("1_xniuh")
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_xi0ys")
+ProgressBar/styles/background = SubResource("StyleBoxFlat_xniuh")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_vs3aq")

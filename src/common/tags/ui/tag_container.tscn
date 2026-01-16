@@ -43,7 +43,9 @@ vertical_alignment = 1
 uppercase = true
 
 [node name="Control" type="Control" parent="."]
+visible = false
 layout_mode = 2
+mouse_filter = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="Control"]
 self_modulate = Color(0, 0, 0, 1)
@@ -59,6 +61,7 @@ offset_right = 7.0
 offset_bottom = 4.0
 grow_horizontal = 0
 grow_vertical = 0
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_af8cv")
 
 [node name="Label" type="Label" parent="Control/PanelContainer"]

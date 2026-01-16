@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://2dpaau0tgd4s"]
+[gd_scene load_steps=9 format=3 uid="uid://2dpaau0tgd4s"]
 
 [ext_resource type="PackedScene" uid="uid://crwf1tvkf4smk" path="res://common/ui/dialogue_panel.tscn" id="1_frykf"]
 [ext_resource type="Script" uid="uid://h12py2rrahp3" path="res://player/ui/player_hud.gd" id="1_ttjji"]
-[ext_resource type="Shader" uid="uid://c6fkq5hwqe4ry" path="res://shaders/vignette.gdshader" id="2_vp0yt"]
+[ext_resource type="Shader" path="res://shaders/vignette.gdshader" id="2_vp0yt"]
 [ext_resource type="PackedScene" uid="uid://bs7alng86owkv" path="res://player/ui/naming_panel.tscn" id="3_kliqd"]
 [ext_resource type="PackedScene" uid="uid://cgp5junta311l" path="res://monsters/ui/monster_info_panel.tscn" id="5_70ums"]
+[ext_resource type="PackedScene" uid="uid://bd7y6wdj4u8jf" path="res://player/ui/tip_panel.tscn" id="6_rtbk0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_70ums"]
 shader = ExtResource("2_vp0yt")
@@ -39,6 +40,10 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_ttjji")
+
+[node name="Tip Panel" parent="." instance=ExtResource("6_rtbk0")]
+unique_name_in_owner = true
+visible = false
 
 [node name="Dialogue Panel" parent="." instance=ExtResource("1_frykf")]
 unique_name_in_owner = true

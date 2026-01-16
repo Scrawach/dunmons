@@ -18,6 +18,12 @@ func initialize() -> void:
 			child.stop_if_needed()
 			parts.append(child)
 
+func show_tactics_positions() -> void:
+	player_positions.show()
+
+func hide_tactics_positions() -> void:
+	player_positions.hide()
+
 func get_travel_points() -> Array[Vector3]:
 	return get_points(player_positions)
 

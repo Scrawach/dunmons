@@ -7,6 +7,7 @@ extends CanvasLayer
 @onready var naming_panel: NamingPanel = %"Naming Panel"
 @onready var background: PanelContainer = %Background
 @onready var monster_info_panel: MonsterInfoPanel = %"Monster Info Panel"
+@onready var tip_panel: LocationTipPanel = %"Tip Panel"
 
 var background_tween: Tween
 var appear_tween: Tween
@@ -24,7 +25,13 @@ func _on_monster_unhover(_monster: Monster) -> void:
 func show_dialogue(message: String) -> void:
 	dialogue_panel.smooth_show()
 	dialogue_panel.show_message(message)
-	
+
+func show_location_description(title: String, description: String) -> void:
+	tip_panel.setup(title, description)
+	tip_panel.smooth_show()
+	await tip_panel.start_button.pressed
+	tip_panel.smooth_hide()
+
 func hide_dialogue() -> void:
 	dialogue_panel.smooth_hide()
 

@@ -31,6 +31,9 @@ func _ready() -> void:
 	damage_min = data.attack_min
 	damage_max = data.attack_max
 
+func can_attack() -> bool:
+	return not is_death and stamina.is_full()
+
 func restore_stamine(tick: float) -> void:
 	if stamina.is_full():
 		return
@@ -43,6 +46,10 @@ func die() -> void:
 
 func revive() -> void:
 	is_death = false
+
+func take_damage_async(value: int) -> void:
+	take_damage(value)
+	await base_animation_tree.animation_finished
 
 func take_damage(value: int) -> void:
 	if is_death:

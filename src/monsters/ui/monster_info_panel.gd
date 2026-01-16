@@ -13,36 +13,44 @@ const TAG_DESCRIPTION_SCENE := preload("res://common/tags/ui/tag_info_panel.tscn
 @onready var name_label: Label = %"Name Label"
 @onready var description_label: Label = %"Description Label"
 
+@onready var health_progress_bar: ProgressBar = %"Health ProgressBar"
+@onready var health_label: Label = %"Health Label"
+
 @onready var attack_stat: StatContainer = %"Attack Stat"
-@onready var health_stat: StatContainer = %"Health Stat"
 @onready var speed_stat: StatContainer = %"Speed Stat"
 
 var target: Monster
 
-func initialize(data: MonsterInfo) -> void:
+func initialize(monster: Monster) -> void:
 	clear()
+	var data := monster.data
 	name_label.text = data.name
 	description_label.text = data.description
 	if data.attack_max != data.attack_min:
 		attack_stat.text = "%s-%s" % [data.attack_min, data.attack_max]
 	else:
 		attack_stat.text = str(data.attack_max)
-	health_stat.text = str(data.health)
+	_on_health_changed(monster.health)
 	speed_stat.text = "%0.2f" % data.stamina
 	add_tags(data.tags)
 
 func attach_to(monster: Monster) -> void:
 	clear()
 	target = monster
-	initialize(monster.data)
+	target.health.changed.connect(_on_health_changed)
+	initialize(monster)
 	smooth_show(0.25)
 	await get_tree().process_frame
 	reset_size()
 
 func deattach() -> void:
+	target.health.changed.disconnect(_on_health_changed)
 	target = null
 	smooth_hide(0.15)
 
+func _on_health_changed(health: Health) -> void:
+	health_progress_bar.value = health_progress_bar.max_value * health.get_ratio()
+	health_label.text = "%s/%s" % [health.current, health.total]
 
 func _physics_process(delta: float) -> void:
 	if target == null:
@@ -56,6 +64,12 @@ func move_to(viewport_position: Vector2) -> void:
 	viewport_position.x -= center_point
 	viewport_position.y -= size.y + MONSTER_HEIGHT_OFFSET
 	position = viewport_position
+	clamp_inside_viewport()
+
+func clamp_inside_viewport() -> void:
+	var viewport_rect := get_viewport_rect()
+	position.x = clamp(position.x, viewport_rect.position.x + tag_info_container.size.x, viewport_rect.size.x)
+	position.y = clamp(position.y, viewport_rect.position.y, viewport_rect.size.y - tag_info_container.size.y)
 
 func add_tags(tags: Array[Tags.Type]) -> void:
 	for tag in tags:

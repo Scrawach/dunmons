@@ -13,3 +13,7 @@ extends PanelContainer
 		text = new_text
 		if not is_node_ready(): await ready
 		%Label.text = new_text
+
+@export var progress: float = 1.0:
+	set(new_progress):
+		progress = new_progress
