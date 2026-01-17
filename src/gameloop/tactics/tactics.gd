@@ -10,6 +10,9 @@ const DESCRIPTION := "before battle starts, you can change formation"
 var player_line: MonsterLine
 
 func prepare_async(line: MonsterLine, location: Location) -> void:
+	if line.monsters.size() <= 1:
+		return
+	
 	player_line = line
 	location.show_tactics_positions()
 	show_monster_ui(line)

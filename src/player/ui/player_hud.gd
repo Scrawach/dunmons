@@ -27,14 +27,25 @@ func show_dialogue(message: String) -> void:
 	dialogue_panel.smooth_show()
 	dialogue_panel.show_message(message)
 
-func show_game_over() -> void:
+func show_game_over() -> GameOverPanel:
 	show_background()
 	game_over_panel.smooth_show(1.0)
+	return game_over_panel
 
-func show_location_description(title: String, description: String) -> void:
+func show_location_description(title: String, description: String, button: String = "start battle!") -> void:
 	tip_panel.setup(title, description)
 	tip_panel.smooth_show()
+	tip_panel.start_button.text = button.to_upper()
+	tip_panel.start_button.show()
 	await tip_panel.start_button.pressed
+	tip_panel.smooth_hide()
+
+func show_location_tip(title: String, description: String) -> void:
+	tip_panel.setup(title, description)
+	tip_panel.smooth_show()
+	tip_panel.start_button.hide()
+
+func hide_location_tip() -> void:
 	tip_panel.smooth_hide()
 
 func hide_dialogue() -> void:

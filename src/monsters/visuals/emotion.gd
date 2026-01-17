@@ -7,7 +7,8 @@ enum Type {
 	BLINK,
 	SAD,
 	CRY,
-	DEAD
+	DEAD,
+	SAD_BLINK
 }
 
 @export var monster: Monster
@@ -28,11 +29,10 @@ func _ready() -> void:
 	if face == null:
 		return
 	
-	face.material_override = material
-	
 	if Engine.is_editor_hint():
 		return
 	
+	face.material_override = material
 	blink_timer = Timer.new()
 	add_child(blink_timer)
 	blink_timer.timeout.connect(_on_blink_timeout)
@@ -43,18 +43,32 @@ func _ready() -> void:
 func _on_died(_monster: Monster) -> void:
 	process(Type.DEAD)
 
+func play(target_emotion: Type) -> void:
+	emotion = target_emotion
+
 func _on_blink_timeout() -> void:
 	match emotion:
 		Type.SMILE:
-			pause_between_blink -= 1
-			if pause_between_blink <= 0:
-				pause_between_blink = randi_range(6, 12)
-				emotion = Type.BLINK
+			_blink(Type.BLINK)
 		Type.BLINK:
-			blink_duration -= 1
-			if blink_duration <= 0:
-				blink_duration = target_blink_duration
-				emotion = Type.SMILE
+			_normal(Type.SMILE)
+		Type.SAD:
+			_blink(Type.SAD_BLINK)
+		Type.SAD_BLINK:
+			_normal(Type.SAD)
+
+func _blink(blink_type: Type) -> void:
+	pause_between_blink -= 1
+	if pause_between_blink <= 0:
+		pause_between_blink = randi_range(6, 12)
+		emotion = blink_type
+
+func _normal(normal_type: Type) -> void:
+	blink_duration -= 1
+	if blink_duration <= 0:
+		blink_duration = target_blink_duration
+		emotion = normal_type
+
 
 func process(type: Type) -> void:
 	if face == null:

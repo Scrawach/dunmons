@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://c53xlcygm75md"
-path="res://.godot/imported/slime.glb-05dfc1ab34b600e332df1138183b3a22.scn"
+uid="uid://cbeho1f7cs5lk"
+path="res://.godot/imported/cage_spot.glb-097dc2cd997221dfb8d6cfe40a9e5022.scn"
 
 [deps]
 
-source_file="res://monsters/specifics/slime/slime.glb"
-dest_files=["res://.godot/imported/slime.glb-05dfc1ab34b600e332df1138183b3a22.scn"]
+source_file="res://locations/assets/cage_spot.glb"
+dest_files=["res://.godot/imported/cage_spot.glb-097dc2cd997221dfb8d6cfe40a9e5022.scn"]
 
 [params]
 
@@ -39,15 +39,10 @@ materials/extract_format=0
 materials/extract_path=""
 _subresources={
 "materials": {
-"Face": {
+"Pot": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://monsters/faces/M_face.tres",
-"use_external/path": "uid://pl1klw8u0ps2"
-},
-"Slime": {
-"use_external/enabled": true,
-"use_external/fallback_path": "res://monsters/specifics/slime/M_slime.tres",
-"use_external/path": "uid://vrtlrgp0cat4"
+"use_external/fallback_path": "res://locations/assets/M_pot.tres",
+"use_external/path": "uid://duvlr0o5ufim4"
 }
 }
 }

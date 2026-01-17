@@ -18,6 +18,9 @@ func initialize() -> void:
 			child.stop_if_needed()
 			parts.append(child)
 
+func execute_async() -> void:
+	pass
+
 func show_tactics_positions() -> void:
 	player_positions.show()
 

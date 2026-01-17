@@ -1,7 +1,6 @@
 class_name Game
 extends Scenario
 
-@export var player_monsters: Array[Monster]
 @export var camera_point: CameraPoint
 @export var enemies: Array[PackedScene]
 
@@ -10,36 +9,45 @@ extends Scenario
 @export var start_location: Location
 @export var location_scenes: Array[PackedScene]
 
+@export var loading_curtain: LoadingCurtain
+
+@export var startup: Startup
 @export var tactics: Tactics
 @export var battle: Battle
 @export var game_over: GameOver
 
+
 var previous_location: Location
 var reached_distance: float
+var location_number: int
+
+var player_line: MonsterLine
 
 func _ready() -> void:
-	execute_async()
+	startup.initialize()
+	loading_curtain.smooth_hide(execute_async)
 
 func execute_async() -> void:
-	start_location.initialize()
-	var player := MonsterLine.new(player_monsters)
-	await move_to(player, start_location)
+	var startup_monster := await startup.get_monster()
+	player_line = MonsterLine.new([startup_monster])
+	reached_distance = startup.cage_location.length
 	while true:
 		var location := make_new_location(reached_distance)
 		var enemy_line := spawn_enemies(location)
 		location.initialize()
-		await move_to(player, location)
+		await move_to(player_line, location)
 		sands.move_if_needed(reached_distance)
-		await tactics.prepare_async(player, location)
-		var battle_result := await battle.simulate_async(player, enemy_line)
-		player.erase_from_death()
+		await tactics.prepare_async(player_line, location)
+		var battle_result := await battle.simulate_async(player_line, enemy_line)
+		player_line.erase_from_death()
 		
 		if battle_result.is_enemy_won:
 			await game_over.execute()
 			return
 
 func make_new_location(offset: float) -> Location:
-	var random := location_scenes.pick_random() as PackedScene
+	location_number += 1
+	var random := location_scenes[location_number % location_scenes.size()]
 	var instance := random.instantiate() as Location
 	world.add_child(instance)
 	instance.position.z = -offset
@@ -61,6 +69,9 @@ func move_to(line: MonsterLine, target: Location) -> void:
 	
 	while line.is_moving():
 		await wait_async(0.5)
+	
+	for monster in line.monsters:
+		monster.look_at(monster.global_position + Vector3.FORWARD, Vector3.UP, true)
 	
 	reached_distance += target.length
 	if previous_location:

@@ -26,14 +26,14 @@ func initialize(monster: Monster) -> void:
 	var data := monster.data
 	name_label.text = data.name
 	description_label.text = data.description
-	if data.attack_max != data.attack_min:
-		attack_stat.text = "%s-%s" % [data.attack_min, data.attack_max]
+	if monster.damage_max != monster.damage_min:
+		attack_stat.text = "%s-%s" % [monster.damage_min, monster.damage_max]
 	else:
-		attack_stat.text = str(data.attack_max)
+		attack_stat.text = str(monster.damage_max)
 	setup_health(monster.health)
 	_on_health_changed(monster.health)
-	speed_stat.text = "%0.2f" % data.stamina
-	add_tags(data.tags)
+	speed_stat.text = "%0.2f" % monster.speed
+	add_tags(monster.tags)
 
 func attach_to(monster: Monster) -> void:
 	clear()

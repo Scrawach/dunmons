@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://c53xlcygm75md"
-path="res://.godot/imported/slime.glb-05dfc1ab34b600e332df1138183b3a22.scn"
+uid="uid://b78tlwmw0lsgh"
+path="res://.godot/imported/cage_floor.glb-3a54c25874f4e95f352dd861755e5ad7.scn"
 
 [deps]
 
-source_file="res://monsters/specifics/slime/slime.glb"
-dest_files=["res://.godot/imported/slime.glb-05dfc1ab34b600e332df1138183b3a22.scn"]
+source_file="res://locations/assets/cage_floor.glb"
+dest_files=["res://.godot/imported/cage_floor.glb-3a54c25874f4e95f352dd861755e5ad7.scn"]
 
 [params]
 
@@ -39,15 +39,10 @@ materials/extract_format=0
 materials/extract_path=""
 _subresources={
 "materials": {
-"Face": {
+"Stone": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://monsters/faces/M_face.tres",
-"use_external/path": "uid://pl1klw8u0ps2"
-},
-"Slime": {
-"use_external/enabled": true,
-"use_external/fallback_path": "res://monsters/specifics/slime/M_slime.tres",
-"use_external/path": "uid://vrtlrgp0cat4"
+"use_external/fallback_path": "res://locations/assets/M_sand_stone.tres",
+"use_external/path": "uid://cgil37e5yjuyd"
 }
 }
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://c4x78xdv4cpx4"]
+[gd_scene load_steps=35 format=3 uid="uid://c4x78xdv4cpx4"]
 
 [ext_resource type="PackedScene" uid="uid://2dpaau0tgd4s" path="res://player/ui/player_hud.tscn" id="1_272bh"]
 [ext_resource type="PackedScene" uid="uid://dmuw5081ygiax" path="res://camera/camera_point.tscn" id="4_4c57u"]
@@ -10,12 +10,25 @@
 [ext_resource type="PackedScene" uid="uid://0bcb6pixpecp" path="res://monsters/specifics/demon/demon.tscn" id="7_vivmo"]
 [ext_resource type="PackedScene" uid="uid://m4dd03q4snfw" path="res://monsters/specifics/slime/slime.tscn" id="8_2cqfq"]
 [ext_resource type="PackedScene" uid="uid://q1sisca1uwsi" path="res://monsters/specifics/cube/cube.tscn" id="8_4c57u"]
-[ext_resource type="PackedScene" uid="uid://xi70be5hasug" path="res://items/coin_3d.tscn" id="9_vivmo"]
+[ext_resource type="PackedScene" uid="uid://bsvikh72fwpsf" path="res://locations/specifics/cage_location.tscn" id="9_074og"]
+[ext_resource type="PackedScene" uid="uid://bhdvw88fr2vkr" path="res://locations/specifics/ruins_location_1.tscn" id="9_xuqvo"]
 [ext_resource type="Script" uid="uid://8psrkms5uwum" path="res://gameloop/tactics/tactics.gd" id="10_efxa6"]
+[ext_resource type="PackedScene" uid="uid://caj80doynbabw" path="res://monsters/specifics/golem/golem.tscn" id="11_074og"]
+[ext_resource type="Script" uid="uid://dwtq0a3fvxw2n" path="res://gameloop/startup/startup.gd" id="11_yaehf"]
 [ext_resource type="Script" uid="uid://dj4ayn6qc5qpp" path="res://player/player_wallet.gd" id="12_dg77c"]
+[ext_resource type="Resource" uid="uid://c6vtdw5ubp0ea" path="res://common/tags/data/tags.tres" id="13_cegan"]
 [ext_resource type="PackedScene" uid="uid://dwwcrfmyt7371" path="res://player/ui/player_wallet_ui.tscn" id="13_ycdy4"]
 [ext_resource type="Script" uid="uid://claub88ltdho3" path="res://gameloop/game_over/game_over.gd" id="14_2cqfq"]
 [ext_resource type="Script" uid="uid://b65182a2jjw81" path="res://monsters/drag_and_drop_3d.gd" id="14_w48qg"]
+[ext_resource type="Script" uid="uid://ce2hwiwg04a0o" path="res://locations/location.gd" id="20_a6jrf"]
+[ext_resource type="PackedScene" uid="uid://bgcpcag06irx1" path="res://locations/assets/decorations1.glb" id="21_xuqvo"]
+[ext_resource type="Script" uid="uid://c1wht4xtvlpme" path="res://locations/location_part.gd" id="22_qsp4k"]
+[ext_resource type="PackedScene" uid="uid://cdk4n2qtr0sd8" path="res://locations/assets/sand.glb" id="23_kq58d"]
+[ext_resource type="Material" uid="uid://bkvyobbkqdj3l" path="res://locations/assets/M_sand_small.tres" id="24_seu75"]
+[ext_resource type="PackedScene" uid="uid://s3jr88n1yai7" path="res://gameloop/battle/assets/target_circle.tscn" id="25_htxhm"]
+[ext_resource type="PackedScene" uid="uid://cbk5vgh7uolo5" path="res://locations/assets/ruins.glb" id="26_jq2sk"]
+[ext_resource type="PackedScene" uid="uid://buwdmh5r15ib3" path="res://locations/assets/plant.glb" id="27_4k2k6"]
+[ext_resource type="PackedScene" uid="uid://cwuae1v4a48cq" path="res://player/ui/loading_curtain.tscn" id="29_qsp4k"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3mixg"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -44,6 +57,9 @@ fog_depth_end = 50.0
 [sub_resource type="PlaneMesh" id="PlaneMesh_0aecw"]
 size = Vector2(100, 100)
 
+[sub_resource type="SphereMesh" id="SphereMesh_dije2"]
+radius = 1.0
+
 [node name="Main" type="Node"]
 
 [node name="Player HUD" parent="." instance=ExtResource("1_272bh")]
@@ -60,6 +76,7 @@ environment = SubResource("Environment_ho76u")
 [node name="World3D" type="Node3D" parent="."]
 
 [node name="Ruins Location" parent="World3D" instance=ExtResource("6_w48qg")]
+visible = false
 
 [node name="Camera Point" parent="World3D" instance=ExtResource("4_4c57u")]
 transform = Transform3D(0.49999997, -0.61237246, 0.6123725, 0, 0.7071068, 0.70710677, -0.86602545, -0.35355335, 0.35355338, 0, 0, -7)
@@ -80,29 +97,35 @@ mesh = SubResource("PlaneMesh_0aecw")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("5_ycdy4")
 
-[node name="Coin3D" parent="World3D" instance=ExtResource("9_vivmo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.699688, 1.4271007, 4.9813676)
+[node name="Cage Location" parent="World3D" instance=ExtResource("9_074og")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 8.438839)
 
-[node name="Cube" parent="World3D" instance=ExtResource("8_4c57u")]
-
-[node name="Monster Base" parent="World3D" instance=ExtResource("8_2cqfq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8.609232)
-
-[node name="Game" type="Node" parent="." node_paths=PackedStringArray("player_monsters", "camera_point", "world", "sands", "start_location", "tactics", "battle", "game_over")]
+[node name="Game" type="Node" parent="." node_paths=PackedStringArray("camera_point", "world", "sands", "start_location", "loading_curtain", "startup", "tactics", "battle", "game_over")]
 script = ExtResource("4_lquwl")
-player_monsters = [NodePath("../World3D/Cube"), NodePath("../World3D/Monster Base")]
 camera_point = NodePath("../World3D/Camera Point")
 enemies = Array[PackedScene]([ExtResource("7_vivmo")])
 world = NodePath("../World3D")
 sands = NodePath("../World3D/Sands")
 start_location = NodePath("../World3D/Ruins Location")
-location_scenes = Array[PackedScene]([ExtResource("6_w48qg")])
+location_scenes = Array[PackedScene]([ExtResource("6_w48qg"), ExtResource("9_xuqvo")])
+loading_curtain = NodePath("Loading Curtain")
+startup = NodePath("Stages/Startup")
 tactics = NodePath("Stages/Tactics")
 battle = NodePath("Stages/Battle")
 game_over = NodePath("Stages/GameOver")
 metadata/_custom_type_script = "uid://d3kcr1y2o7ue"
 
 [node name="Stages" type="Node" parent="Game"]
+
+[node name="Startup" type="Node" parent="Game/Stages" node_paths=PackedStringArray("hud", "camera_point", "cage_location", "world")]
+script = ExtResource("11_yaehf")
+hud = NodePath("../../../Player HUD")
+camera_point = NodePath("../../../World3D/Camera Point")
+cage_location = NodePath("../../../World3D/Cage Location")
+world = NodePath("../../../World3D")
+startup_monsters = Array[PackedScene]([ExtResource("7_vivmo"), ExtResource("8_4c57u"), ExtResource("11_074og"), ExtResource("8_2cqfq")])
+tag_data = ExtResource("13_cegan")
+metadata/_custom_type_script = "uid://dwtq0a3fvxw2n"
 
 [node name="Tactics" type="Node" parent="Game/Stages" node_paths=PackedStringArray("player_hud", "drag_and_drop")]
 script = ExtResource("10_efxa6")
@@ -121,9 +144,10 @@ camera_point = NodePath("../../../World3D/Camera Point")
 wallet = NodePath("../../PlayerWallet")
 metadata/_custom_type_script = "uid://dtc6b60kuy673"
 
-[node name="GameOver" type="Node" parent="Game/Stages" node_paths=PackedStringArray("hud")]
+[node name="GameOver" type="Node" parent="Game/Stages" node_paths=PackedStringArray("hud", "loading_curtain")]
 script = ExtResource("14_2cqfq")
 hud = NodePath("../../../Player HUD")
+loading_curtain = NodePath("../../Loading Curtain")
 metadata/_custom_type_script = "uid://claub88ltdho3"
 
 [node name="PlayerWallet" type="Node" parent="Game"]
@@ -138,3 +162,107 @@ visible = false
 offset_right = 141.0
 offset_bottom = 73.0
 player_wallet = NodePath("../..")
+
+[node name="Ruins Location" type="Node3D" parent="Game/PlayerWallet/CanvasLayer" node_paths=PackedStringArray("camera_point", "player_positions", "enemy_positions")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9795609, 0, -5.744089)
+visible = false
+script = ExtResource("20_a6jrf")
+length = 26.0
+camera_point = NodePath("Camera Point")
+player_positions = NodePath("Player Positions")
+enemy_positions = NodePath("Enemy Positions")
+
+[node name="Main Decorations" parent="Game/PlayerWallet/CanvasLayer/Ruins Location" instance=ExtResource("21_xuqvo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, -0.2912079, 0)
+visible = false
+script = ExtResource("22_qsp4k")
+
+[node name="Second Decorations" type="Node3D" parent="Game/PlayerWallet/CanvasLayer/Ruins Location"]
+script = ExtResource("22_qsp4k")
+disable_rotation = true
+
+[node name="Decoration Sand" parent="Game/PlayerWallet/CanvasLayer/Ruins Location/Second Decorations" instance=ExtResource("23_kq58d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, -0.2912079, 0)
+
+[node name="Sand" parent="Game/PlayerWallet/CanvasLayer/Ruins Location/Second Decorations/Decoration Sand" index="0"]
+surface_material_override/0 = ExtResource("24_seu75")
+
+[node name="Camera Point" type="Marker3D" parent="Game/PlayerWallet/CanvasLayer/Ruins Location"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3378787, 0, -7)
+
+[node name="Player Positions" type="Node3D" parent="Game/PlayerWallet/CanvasLayer/Ruins Location"]
+unique_name_in_owner = true
+visible = false
+
+[node name="Player Position" type="Marker3D" parent="Game/PlayerWallet/CanvasLayer/Ruins Location/Player Positions"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7150831, 4.7683716e-07, -3.5076656)
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Game/PlayerWallet/CanvasLayer/Ruins Location/Player Positions/Player Position"]
+visible = false
+mesh = SubResource("SphereMesh_dije2")
+
+[node name="Target Circle" parent="Game/PlayerWallet/CanvasLayer/Ruins Location/Player Positions/Player Position" instance=ExtResource("25_htxhm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.017503247, 0)
+
+[node name="Player Position2" type="Marker3D" parent="Game/PlayerWallet/CanvasLayer/Ruins Location/Player Positions"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7150831, 4.7683716e-07, -0.50766563)
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Game/PlayerWallet/CanvasLayer/Ruins Location/Player Positions/Player Position2"]
+visible = false
+mesh = SubResource("SphereMesh_dije2")
+
+[node name="Target Circle" parent="Game/PlayerWallet/CanvasLayer/Ruins Location/Player Positions/Player Position2" instance=ExtResource("25_htxhm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.017503247, 0)
+
+[node name="Player Position3" type="Marker3D" parent="Game/PlayerWallet/CanvasLayer/Ruins Location/Player Positions"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7150831, 4.7683716e-07, 2.4923344)
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Game/PlayerWallet/CanvasLayer/Ruins Location/Player Positions/Player Position3"]
+visible = false
+mesh = SubResource("SphereMesh_dije2")
+
+[node name="Target Circle" parent="Game/PlayerWallet/CanvasLayer/Ruins Location/Player Positions/Player Position3" instance=ExtResource("25_htxhm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.017503247, 0)
+
+[node name="Enemy Positions" type="Node3D" parent="Game/PlayerWallet/CanvasLayer/Ruins Location"]
+visible = false
+
+[node name="Enemy Position" type="Marker3D" parent="Game/PlayerWallet/CanvasLayer/Ruins Location/Enemy Positions"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7150831, 4.7683716e-07, -10.507666)
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Game/PlayerWallet/CanvasLayer/Ruins Location/Enemy Positions/Enemy Position"]
+mesh = SubResource("SphereMesh_dije2")
+
+[node name="Enemy Position2" type="Marker3D" parent="Game/PlayerWallet/CanvasLayer/Ruins Location/Enemy Positions"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7150831, 4.7683716e-07, -13.507666)
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Game/PlayerWallet/CanvasLayer/Ruins Location/Enemy Positions/Enemy Position2"]
+mesh = SubResource("SphereMesh_dije2")
+
+[node name="Enemy Position3" type="Marker3D" parent="Game/PlayerWallet/CanvasLayer/Ruins Location/Enemy Positions"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7150831, 4.7683716e-07, -16.507666)
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Game/PlayerWallet/CanvasLayer/Ruins Location/Enemy Positions/Enemy Position3"]
+mesh = SubResource("SphereMesh_dije2")
+
+[node name="ruins" parent="Game/PlayerWallet/CanvasLayer/Ruins Location" instance=ExtResource("26_jq2sk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.4825885, 0, 0)
+
+[node name="plant" parent="Game/PlayerWallet/CanvasLayer/Ruins Location/ruins" instance=ExtResource("27_4k2k6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.558303, -0.2912079, 2.766708)
+
+[node name="plant2" parent="Game/PlayerWallet/CanvasLayer/Ruins Location/ruins" instance=ExtResource("27_4k2k6")]
+transform = Transform3D(0.63317823, 0, 0.774006, 0, 1, 0, -0.774006, 0, 0.63317823, -7.683092, -0.2912079, -13.224989)
+
+[node name="plant4" parent="Game/PlayerWallet/CanvasLayer/Ruins Location/ruins" instance=ExtResource("27_4k2k6")]
+transform = Transform3D(0.16098122, 0.016092533, -0.40917724, -0.0058916607, 0.4397056, 0.014975246, 0.4094512, 0, 0.161089, -4.221939, 0.16062438, -6.846324)
+
+[node name="Loading Curtain" parent="Game" instance=ExtResource("29_qsp4k")]
+
+[editable path="Game/PlayerWallet/CanvasLayer/Ruins Location/Second Decorations/Decoration Sand"]

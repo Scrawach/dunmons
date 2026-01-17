@@ -6,6 +6,7 @@ const ATTACK_ANIMATION := "Attack"
 
 signal died(monster: Monster)
 
+@export var body: MeshInstance3D
 @export var data: MonsterInfo
 @export var movement_speed: float = 6.0
 @export var hit_scene: PackedScene
@@ -17,12 +18,17 @@ signal died(monster: Monster)
 
 @onready var health: Health = %Health
 @onready var stamina: Stamina = %Stamina
+@onready var emotion: Emotion = %Emotion
+
 
 var damage_min: int
 var damage_max: int
+var speed: float
+var tags: Array[Tags.Type]
 
 var is_death: bool
 var is_walking: bool
+var is_fearing: bool
 
 var moving: Tween
 
@@ -31,6 +37,23 @@ func _ready() -> void:
 	stamina.initialize(0.0)
 	damage_min = data.attack_min
 	damage_max = data.attack_max
+	speed = data.stamina
+	tags = data.tags.duplicate()
+
+func remove_tags(remove: Array[Tags.Type]) -> void:
+	for item in remove:
+		var index := tags.find(item)
+		
+		if index == -1:
+			continue
+		
+		tags.remove_at(index)
+
+func add_tag(tag: Tags.Type) -> void:
+	tags.append(tag)
+
+func repaint(target: Material) -> void:
+	body.set_surface_override_material(0, target)
 
 func can_attack() -> bool:
 	return not is_death and stamina.is_full()
@@ -39,21 +62,22 @@ func restore_stamine(tick: float) -> void:
 	if stamina.is_full():
 		return
 	
-	stamina.restore(tick * data.stamina)
+	stamina.restore(tick * speed)
 
 func has_tags(targets: Array[Tags.Type]) -> bool:
 	var result := true
 	for target_tag in targets:
-		result = result && (target_tag in data.tags)
+		result = result && (target_tag in tags)
 	return result
 
 func die() -> void:
 	is_death = true
-	
+	emotion.play(Emotion.Type.DEAD)
 	died.emit(self)
 
 func revive() -> void:
 	is_death = false
+	emotion.play(Emotion.Type.SMILE)
 
 func take_damage_async(value: int) -> void:
 	take_damage(value)
@@ -97,9 +121,13 @@ func move_to(target_position: Vector3) -> void:
 	moving.tween_property(self, "global_position", target_position, movement_time)
 	moving.tween_callback(func(): is_walking = false)
 
-func restore_health(value: int) -> void:
+func restore_health(value: int, is_can_revive: bool = true) -> void:
+	if is_death and not is_can_revive:
+		return
+	
 	if is_death:
-		is_death = false
+		revive()
+	
 	health.heal(value)
 	spawn_floating_numbers(heal_scene, value)
 
@@ -107,6 +135,14 @@ func attack_async(_target: Monster) -> void:
 	play_oneshot_animation(ATTACK_ANIMATION)
 	await base_animation_tree.animation_finished
 	stamina.consume()
+
+func play_fear() -> void:
+	is_fearing = true
+	emotion.play(Emotion.Type.CRY)
+
+func play_unfear() -> void:
+	is_fearing = false
+	emotion.play(Emotion.Type.SAD)
 
 func spawn_floating_numbers(scene: PackedScene, value: int) -> void:
 	var hit_instance := scene.instantiate() as FloatingLabel3D

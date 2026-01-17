@@ -24,13 +24,17 @@ func move_to(target: Vector3, duration: float = 3.0) -> void:
 	tween.tween_property(self, "global_position", target, duration)
 
 func zoom_to(monster: Monster, with_angle: float = 0) -> void:
+	zoom_to_point(monster.global_position, 10.0, with_angle)
+
+func zoom_to_point(point: Vector3, target_size: float = 10.0, angle: float = 0) -> void:
 	stop_if_needed()
 	base_position = self.global_position
 	tween = create_tween()
 	tween.set_trans(Tween.TRANS_CUBIC)
-	tween.tween_property(camera_3d, "size", 10, 1.0)
-	tween.parallel().tween_property(self, "rotation:y", deg_to_rad(with_angle), 1.0)
-	tween.parallel().tween_property(self, "global_position", monster.global_position, 1.0)
+	tween.tween_property(camera_3d, "size", target_size, 1.0)
+	tween.parallel().tween_property(self, "rotation:y", deg_to_rad(angle), 1.0)
+	tween.parallel().tween_property(self, "global_position", point, 1.0)
+
 
 func zoom_out() -> void:
 	stop_if_needed()

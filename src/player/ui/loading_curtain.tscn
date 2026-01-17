@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://cwuae1v4a48cq"]
+
+[ext_resource type="Script" uid="uid://bi424hdbd0377" path="res://player/ui/loading_curtain.gd" id="1_gx5he"]
+[ext_resource type="Shader" uid="uid://bmg71c1rt7cmi" path="res://shaders/transition.gdshader" id="1_s64rg"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gx5he"]
+shader = ExtResource("1_s64rg")
+shader_parameter/progress = 1.0
+shader_parameter/is_open = 1.0
+shader_parameter/diamondPixelSize = 25.0
+
+[node name="Loading Curtain" type="CanvasLayer"]
+layer = 5
+script = ExtResource("1_gx5he")
+
+[node name="Curtain" type="ColorRect" parent="."]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_gx5he")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)

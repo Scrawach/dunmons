@@ -1,0 +1,71 @@
+[gd_scene load_steps=9 format=3 uid="uid://l0o06fj30xx"]
+
+[ext_resource type="Script" uid="uid://dn6pme2p0jlvg" path="res://locations/specifics/cage_location/cage.gd" id="1_1bp3x"]
+[ext_resource type="PackedScene" uid="uid://coa5ebct2yy25" path="res://locations/assets/cage_pikes.glb" id="1_37a5h"]
+[ext_resource type="PackedScene" uid="uid://bme73iu7g3mdt" path="res://locations/assets/cage_walls.glb" id="2_1bp3x"]
+[ext_resource type="PackedScene" uid="uid://b78tlwmw0lsgh" path="res://locations/assets/cage_floor.glb" id="3_6lksf"]
+[ext_resource type="PackedScene" uid="uid://cbeho1f7cs5lk" path="res://locations/assets/cage_spot.glb" id="4_mknn1"]
+
+[sub_resource type="Animation" id="Animation_1bp3x"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("cage_pikes/Cylinder_005:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1.2957458, -0.4161294, 1.4586577)]
+}
+
+[sub_resource type="Animation" id="Animation_37a5h"]
+resource_name = "open"
+length = 0.26667002
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("cage_pikes/Cylinder_005:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.2, 0.26666668),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1.2957458, -0.4161294, 1.4586577), Vector3(1.296, -0.1, 1.459), Vector3(1.296, -2.3, 1.459), Vector3(1.296, -2.241, 1.459)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6lksf"]
+_data = {
+&"RESET": SubResource("Animation_1bp3x"),
+&"open": SubResource("Animation_37a5h")
+}
+
+[node name="Cage" type="Node3D"]
+script = ExtResource("1_1bp3x")
+
+[node name="cage_pikes" parent="." instance=ExtResource("1_37a5h")]
+
+[node name="cage_walls" parent="." instance=ExtResource("2_1bp3x")]
+
+[node name="cage_floor" parent="." instance=ExtResource("3_6lksf")]
+
+[node name="cage_spot" parent="." instance=ExtResource("4_mknn1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2441262, 0.11593717, -1.1759032)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_6lksf")
+}
+
+[node name="Monster Position" type="Marker3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.28349638, 0, -0.21635199)
+
+[node name="Escape Position" type="Marker3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
+
+[editable path="cage_pikes"]

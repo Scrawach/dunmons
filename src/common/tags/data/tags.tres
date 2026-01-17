@@ -1,6 +1,9 @@
-[gd_resource type="Resource" script_class="Tags" load_steps=2 format=3 uid="uid://c6vtdw5ubp0ea"]
+[gd_resource type="Resource" script_class="Tags" load_steps=5 format=3 uid="uid://c6vtdw5ubp0ea"]
 
+[ext_resource type="Material" uid="uid://cgx6audg8begw" path="res://monsters/specifics/demon/M_demon_skin.tres" id="1_gibby"]
 [ext_resource type="Script" uid="uid://c0j6e3uw43cp1" path="res://common/tags/data/tags.gd" id="1_h3ph0"]
+[ext_resource type="Material" uid="uid://vrtlrgp0cat4" path="res://monsters/specifics/slime/M_slime.tres" id="2_vo1o0"]
+[ext_resource type="Material" uid="uid://dmrv7bjgspgf4" path="res://monsters/specifics/golem/M_golem.tres" id="3_ikbrp"]
 
 [resource]
 script = ExtResource("1_h3ph0")
@@ -16,5 +19,10 @@ descriptions = Dictionary[int, String]({
 2: "Deals +1 damage against FIRE type.",
 4: "Deals +1 damage against WATER type.",
 100: "If another creature takes lethal damage, it swaps places with it and takes the hit instead"
+})
+materials = Dictionary[int, Material]({
+1: ExtResource("1_gibby"),
+2: ExtResource("2_vo1o0"),
+3: ExtResource("3_ikbrp")
 })
 metadata/_custom_type_script = "uid://c0j6e3uw43cp1"

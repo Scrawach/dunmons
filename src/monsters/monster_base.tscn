@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://cpq3bvvv5605v"]
+[gd_scene load_steps=57 format=3 uid="uid://cpq3bvvv5605v"]
 
 [ext_resource type="Script" uid="uid://brh32yejypr87" path="res://monsters/monster.gd" id="1_qg1te"]
 [ext_resource type="Resource" uid="uid://tch0ei3beu1s" path="res://monsters/data/default.tres" id="2_jus1s"]
@@ -20,6 +20,7 @@
 [ext_resource type="Material" uid="uid://dladrsv7iv8yq" path="res://monsters/assets/M_heal.tres" id="14_88rtb"]
 [ext_resource type="Texture2D" uid="uid://cdya0j7gv0t0x" path="res://monsters/faces/faces_cry.svg" id="14_c31it"]
 [ext_resource type="Texture2D" uid="uid://cyxc1cmo4v2e6" path="res://monsters/faces/faces_dead.svg" id="15_djh3a"]
+[ext_resource type="Texture2D" uid="uid://bs0s5x85r3m8s" path="res://monsters/faces/faces_blink_sad.svg" id="17_nmr7d"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_xd7ms"]
 
@@ -116,6 +117,23 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0.2617994, 0, 0), Vector3(-0.5235988, 0, 0), Vector3(0.43633232, 0, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_7n547"]
+resource_name = "fear"
+length = 0.10000334
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.06666667, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, -0.034906585), Vector3(0, 0, 0.034906585), Vector3(0, 0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_sbht7"]
@@ -236,6 +254,7 @@ _data = {
 &"RESET": SubResource("Animation_ujn5a"),
 &"attack": SubResource("Animation_janau"),
 &"death": SubResource("Animation_p7hi2"),
+&"fear": SubResource("Animation_7n547"),
 &"idle": SubResource("Animation_sbht7"),
 &"stomp": SubResource("Animation_cam5p"),
 &"take_damage": SubResource("Animation_px60s"),
@@ -249,6 +268,9 @@ animation = &"attack"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_etepe"]
 animation = &"death"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_nmr7d"]
+animation = &"fear"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hx5qy"]
 animation = &"idle"
@@ -290,17 +312,27 @@ advance_expression = "is_death == true"
 advance_mode = 2
 advance_expression = "is_walking == false"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7n547"]
+advance_mode = 2
+advance_expression = "is_fearing == true"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0710c"]
+advance_mode = 2
+advance_expression = "is_fearing == false"
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_px60s"]
 states/Start/position = Vector2(201, 94)
 states/death/node = SubResource("AnimationNodeAnimation_etepe")
 states/death/position = Vector2(579, 87)
+states/fear/node = SubResource("AnimationNodeAnimation_nmr7d")
+states/fear/position = Vector2(302, -18)
 states/idle/node = SubResource("AnimationNodeAnimation_hx5qy")
 states/idle/position = Vector2(377, 87)
 states/revive/node = SubResource("AnimationNodeAnimation_cam5p")
 states/revive/position = Vector2(467, 143)
 states/walk/node = SubResource("AnimationNodeAnimation_71p1i")
 states/walk/position = Vector2(451, 3)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_71p1i"), "idle", "death", SubResource("AnimationNodeStateMachineTransition_lvog1"), "death", "End", SubResource("AnimationNodeStateMachineTransition_88rtb"), "revive", "idle", SubResource("AnimationNodeStateMachineTransition_hx5qy"), "death", "revive", SubResource("AnimationNodeStateMachineTransition_cqyxk"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_px60s"), "walk", "death", SubResource("AnimationNodeStateMachineTransition_o71ry"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_c31it")]
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_71p1i"), "idle", "death", SubResource("AnimationNodeStateMachineTransition_lvog1"), "death", "End", SubResource("AnimationNodeStateMachineTransition_88rtb"), "revive", "idle", SubResource("AnimationNodeStateMachineTransition_hx5qy"), "death", "revive", SubResource("AnimationNodeStateMachineTransition_cqyxk"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_px60s"), "walk", "death", SubResource("AnimationNodeStateMachineTransition_o71ry"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_c31it"), "idle", "fear", SubResource("AnimationNodeStateMachineTransition_7n547"), "fear", "idle", SubResource("AnimationNodeStateMachineTransition_0710c")]
 graph_offset = Vector2(-67, -123)
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lvog1"]
@@ -314,7 +346,8 @@ animation = &"take_damage"
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_px60s"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_hx5qy"]
-nodes/output/position = Vector2(740, 440)
+graph_offset = Vector2(-535.2616, -120.41556)
+nodes/output/position = Vector2(740, 460)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_px60s")
 nodes/StateMachine/position = Vector2(-520, 0)
 nodes/Attack/node = SubResource("AnimationNodeOneShot_etepe")
@@ -417,16 +450,20 @@ metadata/_custom_type_script = "uid://dy7h7atq6vons"
 [node name="Visual" type="Node" parent="."]
 
 [node name="Emotion" type="Node" parent="Visual" node_paths=PackedStringArray("monster")]
+unique_name_in_owner = true
 script = ExtResource("5_g75ok")
 monster = NodePath("../..")
+target_blink_duration = 1
 textures = Dictionary[int, Texture2D]({
 0: ExtResource("11_o71ry"),
 1: ExtResource("7_p7hi2"),
 2: ExtResource("13_o71ry"),
 3: ExtResource("14_c31it"),
-4: ExtResource("15_djh3a")
+4: ExtResource("15_djh3a"),
+5: ExtResource("17_nmr7d")
 })
 material = ExtResource("5_cqyxk")
+emotion = 3
 metadata/_custom_type_script = "uid://psf2sui574x3"
 
 [node name="HitEffect" type="Node" parent="Visual" node_paths=PackedStringArray("health")]

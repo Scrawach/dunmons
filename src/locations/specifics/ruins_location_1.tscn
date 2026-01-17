@@ -1,52 +1,53 @@
-[gd_scene load_steps=10 format=3 uid="uid://butm8yj1yughq"]
+[gd_scene load_steps=10 format=3 uid="uid://bhdvw88fr2vkr"]
 
-[ext_resource type="Script" uid="uid://ce2hwiwg04a0o" path="res://locations/location.gd" id="1_xsg67"]
-[ext_resource type="PackedScene" uid="uid://oqbdqgt3f22u" path="res://locations/assets/ruins_road.glb" id="2_wn1d1"]
-[ext_resource type="Script" uid="uid://c1wht4xtvlpme" path="res://locations/location_part.gd" id="2_xsg67"]
-[ext_resource type="PackedScene" uid="uid://buwdmh5r15ib3" path="res://locations/assets/plant.glb" id="3_wn1d1"]
-[ext_resource type="PackedScene" uid="uid://cdk4n2qtr0sd8" path="res://locations/assets/sand.glb" id="5_3q5i7"]
-[ext_resource type="PackedScene" uid="uid://yd808pi86vl2" path="res://locations/assets/columns_0.glb" id="5_y3jst"]
-[ext_resource type="Material" uid="uid://bkvyobbkqdj3l" path="res://locations/assets/M_sand_small.tres" id="6_uppfn"]
-[ext_resource type="PackedScene" uid="uid://s3jr88n1yai7" path="res://gameloop/battle/assets/target_circle.tscn" id="7_xsg67"]
+[ext_resource type="Script" uid="uid://ce2hwiwg04a0o" path="res://locations/location.gd" id="1_kdc7c"]
+[ext_resource type="PackedScene" uid="uid://oqbdqgt3f22u" path="res://locations/assets/ruins_road.glb" id="2_e145e"]
+[ext_resource type="Script" uid="uid://c1wht4xtvlpme" path="res://locations/location_part.gd" id="3_88pdc"]
+[ext_resource type="PackedScene" uid="uid://buwdmh5r15ib3" path="res://locations/assets/plant.glb" id="4_uvfoe"]
+[ext_resource type="PackedScene" uid="uid://yd808pi86vl2" path="res://locations/assets/columns_0.glb" id="5_k37wd"]
+[ext_resource type="PackedScene" uid="uid://cdk4n2qtr0sd8" path="res://locations/assets/sand.glb" id="6_3omih"]
+[ext_resource type="Material" uid="uid://bkvyobbkqdj3l" path="res://locations/assets/M_sand_small.tres" id="7_x851y"]
+[ext_resource type="PackedScene" uid="uid://s3jr88n1yai7" path="res://gameloop/battle/assets/target_circle.tscn" id="8_gnk28"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_dije2"]
 radius = 1.0
 
 [node name="Ruins Location" type="Node3D" node_paths=PackedStringArray("camera_point", "spawn_point", "player_positions", "enemy_positions")]
-script = ExtResource("1_xsg67")
+script = ExtResource("1_kdc7c")
 length = 26.0
 camera_point = NodePath("Camera Point")
 spawn_point = NodePath("ruins_road")
 player_positions = NodePath("Player Positions")
 enemy_positions = NodePath("Enemy Positions")
 
-[node name="ruins_road" parent="." instance=ExtResource("2_wn1d1")]
+[node name="ruins_road" parent="." instance=ExtResource("2_e145e")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2114353, 0, 0)
-script = ExtResource("2_xsg67")
+script = ExtResource("3_88pdc")
 
-[node name="plant" parent="ruins_road" instance=ExtResource("3_wn1d1")]
+[node name="plant" parent="ruins_road" instance=ExtResource("4_uvfoe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.2871494, -0.2912079, 2.766708)
 
-[node name="plant2" parent="ruins_road" instance=ExtResource("3_wn1d1")]
+[node name="plant2" parent="ruins_road" instance=ExtResource("4_uvfoe")]
 transform = Transform3D(0.63317823, 0, 0.774006, 0, 1, 0, -0.774006, 0, 0.63317823, -7.4119387, -0.2912079, -13.224989)
 
-[node name="plant4" parent="ruins_road" instance=ExtResource("3_wn1d1")]
+[node name="plant4" parent="ruins_road" instance=ExtResource("4_uvfoe")]
 transform = Transform3D(0.16098122, 0.016092533, -0.40917724, -0.0058916607, 0.4397056, 0.014975246, 0.4094512, 0, 0.161089, -3.9507856, 0.16062438, -6.846324)
 
-[node name="columns_0" parent="." instance=ExtResource("5_y3jst")]
+[node name="columns_0" parent="." instance=ExtResource("5_k37wd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2383542, 0, 0)
-script = ExtResource("2_xsg67")
+visible = false
+script = ExtResource("3_88pdc")
 
 [node name="Second Decorations" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05420673, 0)
-script = ExtResource("2_xsg67")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08187854, 0)
+script = ExtResource("3_88pdc")
 disable_rotation = true
 
-[node name="Decoration Sand" parent="Second Decorations" instance=ExtResource("5_3q5i7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, -0.05399263, 0)
+[node name="Decoration Sand" parent="Second Decorations" instance=ExtResource("6_3omih")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, -0.2912079, 0)
 
 [node name="Sand" parent="Second Decorations/Decoration Sand" index="0"]
-surface_material_override/0 = ExtResource("6_uppfn")
+surface_material_override/0 = ExtResource("7_x851y")
 
 [node name="Camera Point" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3378787, 0, -7)
@@ -64,7 +65,7 @@ metadata/_edit_group_ = true
 visible = false
 mesh = SubResource("SphereMesh_dije2")
 
-[node name="Target Circle" parent="Player Positions/Player Position" instance=ExtResource("7_xsg67")]
+[node name="Target Circle" parent="Player Positions/Player Position" instance=ExtResource("8_gnk28")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.017503247, 0)
 
 [node name="Player Position2" type="Marker3D" parent="Player Positions"]
@@ -75,7 +76,7 @@ metadata/_edit_group_ = true
 visible = false
 mesh = SubResource("SphereMesh_dije2")
 
-[node name="Target Circle" parent="Player Positions/Player Position2" instance=ExtResource("7_xsg67")]
+[node name="Target Circle" parent="Player Positions/Player Position2" instance=ExtResource("8_gnk28")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.017503247, 0)
 
 [node name="Player Position3" type="Marker3D" parent="Player Positions"]
@@ -86,7 +87,7 @@ metadata/_edit_group_ = true
 visible = false
 mesh = SubResource("SphereMesh_dije2")
 
-[node name="Target Circle" parent="Player Positions/Player Position3" instance=ExtResource("7_xsg67")]
+[node name="Target Circle" parent="Player Positions/Player Position3" instance=ExtResource("8_gnk28")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.017503247, 0)
 
 [node name="Enemy Positions" type="Node3D" parent="."]
@@ -102,7 +103,7 @@ metadata/_edit_group_ = true
 visible = false
 mesh = SubResource("SphereMesh_dije2")
 
-[node name="Target Circle" parent="Enemy Positions/Player Position" instance=ExtResource("7_xsg67")]
+[node name="Target Circle" parent="Enemy Positions/Player Position" instance=ExtResource("8_gnk28")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.017503247, 0)
 
 [node name="Player Position2" type="Marker3D" parent="Enemy Positions"]
@@ -113,7 +114,7 @@ metadata/_edit_group_ = true
 visible = false
 mesh = SubResource("SphereMesh_dije2")
 
-[node name="Target Circle" parent="Enemy Positions/Player Position2" instance=ExtResource("7_xsg67")]
+[node name="Target Circle" parent="Enemy Positions/Player Position2" instance=ExtResource("8_gnk28")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.017503247, 0)
 
 [node name="Player Position3" type="Marker3D" parent="Enemy Positions"]
@@ -124,7 +125,7 @@ metadata/_edit_group_ = true
 visible = false
 mesh = SubResource("SphereMesh_dije2")
 
-[node name="Target Circle" parent="Enemy Positions/Player Position3" instance=ExtResource("7_xsg67")]
+[node name="Target Circle" parent="Enemy Positions/Player Position3" instance=ExtResource("8_gnk28")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.017503247, 0)
 
 [editable path="Second Decorations/Decoration Sand"]

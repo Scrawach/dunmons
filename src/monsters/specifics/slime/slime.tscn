@@ -11,14 +11,12 @@ transparency = 1
 shading_mode = 0
 albedo_texture = ExtResource("2_q5v3o")
 
-[node name="Slime" instance=ExtResource("1_2urbs")]
+[node name="Slime" node_paths=PackedStringArray("body") instance=ExtResource("1_2urbs")]
+body = NodePath("Model Root/slime/Sphere")
 data = ExtResource("2_lh58h")
 
 [node name="slime" parent="Model Root" index="3" instance=ExtResource("2_5yope")]
 transform = Transform3D(0.9719403, 0, 0, 0, 1.0297279, 0, 0, 0, 0.9719403, 0, 0, 0)
-
-[node name="MonsterInfoHover" parent="." index="1" node_paths=PackedStringArray("body")]
-body = NodePath("../Model Root/slime/Sphere")
 
 [node name="Emotion" parent="Visual" index="0" node_paths=PackedStringArray("face")]
 face = NodePath("../../Model Root/slime/Sphere/Face_002")

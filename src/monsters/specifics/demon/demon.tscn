@@ -11,17 +11,12 @@ transparency = 1
 shading_mode = 0
 albedo_texture = ExtResource("3_c7str")
 
-[node name="Demon" instance=ExtResource("1_fdwxe")]
+[node name="Demon" node_paths=PackedStringArray("body") instance=ExtResource("1_fdwxe")]
+body = NodePath("Model Root/demon/Demon_001")
 data = ExtResource("2_7s3rk")
 
 [node name="demon" parent="Model Root" index="2" instance=ExtResource("2_gcmhi")]
 transform = Transform3D(1, 0, 0, 0, 1.0000001, 0, 0, 0, 1, 0, 0, 0)
-
-[node name="Face" parent="Model Root/demon/Demon_001" index="0"]
-material_override = SubResource("StandardMaterial3D_c7str")
-
-[node name="MonsterInfoHover" parent="." index="1" node_paths=PackedStringArray("body")]
-body = NodePath("../Model Root/demon/Demon_001")
 
 [node name="Emotion" parent="Visual" index="0" node_paths=PackedStringArray("face")]
 face = NodePath("../../Model Root/demon/Demon_001/Face")

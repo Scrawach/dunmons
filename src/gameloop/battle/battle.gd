@@ -86,6 +86,7 @@ func process_attack(attacker: Monster, target: Monster, defender_line: MonsterLi
 				await wait_async(0.3)
 				defender_line.sort_by_positions()
 				guard_monster.spawn_tag(Tags.Type.GUARD)
+				damage = calculate_damage(attacker, guard_monster)
 				await guard_monster.take_damage_async(damage)
 				return true
 	

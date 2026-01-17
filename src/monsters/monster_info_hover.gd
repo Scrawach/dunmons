@@ -4,7 +4,6 @@ extends Area3D
 const HIGHLIGHT = preload("uid://bwl5uabgtog7a")
 
 @export var monster: Monster
-@export var body: MeshInstance3D
 
 var is_hovered: bool
 var highlight_tween: Tween
@@ -28,16 +27,16 @@ func _on_mouse_exited() -> void:
 	unhighlight()
 
 func highlight() -> void:
-	if body == null:
+	if monster.body == null:
 		return
-	body.material_overlay = HIGHLIGHT
+	monster.body.material_overlay = HIGHLIGHT
 	start_smooth_highlight()
 
 func unhighlight() -> void:
-	if body == null:
+	if monster.body == null:
 		return
 	stop_highlight_if_needed()
-	body.material_overlay = null
+	monster.body.material_overlay = null
 
 func start_smooth_highlight() -> void:
 	stop_highlight_if_needed()

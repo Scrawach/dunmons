@@ -12,9 +12,21 @@ enum Type {
 
 @export var colors: Dictionary[Type, Color]
 @export var descriptions: Dictionary[Type, String]
+@export var materials: Dictionary[Type, Material]
+
+func get_elemental_tags() -> Array[Type]:
+	return [
+		Type.FIRE, Type.WATER, Type.STONE
+	]
 
 func get_name_for(tag: Type) -> String:
 	return Tags.Type.find_key(tag)
+
+func get_material_for(tag: Type) -> Material:
+	if not materials.has(tag):
+		return null
+	
+	return materials[tag]
 
 func get_color_for(tag: Type) -> Color:
 	if not colors.has(tag):
