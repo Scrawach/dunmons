@@ -1,10 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://s3jr88n1yai7"]
 
-[ext_resource type="Script" uid="uid://c5x3il87lv" path="res://gameloop/battle/target_circle.gd" id="1_84y46"]
-[ext_resource type="PackedScene" uid="uid://drcqylqookeag" path="res://gameloop/battle/circle_zone.glb" id="1_jvvee"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dg77c"]
-shading_mode = 0
+[ext_resource type="Script" uid="uid://c5x3il87lv" path="res://gameloop/battle/target_circle.gd" id="1_phksu"]
+[ext_resource type="PackedScene" uid="uid://drcqylqookeag" path="res://gameloop/battle/circle_zone.glb" id="2_bprtu"]
+[ext_resource type="Material" uid="uid://ru6o2fqcrevl" path="res://gameloop/battle/assets/M_target_circle.tres" id="3_7jcu5"]
 
 [sub_resource type="Animation" id="Animation_w48qg"]
 length = 0.001
@@ -45,13 +43,13 @@ _data = {
 }
 
 [node name="Target Circle" type="Node3D"]
-script = ExtResource("1_84y46")
+script = ExtResource("1_phksu")
 
-[node name="circle_zone" parent="." instance=ExtResource("1_jvvee")]
+[node name="circle_zone" parent="." instance=ExtResource("2_bprtu")]
 
 [node name="Circle" parent="circle_zone" index="0"]
 cast_shadow = 0
-surface_material_override/0 = SubResource("StandardMaterial3D_dg77c")
+surface_material_override/0 = ExtResource("3_7jcu5")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
