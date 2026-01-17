@@ -107,20 +107,37 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="Description Label" type="Label" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Description Label" type="Label" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.18933333, 0.184, 0.2, 1)
 theme_override_fonts/font = ExtResource("2_6qdba")
-theme_override_font_sizes/font_size = 14
+theme_override_font_sizes/font_size = 18
 text = "DESCRIPTION ABOUT  MONSTER"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
+[node name="Sub Description Label" type="Label" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+self_modulate = Color(1, 1, 1, 0.47058824)
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.18933333, 0.184, 0.2, 1)
+theme_override_fonts/font = ExtResource("2_6qdba")
+theme_override_font_sizes/font_size = 12
+text = "yep, after delete it's appear here"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
 [node name="Health Bar Stat" type="PanelContainer" parent="MarginContainer/VBoxContainer"]
-self_modulate = Color(0.5019608, 0.14901961, 0.14901961, 1)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_c00fg")
 

@@ -10,5 +10,5 @@ tags = Array[int]([3])
 health = 10
 attack_min = 2
 attack_max = 2
-stamina = 0.5
+stamina = 5.0
 metadata/_custom_type_script = "uid://ctaw5qsb30nkg"

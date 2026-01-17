@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bd7y6wdj4u8jf"]
+[gd_scene load_steps=9 format=3 uid="uid://bd7y6wdj4u8jf"]
 
 [ext_resource type="Script" uid="uid://c0q5u4ymqlcql" path="res://player/ui/tip_panel.gd" id="1_stwho"]
 [ext_resource type="FontFile" uid="uid://c5v6cn8v8xdr2" path="res://fonts/RobotoCondensed-Bold.ttf" id="1_v6nee"]
@@ -14,11 +14,11 @@ content_margin_left = 20.0
 content_margin_top = 5.0
 content_margin_right = 20.0
 content_margin_bottom = 5.0
-bg_color = Color(0.85, 0.36125, 0.2635, 1)
+bg_color = Color(0.2635, 0.55675, 0.85, 1)
 border_width_left = 1
 border_width_right = 1
 border_width_bottom = 2
-border_color = Color(0.57, 0.24225001, 0.1767, 1)
+border_color = Color(0.217, 0.45849997, 0.7, 1)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
@@ -29,11 +29,11 @@ content_margin_left = 20.0
 content_margin_top = 5.0
 content_margin_right = 20.0
 content_margin_bottom = 5.0
-bg_color = Color(0.65, 0.27625, 0.2015, 1)
+bg_color = Color(0.186, 0.393, 0.6, 1)
 border_width_left = 1
 border_width_right = 1
 border_width_bottom = 2
-border_color = Color(0.42, 0.1785, 0.1302, 1)
+border_color = Color(0.13949999, 0.29474998, 0.45, 1)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
@@ -44,26 +44,11 @@ content_margin_left = 20.0
 content_margin_top = 5.0
 content_margin_right = 20.0
 content_margin_bottom = 5.0
-bg_color = Color(1, 0.425, 0.31, 1)
+bg_color = Color(0.31, 0.655, 1, 1)
 border_width_left = 1
 border_width_right = 1
 border_width_bottom = 2
-border_color = Color(0.72, 0.30600002, 0.22320001, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qag8r"]
-content_margin_left = 20.0
-content_margin_top = 5.0
-content_margin_right = 20.0
-content_margin_bottom = 5.0
-bg_color = Color(0.85, 0.36125, 0.2635, 1)
-border_width_left = 1
-border_width_right = 1
-border_width_bottom = 2
-border_color = Color(0.57, 0.24225001, 0.1767, 1)
+border_color = Color(0.2627451, 0.5568628, 0.8509804, 1)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
@@ -101,6 +86,7 @@ theme_override_font_sizes/font_size = 42
 text = "TITLE"
 horizontal_alignment = 1
 vertical_alignment = 1
+uppercase = true
 
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
 self_modulate = Color(0.83889705, 0.83889705, 0.838897, 1)
@@ -135,6 +121,5 @@ theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = SubResource("StyleBoxFlat_stwho")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_6813i")
 theme_override_styles/hover = SubResource("StyleBoxFlat_0h5b1")
-theme_override_styles/disabled = SubResource("StyleBoxFlat_qag8r")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_8u2ds")
 text = "START BATTLE!"

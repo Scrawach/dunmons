@@ -30,6 +30,7 @@ func initialize(monster: Monster) -> void:
 		attack_stat.text = "%s-%s" % [data.attack_min, data.attack_max]
 	else:
 		attack_stat.text = str(data.attack_max)
+	setup_health(monster.health)
 	_on_health_changed(monster.health)
 	speed_stat.text = "%0.2f" % data.stamina
 	add_tags(data.tags)
@@ -48,9 +49,16 @@ func deattach() -> void:
 	target = null
 	smooth_hide(0.15)
 
-func _on_health_changed(health: Health) -> void:
-	health_progress_bar.value = health_progress_bar.max_value * health.get_ratio()
+func setup_health(health: Health) -> void:
 	health_label.text = "%s/%s" % [health.current, health.total]
+	var progress = health_progress_bar.max_value * health.get_ratio()
+	health_progress_bar.value = progress
+
+func _on_health_changed(health: Health) -> void:
+	health_label.text = "%s/%s" % [health.current, health.total]
+	var progress = health_progress_bar.max_value * health.get_ratio()
+	var tween = create_tween()
+	tween.tween_property(health_progress_bar, "value", progress, 0.3)
 
 func _physics_process(delta: float) -> void:
 	if target == null:

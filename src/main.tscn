@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c4x78xdv4cpx4"]
+[gd_scene load_steps=17 format=3 uid="uid://c4x78xdv4cpx4"]
 
 [ext_resource type="PackedScene" uid="uid://2dpaau0tgd4s" path="res://player/ui/player_hud.tscn" id="1_272bh"]
 [ext_resource type="PackedScene" uid="uid://dmuw5081ygiax" path="res://camera/camera_point.tscn" id="4_4c57u"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://0bcb6pixpecp" path="res://monsters/specifics/demon/demon.tscn" id="7_vivmo"]
 [ext_resource type="PackedScene" uid="uid://q1sisca1uwsi" path="res://monsters/specifics/cube/cube.tscn" id="8_4c57u"]
 [ext_resource type="Script" uid="uid://8psrkms5uwum" path="res://gameloop/tactics/tactics.gd" id="10_efxa6"]
+[ext_resource type="Script" uid="uid://dj4ayn6qc5qpp" path="res://player/player_wallet.gd" id="12_dg77c"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3mixg"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -86,24 +87,31 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.601608, 0, 3.6513638)
 
 [node name="Game" type="Node" parent="." node_paths=PackedStringArray("player_monsters", "camera_point", "world", "sands", "start_location", "tactics", "battle")]
 script = ExtResource("4_lquwl")
-player_monsters = [NodePath("../World3D/Demon"), NodePath("../World3D/Golem"), NodePath("../World3D/Cube")]
+player_monsters = [NodePath("../World3D/Cube"), NodePath("../World3D/Demon"), NodePath("../World3D/Golem")]
 camera_point = NodePath("../World3D/Camera Point")
 enemies = Array[PackedScene]([ExtResource("7_vivmo")])
 world = NodePath("../World3D")
 sands = NodePath("../World3D/Sands")
 start_location = NodePath("../World3D/Ruins Location")
 location_scenes = Array[PackedScene]([ExtResource("6_w48qg")])
-tactics = NodePath("Tactics")
-battle = NodePath("Battle")
+tactics = NodePath("Stages/Tactics")
+battle = NodePath("Stages/Battle")
 metadata/_custom_type_script = "uid://d3kcr1y2o7ue"
 
-[node name="Tactics" type="Node" parent="Game" node_paths=PackedStringArray("player_hud")]
+[node name="Stages" type="Node" parent="Game"]
+
+[node name="Tactics" type="Node" parent="Game/Stages" node_paths=PackedStringArray("player_hud")]
 script = ExtResource("10_efxa6")
-player_hud = NodePath("../../Player HUD")
+player_hud = NodePath("../../../Player HUD")
 metadata/_custom_type_script = "uid://8psrkms5uwum"
 
-[node name="Battle" type="Node" parent="Game" node_paths=PackedStringArray("camera_point")]
+[node name="Battle" type="Node" parent="Game/Stages" node_paths=PackedStringArray("camera_point", "wallet")]
 script = ExtResource("5_7mycd")
 tick_duration = 0.05
-camera_point = NodePath("../../World3D/Camera Point")
+camera_point = NodePath("../../../World3D/Camera Point")
+wallet = NodePath("../../PlayerWallet")
 metadata/_custom_type_script = "uid://dtc6b60kuy673"
+
+[node name="PlayerWallet" type="Node" parent="Game"]
+script = ExtResource("12_dg77c")
+metadata/_custom_type_script = "uid://dj4ayn6qc5qpp"
