@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c78uywdwojndk"
-path.s3tc="res://.godot/imported/faces_blink.svg-daea5a5d14d9b8f5e5a6280e64d7e149.s3tc.ctex"
+uid="uid://xvjdqie5i65l"
+path.s3tc="res://.godot/imported/faces_sad.svg-583dd18ee2c2826ad664d19a1d8c652b.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://monsters/assets/faces_blink.svg"
-dest_files=["res://.godot/imported/faces_blink.svg-daea5a5d14d9b8f5e5a6280e64d7e149.s3tc.ctex"]
+source_file="res://monsters/faces/faces_sad.svg"
+dest_files=["res://.godot/imported/faces_sad.svg-583dd18ee2c2826ad664d19a1d8c652b.s3tc.ctex"]
 
 [params]
 

@@ -1,12 +1,20 @@
-[gd_scene load_steps=7 format=3 uid="uid://q1sisca1uwsi"]
+[gd_scene load_steps=9 format=3 uid="uid://q1sisca1uwsi"]
 
 [ext_resource type="PackedScene" uid="uid://cpq3bvvv5605v" path="res://monsters/monster_base.tscn" id="1_7k3ok"]
 [ext_resource type="Resource" uid="uid://wwne7wtnllbh" path="res://monsters/specifics/cube/cube_info.tres" id="2_2fflt"]
+[ext_resource type="Texture2D" uid="uid://cgqtilri68dqg" path="res://monsters/faces/faces_smile.svg" id="3_6njji"]
 [ext_resource type="Material" uid="uid://dmrv7bjgspgf4" path="res://monsters/specifics/golem/M_golem.tres" id="3_mrr43"]
-[ext_resource type="Material" uid="uid://pl1klw8u0ps2" path="res://monsters/assets/M_face.tres" id="3_xk186"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_mrr43"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_7k3ok"]
 size = Vector3(1.2, 1.2, 1.2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dlxnt"]
+resource_local_to_scene = true
+transparency = 1
+shading_mode = 0
+albedo_texture = ExtResource("3_6njji")
 
 [sub_resource type="QuadMesh" id="QuadMesh_mrr43"]
 size = Vector2(1.2, 1.2)
@@ -14,8 +22,8 @@ size = Vector2(1.2, 1.2)
 [node name="Cube" instance=ExtResource("1_7k3ok")]
 data = ExtResource("2_2fflt")
 
-[node name="MeshInstance3D" parent="Model Root" index="0"]
-visible = false
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model Root/MeshInstance3D" index="0"]
+mesh = SubResource("BoxMesh_mrr43")
 
 [node name="Cube" type="MeshInstance3D" parent="Model Root" index="3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.607, 0)
@@ -24,14 +32,15 @@ surface_material_override/0 = ExtResource("3_mrr43")
 
 [node name="Face" type="MeshInstance3D" parent="Model Root/Cube" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.61)
+material_override = SubResource("StandardMaterial3D_dlxnt")
 mesh = SubResource("QuadMesh_mrr43")
-surface_material_override/0 = ExtResource("3_xk186")
 
 [node name="MonsterInfoHover" parent="." index="1" node_paths=PackedStringArray("body")]
 body = NodePath("../Model Root/Cube")
 
 [node name="Emotion" parent="Visual" index="0" node_paths=PackedStringArray("face")]
 face = NodePath("../../Model Root/Cube/Face")
+material = SubResource("StandardMaterial3D_dlxnt")
 
 [node name="HitEffect" parent="Visual" index="1" node_paths=PackedStringArray("body")]
 body = NodePath("../../Model Root/Cube")

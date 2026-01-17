@@ -68,7 +68,7 @@ func move_to(line: MonsterLine, target: Location) -> void:
 	previous_location = target
 
 func spawn_enemies(location: Location) -> MonsterLine:
-	var enemy_count := randi_range(1, 3)
+	var enemy_count := randi_range(1, 1)
 	var points := location.get_enemy_points()
 	var enemy_monsters: Array[Monster]
 	for i in enemy_count:

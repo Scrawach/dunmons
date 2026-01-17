@@ -6,18 +6,19 @@ enum Type {
 	SMILE,
 	BLINK,
 	SAD,
-	CRY
+	CRY,
+	DEAD
 }
 
+@export var monster: Monster
 @export var face: MeshInstance3D
 @export var target_blink_duration: int = 2
 @export var textures: Dictionary[Type, Texture2D]
+@export var material: Material
 @export var emotion: Type:
 	set(new_emotion):
 		emotion = new_emotion
 		process(emotion)
-
-var face_material: StandardMaterial3D
 
 var blink_timer: Timer
 var blink_duration: int
@@ -27,8 +28,7 @@ func _ready() -> void:
 	if face == null:
 		return
 	
-	face_material = face.get_active_material(0).duplicate()
-	face.material_override = face_material
+	face.material_override = material
 	
 	if Engine.is_editor_hint():
 		return
@@ -38,6 +38,10 @@ func _ready() -> void:
 	blink_timer.timeout.connect(_on_blink_timeout)
 	blink_timer.start(0.15)
 	process(Type.SMILE)
+	monster.died.connect(_on_died)
+
+func _on_died(_monster: Monster) -> void:
+	process(Type.DEAD)
 
 func _on_blink_timeout() -> void:
 	match emotion:
@@ -55,4 +59,4 @@ func _on_blink_timeout() -> void:
 func process(type: Type) -> void:
 	if face == null:
 		return
-	face_material.albedo_texture = textures[type]
+	material.albedo_texture = textures[type]

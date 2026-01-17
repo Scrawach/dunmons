@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="MonsterInfo" load_steps=2 format=3 uid="uid://cyivq61e44kyx"]
+
+[ext_resource type="Script" uid="uid://ctaw5qsb30nkg" path="res://monsters/data/monster_info.gd" id="1_lfro4"]
+
+[resource]
+script = ExtResource("1_lfro4")
+name = "SLIME"
+description = "HE-HE"
+tags = Array[int]([2])
+health = 6
+attack_min = 2
+attack_max = 4
+stamina = 1.0
+metadata/_custom_type_script = "uid://ctaw5qsb30nkg"

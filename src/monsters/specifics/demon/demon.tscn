@@ -1,15 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://0bcb6pixpecp"]
+[gd_scene load_steps=6 format=3 uid="uid://0bcb6pixpecp"]
 
 [ext_resource type="PackedScene" uid="uid://cpq3bvvv5605v" path="res://monsters/monster_base.tscn" id="1_fdwxe"]
 [ext_resource type="Resource" uid="uid://d3dnb6xtjegsp" path="res://monsters/specifics/demon/demon_info.tres" id="2_7s3rk"]
 [ext_resource type="PackedScene" uid="uid://bbcvtd7mxnui3" path="res://monsters/specifics/demon/demon.glb" id="2_gcmhi"]
-[ext_resource type="Texture2D" uid="uid://cgqtilri68dqg" path="res://monsters/assets/faces_smile.svg" id="3_c7str"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pgnys"]
-resource_local_to_scene = true
-transparency = 1
-shading_mode = 0
-albedo_texture = ExtResource("3_c7str")
+[ext_resource type="Texture2D" uid="uid://cgqtilri68dqg" path="res://monsters/faces/faces_smile.svg" id="3_c7str"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c7str"]
 resource_local_to_scene = true
@@ -20,13 +14,7 @@ albedo_texture = ExtResource("3_c7str")
 [node name="Demon" instance=ExtResource("1_fdwxe")]
 data = ExtResource("2_7s3rk")
 
-[node name="MeshInstance3D" parent="Model Root" index="0"]
-visible = false
-
-[node name="MeshInstance3D" parent="Model Root/MeshInstance3D" index="0"]
-surface_material_override/0 = SubResource("StandardMaterial3D_pgnys")
-
-[node name="demon" parent="Model Root" index="3" instance=ExtResource("2_gcmhi")]
+[node name="demon" parent="Model Root" index="2" instance=ExtResource("2_gcmhi")]
 transform = Transform3D(1, 0, 0, 0, 1.0000001, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="Face" parent="Model Root/demon/Demon_001" index="0"]
@@ -37,6 +25,7 @@ body = NodePath("../Model Root/demon/Demon_001")
 
 [node name="Emotion" parent="Visual" index="0" node_paths=PackedStringArray("face")]
 face = NodePath("../../Model Root/demon/Demon_001/Face")
+material = SubResource("StandardMaterial3D_c7str")
 
 [node name="HitEffect" parent="Visual" index="1" node_paths=PackedStringArray("body")]
 body = NodePath("../../Model Root/demon/Demon_001")

@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://m4dd03q4snfw"]
+
+[ext_resource type="PackedScene" uid="uid://cpq3bvvv5605v" path="res://monsters/monster_base.tscn" id="1_2urbs"]
+[ext_resource type="PackedScene" uid="uid://c53xlcygm75md" path="res://monsters/specifics/slime/slime.glb" id="2_5yope"]
+[ext_resource type="Resource" uid="uid://cyivq61e44kyx" path="res://monsters/specifics/slime/slime_info.tres" id="2_lh58h"]
+[ext_resource type="Texture2D" uid="uid://cgqtilri68dqg" path="res://monsters/faces/faces_smile.svg" id="2_q5v3o"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5yope"]
+resource_local_to_scene = true
+transparency = 1
+shading_mode = 0
+albedo_texture = ExtResource("2_q5v3o")
+
+[node name="Slime" instance=ExtResource("1_2urbs")]
+data = ExtResource("2_lh58h")
+
+[node name="slime" parent="Model Root" index="3" instance=ExtResource("2_5yope")]
+transform = Transform3D(0.9719403, 0, 0, 0, 1.0297279, 0, 0, 0, 0.9719403, 0, 0, 0)
+
+[node name="MonsterInfoHover" parent="." index="1" node_paths=PackedStringArray("body")]
+body = NodePath("../Model Root/slime/Sphere")
+
+[node name="Emotion" parent="Visual" index="0" node_paths=PackedStringArray("face")]
+face = NodePath("../../Model Root/slime/Sphere/Face_002")
+material = SubResource("StandardMaterial3D_5yope")
+
+[editable path="Model Root/slime"]

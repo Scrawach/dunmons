@@ -3,8 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://cpq3bvvv5605v" path="res://monsters/monster_base.tscn" id="1_dsk0m"]
 [ext_resource type="PackedScene" uid="uid://uq7q7y5xuccg" path="res://monsters/specifics/golem/golem.glb" id="2_7cm0r"]
 [ext_resource type="Resource" uid="uid://dgxr521jod2av" path="res://monsters/specifics/golem/golem_info.tres" id="2_kdkyd"]
-[ext_resource type="Texture2D" uid="uid://cgqtilri68dqg" path="res://monsters/assets/faces_smile.svg" id="3_0ratg"]
-[ext_resource type="Material" uid="uid://pl1klw8u0ps2" path="res://monsters/assets/M_face.tres" id="4_8sgq6"]
+[ext_resource type="Texture2D" uid="uid://cgqtilri68dqg" path="res://monsters/faces/faces_smile.svg" id="3_0ratg"]
+[ext_resource type="Material" uid="uid://pl1klw8u0ps2" path="res://monsters/faces/M_face.tres" id="4_8sgq6"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_06x53"]
 resource_local_to_scene = true

@@ -4,25 +4,24 @@
 [ext_resource type="Resource" uid="uid://tch0ei3beu1s" path="res://monsters/data/default.tres" id="2_jus1s"]
 [ext_resource type="Script" uid="uid://d1ccxqa3v8eby" path="res://monsters/monster_info_hover.gd" id="3_6c25d"]
 [ext_resource type="PackedScene" uid="uid://qsktg54howv0" path="res://common/heal_label_3d.tscn" id="4_lvog1"]
-[ext_resource type="Material" uid="uid://pl1klw8u0ps2" path="res://monsters/assets/M_face.tres" id="5_cqyxk"]
+[ext_resource type="Material" uid="uid://pl1klw8u0ps2" path="res://monsters/faces/M_face.tres" id="5_cqyxk"]
 [ext_resource type="Script" uid="uid://psf2sui574x3" path="res://monsters/visuals/emotion.gd" id="5_g75ok"]
 [ext_resource type="PackedScene" uid="uid://dx1rc42vwo8j1" path="res://common/tags/tag_world_ui.tscn" id="5_xd7ms"]
 [ext_resource type="Script" uid="uid://cp7uxorhel0cs" path="res://monsters/dragging_area_3d.gd" id="7_c31it"]
-[ext_resource type="Texture2D" uid="uid://c78uywdwojndk" path="res://monsters/assets/faces_blink.svg" id="7_p7hi2"]
+[ext_resource type="Texture2D" uid="uid://c78uywdwojndk" path="res://monsters/faces/faces_blink.svg" id="7_p7hi2"]
 [ext_resource type="PackedScene" uid="uid://0afkj1wx1g6h" path="res://monsters/ui/monster_world_ui.tscn" id="8_janau"]
 [ext_resource type="Script" uid="uid://xixq75xd6wy6" path="res://monsters/hit_effect.gd" id="9_cam5p"]
 [ext_resource type="PackedScene" uid="uid://b2gw3gp2wjl8j" path="res://common/hit_label_3d.tscn" id="9_etepe"]
 [ext_resource type="Material" uid="uid://cm5tfcoeautd5" path="res://monsters/assets/M_hit.tres" id="10_hx5qy"]
 [ext_resource type="Script" uid="uid://c3qputg4lrkwf" path="res://monsters/components/health.gd" id="11_hx5qy"]
-[ext_resource type="Texture2D" uid="uid://cgqtilri68dqg" path="res://monsters/assets/faces_smile.svg" id="11_o71ry"]
+[ext_resource type="Texture2D" uid="uid://cgqtilri68dqg" path="res://monsters/faces/faces_smile.svg" id="11_o71ry"]
 [ext_resource type="Script" uid="uid://dy7h7atq6vons" path="res://monsters/components/stamina.gd" id="12_71p1i"]
-[ext_resource type="Texture2D" uid="uid://xvjdqie5i65l" path="res://monsters/assets/faces_sad.svg" id="13_o71ry"]
+[ext_resource type="Texture2D" uid="uid://xvjdqie5i65l" path="res://monsters/faces/faces_sad.svg" id="13_o71ry"]
 [ext_resource type="Material" uid="uid://dladrsv7iv8yq" path="res://monsters/assets/M_heal.tres" id="14_88rtb"]
-[ext_resource type="Texture2D" uid="uid://cdya0j7gv0t0x" path="res://monsters/assets/faces_cry.svg" id="14_c31it"]
+[ext_resource type="Texture2D" uid="uid://cdya0j7gv0t0x" path="res://monsters/faces/faces_cry.svg" id="14_c31it"]
+[ext_resource type="Texture2D" uid="uid://cyxc1cmo4v2e6" path="res://monsters/faces/faces_dead.svg" id="15_djh3a"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_janau"]
-
-[sub_resource type="QuadMesh" id="QuadMesh_px60s"]
+[sub_resource type="BoxMesh" id="BoxMesh_xd7ms"]
 
 [sub_resource type="Animation" id="Animation_ujn5a"]
 length = 0.001
@@ -348,13 +347,9 @@ tag_scene = ExtResource("5_xd7ms")
 [node name="Model Root" type="Node3D" parent="."]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Model Root"]
-transform = Transform3D(0.99700207, 0, 0, 0, 1.0057727, 0, 0, 0, 0.99700207, 0, 0.49631643, 0)
-mesh = SubResource("BoxMesh_janau")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Model Root/MeshInstance3D"]
-transform = Transform3D(0.99508625, 0, 0, 0, 1.0042286, 0, 0, 0, 0.99508625, 0, 0.0020866394, 1.0842803)
-mesh = SubResource("QuadMesh_px60s")
-surface_material_override/0 = ExtResource("5_cqyxk")
+transform = Transform3D(0.99999994, 0, 0, 0, 0.9999998, 0, 0, 0, 0.99999994, 0, 0.51, 0)
+visible = false
+mesh = SubResource("BoxMesh_xd7ms")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Model Root"]
 unique_name_in_owner = true
@@ -421,14 +416,17 @@ metadata/_custom_type_script = "uid://dy7h7atq6vons"
 
 [node name="Visual" type="Node" parent="."]
 
-[node name="Emotion" type="Node" parent="Visual"]
+[node name="Emotion" type="Node" parent="Visual" node_paths=PackedStringArray("monster")]
 script = ExtResource("5_g75ok")
+monster = NodePath("../..")
 textures = Dictionary[int, Texture2D]({
 0: ExtResource("11_o71ry"),
 1: ExtResource("7_p7hi2"),
-3: ExtResource("13_o71ry"),
-4: ExtResource("14_c31it")
+2: ExtResource("13_o71ry"),
+3: ExtResource("14_c31it"),
+4: ExtResource("15_djh3a")
 })
+material = ExtResource("5_cqyxk")
 metadata/_custom_type_script = "uid://psf2sui574x3"
 
 [node name="HitEffect" type="Node" parent="Visual" node_paths=PackedStringArray("health")]

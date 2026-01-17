@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cgqtilri68dqg"
-path.s3tc="res://.godot/imported/faces_smile.svg-463c80cfd7caa4b3a17ecc6603cd80ba.s3tc.ctex"
+path.s3tc="res://.godot/imported/faces_smile.svg-303b08490782412880f7307f0d20e5fc.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://monsters/assets/faces_smile.svg"
-dest_files=["res://.godot/imported/faces_smile.svg-463c80cfd7caa4b3a17ecc6603cd80ba.s3tc.ctex"]
+source_file="res://monsters/faces/faces_smile.svg"
+dest_files=["res://.godot/imported/faces_smile.svg-303b08490782412880f7307f0d20e5fc.s3tc.ctex"]
 
 [params]
 

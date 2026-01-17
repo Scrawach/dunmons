@@ -7,8 +7,8 @@
 [ext_resource type="Script" uid="uid://dtc6b60kuy673" path="res://gameloop/battle/battle.gd" id="5_7mycd"]
 [ext_resource type="Material" uid="uid://dlelrtvcgwl50" path="res://locations/assets/M_sand.tres" id="5_ycdy4"]
 [ext_resource type="PackedScene" uid="uid://butm8yj1yughq" path="res://locations/specifics/ruins_location.tscn" id="6_w48qg"]
-[ext_resource type="PackedScene" uid="uid://caj80doynbabw" path="res://monsters/specifics/golem/golem.tscn" id="7_4c57u"]
 [ext_resource type="PackedScene" uid="uid://0bcb6pixpecp" path="res://monsters/specifics/demon/demon.tscn" id="7_vivmo"]
+[ext_resource type="PackedScene" uid="uid://m4dd03q4snfw" path="res://monsters/specifics/slime/slime.tscn" id="8_2cqfq"]
 [ext_resource type="PackedScene" uid="uid://q1sisca1uwsi" path="res://monsters/specifics/cube/cube.tscn" id="8_4c57u"]
 [ext_resource type="PackedScene" uid="uid://xi70be5hasug" path="res://items/coin_3d.tscn" id="9_vivmo"]
 [ext_resource type="Script" uid="uid://8psrkms5uwum" path="res://gameloop/tactics/tactics.gd" id="10_efxa6"]
@@ -61,9 +61,6 @@ environment = SubResource("Environment_ho76u")
 
 [node name="Ruins Location" parent="World3D" instance=ExtResource("6_w48qg")]
 
-[node name="Demon" parent="World3D" instance=ExtResource("7_vivmo")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 3.6412606, 0, 20.13366)
-
 [node name="Camera Point" parent="World3D" instance=ExtResource("4_4c57u")]
 transform = Transform3D(0.49999997, -0.61237246, 0.6123725, 0, 0.7071068, 0.70710677, -0.86602545, -0.35355335, 0.35355338, 0, 0, -7)
 
@@ -83,18 +80,17 @@ mesh = SubResource("PlaneMesh_0aecw")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("5_ycdy4")
 
-[node name="Golem" parent="World3D" instance=ExtResource("7_4c57u")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 8)
-
-[node name="Cube" parent="World3D" instance=ExtResource("8_4c57u")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.601608, 0, 3.6513638)
-
 [node name="Coin3D" parent="World3D" instance=ExtResource("9_vivmo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.699688, 1.4271007, 4.9813676)
 
+[node name="Cube" parent="World3D" instance=ExtResource("8_4c57u")]
+
+[node name="Monster Base" parent="World3D" instance=ExtResource("8_2cqfq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8.609232)
+
 [node name="Game" type="Node" parent="." node_paths=PackedStringArray("player_monsters", "camera_point", "world", "sands", "start_location", "tactics", "battle", "game_over")]
 script = ExtResource("4_lquwl")
-player_monsters = [NodePath("../World3D/Cube"), NodePath("../World3D/Demon"), NodePath("../World3D/Golem")]
+player_monsters = [NodePath("../World3D/Cube"), NodePath("../World3D/Monster Base")]
 camera_point = NodePath("../World3D/Camera Point")
 enemies = Array[PackedScene]([ExtResource("7_vivmo")])
 world = NodePath("../World3D")

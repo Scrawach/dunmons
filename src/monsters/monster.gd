@@ -49,6 +49,7 @@ func has_tags(targets: Array[Tags.Type]) -> bool:
 
 func die() -> void:
 	is_death = true
+	
 	died.emit(self)
 
 func revive() -> void:

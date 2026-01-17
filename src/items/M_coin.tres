@@ -11,6 +11,6 @@ shader_parameter/size = 1.05
 [resource]
 next_pass = SubResource("ShaderMaterial_7gfcd")
 diffuse_mode = 3
-albedo_color = Color(0.83, 0.6717467, 0.0996, 1)
+albedo_color = Color(0.72, 0.58272004, 0.08640001, 1)
 emission = Color(1, 0.6333333, 0, 1)
 emission_energy_multiplier = 0.7
