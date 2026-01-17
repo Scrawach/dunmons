@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://dx1rc42vwo8j1"]
+
+[ext_resource type="Script" uid="uid://bmebhfme6hrdr" path="res://common/tags/tag_world_ui.gd" id="1_0uxc5"]
+[ext_resource type="PackedScene" uid="uid://c1yjxlk2ur3hx" path="res://common/tags/ui/tag_container.tscn" id="2_4ny4f"]
+[ext_resource type="Resource" uid="uid://c6vtdw5ubp0ea" path="res://common/tags/data/tags.tres" id="2_jkn86"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_jkn86"]
+viewport_path = NodePath("Sprite3D/SubViewport")
+
+[node name="Tag World UI" type="Node3D"]
+script = ExtResource("1_0uxc5")
+tag_data = ExtResource("2_jkn86")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+pixel_size = 0.003
+billboard = 1
+no_depth_test = true
+fixed_size = true
+render_priority = 10
+texture = SubResource("ViewportTexture_jkn86")
+
+[node name="SubViewport" type="SubViewport" parent="Sprite3D"]
+transparent_bg = true
+size = Vector2i(64, 64)
+
+[node name="Tag Container" parent="Sprite3D/SubViewport" instance=ExtResource("2_4ny4f")]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -15.0
+offset_right = 25.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2

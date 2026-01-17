@@ -10,6 +10,7 @@ signal died(monster: Monster)
 @export var movement_speed: float = 6.0
 @export var hit_scene: PackedScene
 @export var heal_scene: PackedScene
+@export var tag_scene: PackedScene
 
 @onready var base_animation_tree: AnimationTree = %BaseAnimationTree
 @onready var monster_world_ui: MonsterWorldUI = %"Monster World UI"
@@ -40,6 +41,12 @@ func restore_stamine(tick: float) -> void:
 	
 	stamina.restore(tick * data.stamina)
 
+func has_tags(targets: Array[Tags.Type]) -> bool:
+	var result := true
+	for target_tag in targets:
+		result = result && (target_tag in data.tags)
+	return result
+
 func die() -> void:
 	is_death = true
 	died.emit(self)
@@ -60,6 +67,19 @@ func take_damage(value: int) -> void:
 	
 	if health.is_empty():
 		die()
+
+func spawn_tag(tag: Tags.Type) -> void:
+	var instance := tag_scene.instantiate() as TagWorldUI
+	get_parent().add_child(instance)
+	instance.global_position = global_position
+	instance.initialize(tag)
+
+func drag_to(target_position: Vector3, duration: float = 0.25) -> void:
+	if moving:
+		moving.kill()
+		is_walking = false
+	moving = create_tween()
+	moving.tween_property(self, "global_position", target_position, duration)
 
 func move_to(target_position: Vector3) -> void:
 	if moving:
@@ -83,9 +103,9 @@ func restore_health(value: int) -> void:
 	spawn_floating_numbers(heal_scene, value)
 
 func attack_async(_target: Monster) -> void:
-	stamina.consume()
 	play_oneshot_animation(ATTACK_ANIMATION)
 	await base_animation_tree.animation_finished
+	stamina.consume()
 
 func spawn_floating_numbers(scene: PackedScene, value: int) -> void:
 	var hit_instance := scene.instantiate() as FloatingLabel3D

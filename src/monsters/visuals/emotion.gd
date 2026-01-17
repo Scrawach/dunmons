@@ -4,12 +4,14 @@ extends Node
 
 enum Type {
 	SMILE,
-	BLINK
+	BLINK,
+	SAD,
+	CRY
 }
 
 @export var face: MeshInstance3D
+@export var target_blink_duration: int = 2
 @export var textures: Dictionary[Type, Texture2D]
-@export var offset_step: int
 @export var emotion: Type:
 	set(new_emotion):
 		emotion = new_emotion
@@ -17,20 +19,16 @@ enum Type {
 
 var face_material: StandardMaterial3D
 
-var texture_width: int
-var texture_height: int
-
 var blink_timer: Timer
-var current_emotion: Type
+var blink_duration: int
 var pause_between_blink: int
 
 func _ready() -> void:
 	if face == null:
 		return
 	
-	face_material = face.get_active_material(0)
-	texture_width = face_material.albedo_texture.get_width()
-	texture_height = face_material.albedo_texture.get_height()
+	face_material = face.get_active_material(0).duplicate()
+	face.material_override = face_material
 	
 	if Engine.is_editor_hint():
 		return
@@ -42,17 +40,19 @@ func _ready() -> void:
 	process(Type.SMILE)
 
 func _on_blink_timeout() -> void:
-	if pause_between_blink == 0:
-		process(Type.BLINK)
-		pause_between_blink = randi_range(8, 16)
-	else:
-		pause_between_blink -= 1
-		process(Type.SMILE)
+	match emotion:
+		Type.SMILE:
+			pause_between_blink -= 1
+			if pause_between_blink <= 0:
+				pause_between_blink = randi_range(6, 12)
+				emotion = Type.BLINK
+		Type.BLINK:
+			blink_duration -= 1
+			if blink_duration <= 0:
+				blink_duration = target_blink_duration
+				emotion = Type.SMILE
 
 func process(type: Type) -> void:
 	if face == null:
 		return
 	face_material.albedo_texture = textures[type]
-	current_emotion = type
-	#var offset := offsets[type] * offset_step
-	#face_material.uv1_offset = Vector3(offset.x / texture_width, offset.y / texture_height, 0)

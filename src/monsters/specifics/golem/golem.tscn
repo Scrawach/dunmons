@@ -1,8 +1,22 @@
-[gd_scene load_steps=4 format=3 uid="uid://caj80doynbabw"]
+[gd_scene load_steps=8 format=3 uid="uid://caj80doynbabw"]
 
 [ext_resource type="PackedScene" uid="uid://cpq3bvvv5605v" path="res://monsters/monster_base.tscn" id="1_dsk0m"]
 [ext_resource type="PackedScene" uid="uid://uq7q7y5xuccg" path="res://monsters/specifics/golem/golem.glb" id="2_7cm0r"]
 [ext_resource type="Resource" uid="uid://dgxr521jod2av" path="res://monsters/specifics/golem/golem_info.tres" id="2_kdkyd"]
+[ext_resource type="Texture2D" uid="uid://cgqtilri68dqg" path="res://monsters/assets/faces_smile.svg" id="3_0ratg"]
+[ext_resource type="Material" uid="uid://pl1klw8u0ps2" path="res://monsters/assets/M_face.tres" id="4_8sgq6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_06x53"]
+resource_local_to_scene = true
+transparency = 1
+shading_mode = 0
+albedo_texture = ExtResource("3_0ratg")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0ratg"]
+resource_local_to_scene = true
+transparency = 1
+shading_mode = 0
+albedo_texture = ExtResource("3_0ratg")
 
 [node name="Golem" instance=ExtResource("1_dsk0m")]
 data = ExtResource("2_kdkyd")
@@ -10,10 +24,20 @@ data = ExtResource("2_kdkyd")
 [node name="MeshInstance3D" parent="Model Root" index="0"]
 visible = false
 
+[node name="MeshInstance3D" parent="Model Root/MeshInstance3D" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_06x53")
+
 [node name="golem" parent="Model Root" index="3" instance=ExtResource("2_7cm0r")]
+
+[node name="Face_001" parent="Model Root/golem/Stone Golem" index="0"]
+material_override = SubResource("StandardMaterial3D_0ratg")
+surface_material_override/0 = ExtResource("4_8sgq6")
 
 [node name="MonsterInfoHover" parent="." index="1" node_paths=PackedStringArray("body")]
 body = NodePath("../Model Root/golem/Stone Golem")
+
+[node name="Emotion" parent="Visual" index="0" node_paths=PackedStringArray("face")]
+face = NodePath("../../Model Root/golem/Stone Golem/Face_001")
 
 [node name="HitEffect" parent="Visual" index="1" node_paths=PackedStringArray("body")]
 body = NodePath("../../Model Root/golem/Stone Golem")

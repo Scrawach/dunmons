@@ -6,7 +6,8 @@ enum Type {
 	FIRE = 1,
 	WATER = 2,
 	STONE = 3,
-	GRASS = 4
+	GRASS = 4,
+	GUARD = 100,
 }
 
 @export var colors: Dictionary[Type, Color]

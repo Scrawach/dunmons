@@ -5,7 +5,7 @@ signal dragged(target_position: Vector3)
 signal end_dragged()
 
 @export var body: Node3D
-@export var dragging_speed: float = 12.0
+@export var dragging_speed: float = 50.0
 @export var rotation_speed: float = 10.0
 
 @onready var collision_shape_3d: CollisionShape3D = $CollisionShape3D

@@ -36,12 +36,14 @@ func simulate_async(player: MonsterLine, enemies: MonsterLine) -> BattleResult:
 			await wait_async(tick_duration)
 			player_monster.restore_stamine(tick_duration)
 			enemy_monster.restore_stamine(tick_duration)
-			
+						
 			if player_monster.can_attack():
-				await process_attack(player_monster, enemy_monster)
+				await process_attack(player_monster, enemy_monster, enemies)
 				
 			if enemy_monster.can_attack():
-				await process_attack(enemy_monster, player_monster)
+				var need_break := await process_attack(enemy_monster, player_monster, player)
+				if need_break:
+					break
 			
 			if enemy_monster.is_death:
 				await spawn_drop(enemy_monster)
@@ -63,10 +65,32 @@ func simulate_async(player: MonsterLine, enemies: MonsterLine) -> BattleResult:
 	
 	return BattleResult.enemy_win()
 
-func process_attack(attacker: Monster, target: Monster) -> void:
+func process_attack(attacker: Monster, target: Monster, defender_line: MonsterLine) -> bool:
 	await attacker.attack_async(target)
 	var damage := calculate_damage(attacker, target)
+	
+	var is_lethal_damage := damage >= target.health.current
+	
+	if is_lethal_damage:
+		var guards := defender_line.find_monsters_with_tags([Tags.Type.GUARD])
+		if not guards.is_empty():
+			var guard_monster: Monster
+			for monster in guards:
+				if monster != target:
+					guard_monster = monster
+			
+			if guard_monster:
+				target.monster_world_ui.block()
+				guard_monster.monster_world_ui.unblock()
+				defender_line.switch_positions(target, guard_monster)
+				await wait_async(0.3)
+				defender_line.sort_by_positions()
+				guard_monster.spawn_tag(Tags.Type.GUARD)
+				await guard_monster.take_damage_async(damage)
+				return true
+	
 	await target.take_damage_async(damage)
+	return false
 
 func calculate_damage(attacker: Monster, target: Monster) -> int:
 	var base_damage := randi_range(attacker.damage_min, attacker.damage_max)

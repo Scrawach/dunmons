@@ -2,6 +2,8 @@ class_name PlayerWallet
 extends Node
 
 signal changed(wallet: PlayerWallet)
+signal added(value: int)
+signal removed(value: int)
 
 var total: int:
 	set(value):
@@ -13,3 +15,4 @@ func can_purchase(price: int) -> bool:
 
 func add(coins: int) -> void:
 	total += coins
+	added.emit(coins)

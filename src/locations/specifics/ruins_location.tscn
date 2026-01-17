@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://butm8yj1yughq"]
+[gd_scene load_steps=9 format=3 uid="uid://butm8yj1yughq"]
 
 [ext_resource type="PackedScene" uid="uid://bgcpcag06irx1" path="res://locations/assets/decorations1.glb" id="1_ubjgg"]
 [ext_resource type="Script" uid="uid://ce2hwiwg04a0o" path="res://locations/location.gd" id="1_xsg67"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://buwdmh5r15ib3" path="res://locations/assets/plant.glb" id="3_wn1d1"]
 [ext_resource type="PackedScene" uid="uid://cdk4n2qtr0sd8" path="res://locations/assets/sand.glb" id="5_3q5i7"]
 [ext_resource type="Material" uid="uid://bkvyobbkqdj3l" path="res://locations/assets/M_sand_small.tres" id="6_uppfn"]
+[ext_resource type="PackedScene" uid="uid://s3jr88n1yai7" path="res://gameloop/battle/assets/target_circle.tscn" id="7_xsg67"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_dije2"]
 radius = 1.0
@@ -53,21 +54,33 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7150831, 4.7683716e-07, -3.
 metadata/_edit_group_ = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Player Positions/Player Position"]
+visible = false
 mesh = SubResource("SphereMesh_dije2")
+
+[node name="Target Circle" parent="Player Positions/Player Position" instance=ExtResource("7_xsg67")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.017503247, 0)
 
 [node name="Player Position2" type="Marker3D" parent="Player Positions"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7150831, 4.7683716e-07, -0.50766563)
 metadata/_edit_group_ = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Player Positions/Player Position2"]
+visible = false
 mesh = SubResource("SphereMesh_dije2")
+
+[node name="Target Circle" parent="Player Positions/Player Position2" instance=ExtResource("7_xsg67")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.017503247, 0)
 
 [node name="Player Position3" type="Marker3D" parent="Player Positions"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7150831, 4.7683716e-07, 2.4923344)
 metadata/_edit_group_ = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Player Positions/Player Position3"]
+visible = false
 mesh = SubResource("SphereMesh_dije2")
+
+[node name="Target Circle" parent="Player Positions/Player Position3" instance=ExtResource("7_xsg67")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.017503247, 0)
 
 [node name="Enemy Positions" type="Node3D" parent="."]
 visible = false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://c4x78xdv4cpx4"]
+[gd_scene load_steps=19 format=3 uid="uid://c4x78xdv4cpx4"]
 
 [ext_resource type="PackedScene" uid="uid://2dpaau0tgd4s" path="res://player/ui/player_hud.tscn" id="1_272bh"]
 [ext_resource type="PackedScene" uid="uid://dmuw5081ygiax" path="res://camera/camera_point.tscn" id="4_4c57u"]
@@ -10,11 +10,9 @@
 [ext_resource type="PackedScene" uid="uid://caj80doynbabw" path="res://monsters/specifics/golem/golem.tscn" id="7_4c57u"]
 [ext_resource type="PackedScene" uid="uid://0bcb6pixpecp" path="res://monsters/specifics/demon/demon.tscn" id="7_vivmo"]
 [ext_resource type="PackedScene" uid="uid://q1sisca1uwsi" path="res://monsters/specifics/cube/cube.tscn" id="8_4c57u"]
-[ext_resource type="PackedScene" uid="uid://xi70be5hasug" path="res://items/coin_3d.tscn" id="9_vivmo"]
 [ext_resource type="Script" uid="uid://8psrkms5uwum" path="res://gameloop/tactics/tactics.gd" id="10_efxa6"]
 [ext_resource type="Script" uid="uid://dj4ayn6qc5qpp" path="res://player/player_wallet.gd" id="12_dg77c"]
 [ext_resource type="PackedScene" uid="uid://dwwcrfmyt7371" path="res://player/ui/player_wallet_ui.tscn" id="13_ycdy4"]
-[ext_resource type="Script" uid="uid://claub88ltdho3" path="res://gameloop/game_over/game_over.gd" id="14_2cqfq"]
 [ext_resource type="Script" uid="uid://b65182a2jjw81" path="res://monsters/drag_and_drop_3d.gd" id="14_w48qg"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3mixg"]
@@ -89,10 +87,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 8)
 [node name="Cube" parent="World3D" instance=ExtResource("8_4c57u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.601608, 0, 3.6513638)
 
-[node name="Coin3D" parent="World3D" instance=ExtResource("9_vivmo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.699688, 1.4271007, 4.9813676)
-
-[node name="Game" type="Node" parent="." node_paths=PackedStringArray("player_monsters", "camera_point", "world", "sands", "start_location", "tactics", "battle", "game_over")]
+[node name="Game" type="Node" parent="." node_paths=PackedStringArray("player_monsters", "camera_point", "world", "sands", "start_location", "tactics", "battle")]
 script = ExtResource("4_lquwl")
 player_monsters = [NodePath("../World3D/Cube"), NodePath("../World3D/Demon"), NodePath("../World3D/Golem")]
 camera_point = NodePath("../World3D/Camera Point")
@@ -103,7 +98,6 @@ start_location = NodePath("../World3D/Ruins Location")
 location_scenes = Array[PackedScene]([ExtResource("6_w48qg")])
 tactics = NodePath("Stages/Tactics")
 battle = NodePath("Stages/Battle")
-game_over = NodePath("Stages/GameOver")
 metadata/_custom_type_script = "uid://d3kcr1y2o7ue"
 
 [node name="Stages" type="Node" parent="Game"]
@@ -125,11 +119,6 @@ camera_point = NodePath("../../../World3D/Camera Point")
 wallet = NodePath("../../PlayerWallet")
 metadata/_custom_type_script = "uid://dtc6b60kuy673"
 
-[node name="GameOver" type="Node" parent="Game/Stages" node_paths=PackedStringArray("hud")]
-script = ExtResource("14_2cqfq")
-hud = NodePath("../../../Player HUD")
-metadata/_custom_type_script = "uid://claub88ltdho3"
-
 [node name="PlayerWallet" type="Node" parent="Game"]
 script = ExtResource("12_dg77c")
 metadata/_custom_type_script = "uid://dj4ayn6qc5qpp"
@@ -138,7 +127,6 @@ metadata/_custom_type_script = "uid://dj4ayn6qc5qpp"
 layer = 2
 
 [node name="PlayerWalletUI" parent="Game/PlayerWallet/CanvasLayer" node_paths=PackedStringArray("player_wallet") instance=ExtResource("13_ycdy4")]
-visible = false
 offset_right = 141.0
 offset_bottom = 73.0
 player_wallet = NodePath("../..")

@@ -6,7 +6,7 @@
 script = ExtResource("1_dep4o")
 name = "SUPER AUTO BOT"
 description = "Not like then comape with other game"
-tags = Array[int]([1, 0, 2, 3, 4])
+tags = Array[int]([1, 0, 2, 3, 4, 0])
 health = 10
 attack_min = 2
 attack_max = 3

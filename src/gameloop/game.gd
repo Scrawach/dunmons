@@ -12,6 +12,7 @@ extends Scenario
 
 @export var tactics: Tactics
 @export var battle: Battle
+@export var game_over: GameOver
 
 var previous_location: Location
 var reached_distance: float
@@ -32,12 +33,10 @@ func execute_async() -> void:
 		await tactics.prepare_async(player, location)
 		var battle_result := await battle.simulate_async(player, enemy_line)
 		player.erase_from_death()
+		
 		if battle_result.is_enemy_won:
-			await game_over_async()
+			await game_over.execute()
 			return
-
-func game_over_async() -> void:
-	print("GAME OVER")
 
 func make_new_location(offset: float) -> Location:
 	var random := location_scenes.pick_random() as PackedScene
@@ -48,6 +47,7 @@ func make_new_location(offset: float) -> Location:
 
 func move_to(line: MonsterLine, target: Location) -> void:
 	var travel_points := target.get_travel_points()
+	line.setup_points(travel_points)
 	for i in line.monsters.size():
 		line.monsters[i].move_to(travel_points[i])
 	camera_point.move_to(target.camera_point.global_position, 4.0)
@@ -59,7 +59,7 @@ func move_to(line: MonsterLine, target: Location) -> void:
 	
 	target.smooth_show()
 	
-	while player_monsters.front().is_walking:
+	while line.is_moving():
 		await wait_async(0.5)
 	
 	reached_distance += target.length

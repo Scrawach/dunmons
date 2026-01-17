@@ -1,21 +1,28 @@
-[gd_scene load_steps=45 format=3 uid="uid://cpq3bvvv5605v"]
+[gd_scene load_steps=52 format=3 uid="uid://cpq3bvvv5605v"]
 
 [ext_resource type="Script" uid="uid://brh32yejypr87" path="res://monsters/monster.gd" id="1_qg1te"]
 [ext_resource type="Resource" uid="uid://tch0ei3beu1s" path="res://monsters/data/default.tres" id="2_jus1s"]
 [ext_resource type="Script" uid="uid://d1ccxqa3v8eby" path="res://monsters/monster_info_hover.gd" id="3_6c25d"]
 [ext_resource type="PackedScene" uid="uid://qsktg54howv0" path="res://common/heal_label_3d.tscn" id="4_lvog1"]
+[ext_resource type="Material" uid="uid://pl1klw8u0ps2" path="res://monsters/assets/M_face.tres" id="5_cqyxk"]
 [ext_resource type="Script" uid="uid://psf2sui574x3" path="res://monsters/visuals/emotion.gd" id="5_g75ok"]
-[ext_resource type="Texture2D" uid="uid://dkxg5n17pg2fn" path="res://monsters/assets/faces.svg" id="6_yonl5"]
+[ext_resource type="PackedScene" uid="uid://dx1rc42vwo8j1" path="res://common/tags/tag_world_ui.tscn" id="5_xd7ms"]
+[ext_resource type="Script" uid="uid://cp7uxorhel0cs" path="res://monsters/dragging_area_3d.gd" id="7_c31it"]
 [ext_resource type="Texture2D" uid="uid://c78uywdwojndk" path="res://monsters/assets/faces_blink.svg" id="7_p7hi2"]
 [ext_resource type="PackedScene" uid="uid://0afkj1wx1g6h" path="res://monsters/ui/monster_world_ui.tscn" id="8_janau"]
 [ext_resource type="Script" uid="uid://xixq75xd6wy6" path="res://monsters/hit_effect.gd" id="9_cam5p"]
 [ext_resource type="PackedScene" uid="uid://b2gw3gp2wjl8j" path="res://common/hit_label_3d.tscn" id="9_etepe"]
 [ext_resource type="Material" uid="uid://cm5tfcoeautd5" path="res://monsters/assets/M_hit.tres" id="10_hx5qy"]
 [ext_resource type="Script" uid="uid://c3qputg4lrkwf" path="res://monsters/components/health.gd" id="11_hx5qy"]
+[ext_resource type="Texture2D" uid="uid://cgqtilri68dqg" path="res://monsters/assets/faces_smile.svg" id="11_o71ry"]
 [ext_resource type="Script" uid="uid://dy7h7atq6vons" path="res://monsters/components/stamina.gd" id="12_71p1i"]
+[ext_resource type="Texture2D" uid="uid://xvjdqie5i65l" path="res://monsters/assets/faces_sad.svg" id="13_o71ry"]
 [ext_resource type="Material" uid="uid://dladrsv7iv8yq" path="res://monsters/assets/M_heal.tres" id="14_88rtb"]
+[ext_resource type="Texture2D" uid="uid://cdya0j7gv0t0x" path="res://monsters/assets/faces_cry.svg" id="14_c31it"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_janau"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_px60s"]
 
 [sub_resource type="Animation" id="Animation_ujn5a"]
 length = 0.001
@@ -328,17 +335,26 @@ node_connections = [&"output", 0, &"Take Damage", &"Attack", 0, &"StateMachine",
 [sub_resource type="SphereShape3D" id="SphereShape3D_jus1s"]
 radius = 1.5682002
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_xd7ms"]
+radius = 1.381
+
 [node name="Monster Base" type="Node3D"]
 script = ExtResource("1_qg1te")
 data = ExtResource("2_jus1s")
 hit_scene = ExtResource("9_etepe")
 heal_scene = ExtResource("4_lvog1")
+tag_scene = ExtResource("5_xd7ms")
 
 [node name="Model Root" type="Node3D" parent="."]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Model Root"]
 transform = Transform3D(0.99700207, 0, 0, 0, 1.0057727, 0, 0, 0, 0.99700207, 0, 0.49631643, 0)
 mesh = SubResource("BoxMesh_janau")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model Root/MeshInstance3D"]
+transform = Transform3D(0.99508625, 0, 0, 0, 1.0042286, 0, 0, 0, 0.99508625, 0, 0.0020866394, 1.0842803)
+mesh = SubResource("QuadMesh_px60s")
+surface_material_override/0 = ExtResource("5_cqyxk")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Model Root"]
 unique_name_in_owner = true
@@ -372,6 +388,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.052011, 0)
 shape = SubResource("SphereShape3D_jus1s")
 debug_color = Color(1, 0.6313726, 0, 1)
 
+[node name="DraggingArea3D" type="Area3D" parent="." node_paths=PackedStringArray("body")]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("7_c31it")
+body = NodePath("..")
+metadata/_custom_type_script = "uid://cp7uxorhel0cs"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DraggingArea3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("SphereShape3D_xd7ms")
+debug_color = Color(0, 0.5961666, 0.73, 1)
+
 [node name="Monster World UI" parent="." node_paths=PackedStringArray("health", "stamina") instance=ExtResource("8_janau")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
@@ -396,10 +424,11 @@ metadata/_custom_type_script = "uid://dy7h7atq6vons"
 [node name="Emotion" type="Node" parent="Visual"]
 script = ExtResource("5_g75ok")
 textures = Dictionary[int, Texture2D]({
-0: ExtResource("6_yonl5"),
-1: ExtResource("7_p7hi2")
+0: ExtResource("11_o71ry"),
+1: ExtResource("7_p7hi2"),
+3: ExtResource("13_o71ry"),
+4: ExtResource("14_c31it")
 })
-offset_step = 128
 metadata/_custom_type_script = "uid://psf2sui574x3"
 
 [node name="HitEffect" type="Node" parent="Visual" node_paths=PackedStringArray("health")]

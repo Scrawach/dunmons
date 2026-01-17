@@ -1,60 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://bd7y6wdj4u8jf"]
+[gd_scene load_steps=6 format=3 uid="uid://bd7y6wdj4u8jf"]
 
 [ext_resource type="Script" uid="uid://c0q5u4ymqlcql" path="res://player/ui/tip_panel.gd" id="1_stwho"]
 [ext_resource type="FontFile" uid="uid://c5v6cn8v8xdr2" path="res://fonts/RobotoCondensed-Bold.ttf" id="1_v6nee"]
+[ext_resource type="Theme" uid="uid://eacyfiau8pp" path="res://player/ui/ui_button.tres" id="3_6813i"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_70ums"]
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_kx37s"]
 color = Color(1, 1, 1, 1)
 thickness = 2
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_stwho"]
-content_margin_left = 20.0
-content_margin_top = 5.0
-content_margin_right = 20.0
-content_margin_bottom = 5.0
-bg_color = Color(0.2635, 0.55675, 0.85, 1)
-border_width_left = 1
-border_width_right = 1
-border_width_bottom = 2
-border_color = Color(0.217, 0.45849997, 0.7, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6813i"]
-content_margin_left = 20.0
-content_margin_top = 5.0
-content_margin_right = 20.0
-content_margin_bottom = 5.0
-bg_color = Color(0.186, 0.393, 0.6, 1)
-border_width_left = 1
-border_width_right = 1
-border_width_bottom = 2
-border_color = Color(0.13949999, 0.29474998, 0.45, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0h5b1"]
-content_margin_left = 20.0
-content_margin_top = 5.0
-content_margin_right = 20.0
-content_margin_bottom = 5.0
-bg_color = Color(0.31, 0.655, 1, 1)
-border_width_left = 1
-border_width_right = 1
-border_width_bottom = 2
-border_color = Color(0.2627451, 0.5568628, 0.8509804, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8u2ds"]
 
 [node name="Location Tip Panel" type="PanelContainer"]
 anchors_preset = 15
@@ -115,11 +69,5 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("1_v6nee")
-theme_override_font_sizes/font_size = 32
-theme_override_styles/normal = SubResource("StyleBoxFlat_stwho")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_6813i")
-theme_override_styles/hover = SubResource("StyleBoxFlat_0h5b1")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_8u2ds")
+theme = ExtResource("3_6813i")
 text = "START BATTLE!"

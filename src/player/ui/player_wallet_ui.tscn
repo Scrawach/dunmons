@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=3 uid="uid://dwwcrfmyt7371"]
+
+[ext_resource type="Script" uid="uid://bu505nlq0spxh" path="res://player/ui/player_wallet_ui.gd" id="1_gosth"]
+[ext_resource type="FontFile" uid="uid://c5v6cn8v8xdr2" path="res://fonts/RobotoCondensed-Bold.ttf" id="2_gosth"]
+[ext_resource type="Texture2D" uid="uid://blt7oj3yj72aa" path="res://player/ui/icons/coin_32px.svg" id="2_p3rpg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_k2ayy"]
+
+[node name="PlayerWalletUI" type="PanelContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_k2ayy")
+script = ExtResource("1_gosth")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+modulate = Color(1, 0.74333334, 0.23000002, 1)
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("2_p3rpg")
+expand_mode = 2
+
+[node name="Value Label" type="Label" parent="MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_gosth")
+theme_override_font_sizes/font_size = 26
+text = "0"
+horizontal_alignment = 1
+
+[node name="Add Label" type="Label" parent="MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.74509805, 0.23137255, 1)
+theme_override_fonts/font = ExtResource("2_gosth")
+theme_override_font_sizes/font_size = 20
+text = "+1"

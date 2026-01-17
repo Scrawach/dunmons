@@ -1,16 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://xi70be5hasug"]
+[gd_scene load_steps=3 format=3 uid="uid://xi70be5hasug"]
 
 [ext_resource type="Script" uid="uid://bde7let5sbi6" path="res://items/coin_3d.gd" id="1_ufx5v"]
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_7se1w"]
-height = 0.2
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ufx5v"]
-diffuse_mode = 3
-albedo_color = Color(1, 0.43333334, 0, 1)
-emission_enabled = true
-emission = Color(1, 0.6333333, 0, 1)
-emission_energy_multiplier = 1.5
+[ext_resource type="PackedScene" uid="uid://b3u55w5fvbbac" path="res://items/coin.glb" id="2_mgtk8"]
 
 [node name="Coin3D" type="Node3D"]
 script = ExtResource("1_ufx5v")
@@ -18,8 +9,10 @@ script = ExtResource("1_ufx5v")
 [node name="Model Root" type="Node3D" parent="."]
 unique_name_in_owner = true
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Model Root"]
-transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
-mesh = SubResource("CylinderMesh_7se1w")
-skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_ufx5v")
+[node name="coin" parent="Model Root" instance=ExtResource("2_mgtk8")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
+
+[node name="Coin" parent="Model Root/coin" index="0"]
+cast_shadow = 0
+
+[editable path="Model Root/coin"]
