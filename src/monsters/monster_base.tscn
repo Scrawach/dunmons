@@ -346,7 +346,7 @@ animation = &"take_damage"
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_px60s"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_hx5qy"]
-graph_offset = Vector2(-535.2616, -120.41556)
+graph_offset = Vector2(-255.44806, 132.56001)
 nodes/output/position = Vector2(740, 460)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_px60s")
 nodes/StateMachine/position = Vector2(-520, 0)

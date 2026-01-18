@@ -3,6 +3,8 @@ extends Node3D
 
 const TAKE_DAMAGE_ANIMATION := "Take Damage"
 const ATTACK_ANIMATION := "Attack"
+const ALT_ATTACK_ANIMATION := "Stomp"
+const ALT_ATTACK_CHANCE := 0.2
 
 signal died(monster: Monster)
 
@@ -132,7 +134,8 @@ func restore_health(value: int, is_can_revive: bool = true) -> void:
 	spawn_floating_numbers(heal_scene, value)
 
 func attack_async(_target: Monster) -> void:
-	play_oneshot_animation(ATTACK_ANIMATION)
+	var attack_animation = ATTACK_ANIMATION if randf() > ALT_ATTACK_CHANCE else ALT_ATTACK_ANIMATION
+	play_oneshot_animation(attack_animation)
 	await base_animation_tree.animation_finished
 	stamina.consume()
 

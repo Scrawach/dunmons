@@ -93,19 +93,19 @@ transform = Transform3D(0.40231517, 0, -0.91550124, 0, 1, 0, 0.91550124, 0, 0.40
 [node name="FColumn_001" parent="columns_1" index="0"]
 transform = Transform3D(0.9963929, 0, -0.08485958, 0, 1, 0, 0.08485958, 0, 0.9963929, -4.2957797, -0.21343103, -4.7263746)
 
+[node name="FColumn_002" parent="columns_1" index="1"]
+transform = Transform3D(0.9963929, 0, -0.08485958, 0, 1, 0, 0.08485958, 0, 0.9963929, 0.10511541, -0.26904884, 2.8269525)
+
+[node name="FColumn" parent="columns_1" index="2"]
+transform = Transform3D(0.8947749, 0.4150436, 0.16467074, -0.15809941, -0.050414566, 0.98613536, 0.417591, -0.9084034, 0.02050848, -7.4631057, 0.96845114, -4.4780216)
+
+[node name="FColumn_003" parent="columns_1" index="3"]
+transform = Transform3D(0.78951097, -0.60624814, 0.09558262, -0.15809941, -0.050414566, 0.9861355, -0.5930239, -0.7936759, -0.13565034, -4.048672, 0.96845114, 3.1641965)
+
 [node name="FColumn_004" type="MeshInstance3D" parent="columns_1"]
 transform = Transform3D(-0.08414653, 0, -0.9964534, 0, 1, 0, 0.9964534, 0, -0.08414653, -3.3972325, -0.21343103, -13.330247)
 mesh = SubResource("ArrayMesh_d2c2a")
 skeleton = NodePath("")
-
-[node name="FColumn_002" parent="columns_1" index="2"]
-transform = Transform3D(0.9963929, 0, -0.08485958, 0, 1, 0, 0.08485958, 0, 0.9963929, 0.10511541, -0.26904884, 2.8269525)
-
-[node name="FColumn" parent="columns_1" index="3"]
-transform = Transform3D(0.8947749, 0.4150436, 0.16467074, -0.15809941, -0.050414566, 0.98613536, 0.417591, -0.9084034, 0.02050848, -7.4631057, 0.96845114, -4.4780216)
-
-[node name="FColumn_003" parent="columns_1" index="4"]
-transform = Transform3D(0.78951097, -0.60624814, 0.09558262, -0.15809941, -0.050414566, 0.9861355, -0.5930239, -0.7936759, -0.13565034, -4.048672, 0.96845114, 3.1641965)
 
 [node name="sand" parent="." instance=ExtResource("6_83xw1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9209391, -2.084387)
