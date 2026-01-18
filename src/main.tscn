@@ -1,11 +1,11 @@
-[gd_scene load_steps=35 format=3 uid="uid://c4x78xdv4cpx4"]
+[gd_scene load_steps=34 format=3 uid="uid://c4x78xdv4cpx4"]
 
 [ext_resource type="PackedScene" uid="uid://2dpaau0tgd4s" path="res://player/ui/player_hud.tscn" id="1_272bh"]
 [ext_resource type="PackedScene" uid="uid://dmuw5081ygiax" path="res://camera/camera_point.tscn" id="4_4c57u"]
 [ext_resource type="Script" uid="uid://d3kcr1y2o7ue" path="res://gameloop/game.gd" id="4_lquwl"]
 [ext_resource type="Script" uid="uid://cbmmrcqm4l1fk" path="res://locations/sands.gd" id="5_5vw27"]
 [ext_resource type="Script" uid="uid://dtc6b60kuy673" path="res://gameloop/battle/battle.gd" id="5_7mycd"]
-[ext_resource type="Material" uid="uid://dlelrtvcgwl50" path="res://locations/assets/M_sand.tres" id="5_ycdy4"]
+[ext_resource type="PackedScene" uid="uid://bg2vbykk85mna" path="res://locations/sand.tscn" id="5_qsp4k"]
 [ext_resource type="PackedScene" uid="uid://butm8yj1yughq" path="res://locations/specifics/ruins_location.tscn" id="6_w48qg"]
 [ext_resource type="PackedScene" uid="uid://0bcb6pixpecp" path="res://monsters/specifics/demon/demon.tscn" id="7_vivmo"]
 [ext_resource type="PackedScene" uid="uid://m4dd03q4snfw" path="res://monsters/specifics/slime/slime.tscn" id="8_2cqfq"]
@@ -54,9 +54,6 @@ fog_depth_curve = 0.7320431
 fog_depth_begin = 0.0
 fog_depth_end = 50.0
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_0aecw"]
-size = Vector2(100, 100)
-
 [sub_resource type="SphereMesh" id="SphereMesh_dije2"]
 radius = 1.0
 
@@ -83,19 +80,13 @@ transform = Transform3D(0.49999997, -0.61237246, 0.6123725, 0, 0.7071068, 0.7071
 
 [node name="Sands" type="Node3D" parent="World3D" node_paths=PackedStringArray("sands")]
 script = ExtResource("5_5vw27")
-sands = [NodePath("Sand"), NodePath("Sand2")]
+sands = [NodePath(""), NodePath("")]
 
-[node name="Sand" type="MeshInstance3D" parent="World3D/Sands"]
-transform = Transform3D(1, 0, -2.9802322e-08, 0, 0.99999994, 0, 0, 0, 1, -1.1920929e-07, -0.16102183, 0)
-mesh = SubResource("PlaneMesh_0aecw")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_ycdy4")
+[node name="Sand" parent="World3D/Sands" instance=ExtResource("5_qsp4k")]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 1, -1.1920929e-07, -0.16102183, 0)
 
-[node name="Sand2" type="MeshInstance3D" parent="World3D/Sands"]
-transform = Transform3D(1, 0, -2.9802322e-08, 0, 0.99999994, 0, 0, 0, 1, -1.1920929e-07, -0.16102183, -100)
-mesh = SubResource("PlaneMesh_0aecw")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_ycdy4")
+[node name="Sand2" parent="World3D/Sands" instance=ExtResource("5_qsp4k")]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 1, -1.1920929e-07, -0.16102183, -100)
 
 [node name="Cage Location" parent="World3D" instance=ExtResource("9_074og")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 8.438839)

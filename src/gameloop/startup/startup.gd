@@ -10,11 +10,12 @@ extends Scenario
 
 func initialize() -> void:
 	var monsters := spawn_startup_monsters()
-	camera_point.zoom_to_point(cage_location.camera_point.global_position, 15, 160)
-	hud.show_location_tip("choose wisely", "you can save only one")
 	cage_location.attach_monsters(monsters)
 
 func get_monster() -> Monster:
+	hud.show_location_tip("choose wisely", "you can save only one")
+	camera_point.zoom_to_point(cage_location.camera_point.global_position, 15, 160)
+	
 	var data = await cage_location.selected
 	hud.hide_location_tip()
 	

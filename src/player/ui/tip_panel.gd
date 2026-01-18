@@ -11,9 +11,10 @@ func setup(title: String, description: String) -> void:
 
 func smooth_show(duration: float = 0.5) -> void:
 	_stop_tween_if_needed(appear_tween)
+	modulate.a = 0.0
 	show()
 	appear_tween = create_tween()
-	appear_tween.tween_property(self, "modulate:a", 1.0, duration).from(0.0)
+	appear_tween.tween_property(self, "modulate:a", 1.0, duration)
 
 func smooth_hide(duration: float = 0.4) -> void:
 	_stop_tween_if_needed(appear_tween)

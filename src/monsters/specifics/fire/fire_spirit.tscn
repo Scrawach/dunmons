@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://wle52r4hufom"]
+
+[ext_resource type="PackedScene" uid="uid://cpq3bvvv5605v" path="res://monsters/monster_base.tscn" id="1_bhkt3"]
+[ext_resource type="PackedScene" uid="uid://b4tcnobs5lk0e" path="res://monsters/specifics/fire/fire.glb" id="2_3u152"]
+[ext_resource type="Texture2D" uid="uid://cgqtilri68dqg" path="res://monsters/faces/faces_smile.svg" id="2_va8fn"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3u152"]
+resource_local_to_scene = true
+transparency = 1
+shading_mode = 0
+albedo_texture = ExtResource("2_va8fn")
+
+[node name="Fire Spirit" node_paths=PackedStringArray("body") instance=ExtResource("1_bhkt3")]
+body = NodePath("Model Root/fire/Icosphere")
+
+[node name="fire" parent="Model Root" index="4" instance=ExtResource("2_3u152")]
+
+[node name="Emotion" parent="Visual" index="0" node_paths=PackedStringArray("face")]
+face = NodePath("../../Model Root/fire/Icosphere/Face_005")
+material = SubResource("StandardMaterial3D_3u152")
+
+[editable path="Model Root/fire"]

@@ -1,0 +1,79 @@
+[gd_scene load_steps=14 format=3 uid="uid://bs4022behl504"]
+
+[ext_resource type="PackedScene" uid="uid://q1sisca1uwsi" path="res://monsters/specifics/cube/cube.tscn" id="1_f054v"]
+[ext_resource type="PackedScene" uid="uid://2dpaau0tgd4s" path="res://player/ui/player_hud.tscn" id="1_tx223"]
+[ext_resource type="PackedScene" uid="uid://0bcb6pixpecp" path="res://monsters/specifics/demon/demon.tscn" id="2_oxkk1"]
+[ext_resource type="PackedScene" uid="uid://caj80doynbabw" path="res://monsters/specifics/golem/golem.tscn" id="3_tx223"]
+[ext_resource type="PackedScene" uid="uid://hytiumnrg4l3" path="res://monsters/specifics/medusa/medusa.tscn" id="4_ndj5v"]
+[ext_resource type="PackedScene" uid="uid://dtcq0oxltpghh" path="res://monsters/specifics/mushroom/mushroom.tscn" id="5_jyll1"]
+[ext_resource type="PackedScene" uid="uid://ya46toa4tsdo" path="res://monsters/specifics/plant/plant.tscn" id="6_s8asg"]
+[ext_resource type="PackedScene" uid="uid://m4dd03q4snfw" path="res://monsters/specifics/slime/slime.tscn" id="7_57n3o"]
+[ext_resource type="PackedScene" uid="uid://bg2vbykk85mna" path="res://locations/sand.tscn" id="8_b72xd"]
+[ext_resource type="PackedScene" uid="uid://wle52r4hufom" path="res://monsters/specifics/fire/fire_spirit.tscn" id="9_oxkk1"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_cennu"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_wi035"]
+sky_material = SubResource("ProceduralSkyMaterial_cennu")
+
+[sub_resource type="Environment" id="Environment_70ww8"]
+background_mode = 1
+background_color = Color(0.95686275, 0.63529414, 0.38039216, 1)
+sky = SubResource("Sky_wi035")
+ambient_light_source = 2
+ambient_light_color = Color(0.72156864, 0.34901962, 0.34509805, 1)
+ambient_light_energy = 0.5
+tonemap_mode = 2
+fog_enabled = true
+fog_mode = 1
+fog_light_color = Color(0.95686275, 0.63529414, 0.38039216, 1)
+fog_light_energy = 0.0
+fog_density = 0.8719
+fog_depth_curve = 0.7320431
+fog_depth_begin = 0.0
+fog_depth_end = 50.0
+
+[node name="Monsters" type="Node3D"]
+
+[node name="Player HUD" parent="." instance=ExtResource("1_tx223")]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.57357645, -0.7094065, 0.40957597, 0, 0.49999997, 0.86602545, -0.819152, 0.49673182, -0.2867882, 7.371601, 0, -5.653407)
+light_angular_distance = 5.45
+shadow_enabled = true
+directional_shadow_max_distance = 8192.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_70ww8")
+
+[node name="Cube" parent="." instance=ExtResource("1_f054v")]
+
+[node name="Demon" parent="." instance=ExtResource("2_oxkk1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+
+[node name="Golem" parent="." instance=ExtResource("3_tx223")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="Medusa" parent="." instance=ExtResource("4_ndj5v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
+
+[node name="Mushroom" parent="." instance=ExtResource("5_jyll1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 0)
+
+[node name="Plant" parent="." instance=ExtResource("6_s8asg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0)
+
+[node name="Slime" parent="." instance=ExtResource("7_57n3o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
+
+[node name="Sand" parent="." instance=ExtResource("8_b72xd")]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 5, 6, 6)
+projection = 1
+size = 12.0
+
+[node name="Fire Spirit" parent="." instance=ExtResource("9_oxkk1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)

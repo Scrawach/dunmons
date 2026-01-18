@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://bg2vbykk85mna"]
+
+[ext_resource type="Material" uid="uid://dlelrtvcgwl50" path="res://locations/assets/M_sand.tres" id="1_uqgor"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_0aecw"]
+size = Vector2(100, 100)
+
+[node name="Sand" type="MeshInstance3D"]
+transform = Transform3D(1, 0, -2.9802322e-08, 0, 0.99999994, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("PlaneMesh_0aecw")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("1_uqgor")

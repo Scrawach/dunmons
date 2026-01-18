@@ -1,0 +1,24 @@
+[gd_scene load_steps=6 format=3 uid="uid://hytiumnrg4l3"]
+
+[ext_resource type="PackedScene" uid="uid://cpq3bvvv5605v" path="res://monsters/monster_base.tscn" id="1_4lxcq"]
+[ext_resource type="Resource" uid="uid://b3iy7ksbhqxmc" path="res://monsters/specifics/medusa/medusa_info.tres" id="2_5l61n"]
+[ext_resource type="PackedScene" uid="uid://by8j775c3g2lk" path="res://monsters/specifics/medusa/medusa.glb" id="2_81e55"]
+[ext_resource type="Texture2D" uid="uid://cgqtilri68dqg" path="res://monsters/faces/faces_smile.svg" id="2_cb7kj"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_81e55"]
+resource_local_to_scene = true
+transparency = 1
+shading_mode = 0
+albedo_texture = ExtResource("2_cb7kj")
+
+[node name="Medusa" node_paths=PackedStringArray("body") instance=ExtResource("1_4lxcq")]
+body = NodePath("Model Root/medusa/Medusa")
+data = ExtResource("2_5l61n")
+
+[node name="medusa" parent="Model Root" index="3" instance=ExtResource("2_81e55")]
+
+[node name="Emotion" parent="Visual" index="0" node_paths=PackedStringArray("face")]
+face = NodePath("../../Model Root/medusa/Medusa/Face")
+material = SubResource("StandardMaterial3D_81e55")
+
+[editable path="Model Root/medusa"]

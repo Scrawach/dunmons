@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="MonsterInfo" load_steps=2 format=3 uid="uid://cnxv5vlxrol7"]
+
+[ext_resource type="Script" uid="uid://ctaw5qsb30nkg" path="res://monsters/data/monster_info.gd" id="1_y8bd6"]
+
+[resource]
+script = ExtResource("1_y8bd6")
+name = "Mushroom"
+description = "MEW"
+tags = Array[int]([4])
+health = 1
+attack_min = 2
+attack_max = 4
+stamina = 0.25
+metadata/_custom_type_script = "uid://ctaw5qsb30nkg"

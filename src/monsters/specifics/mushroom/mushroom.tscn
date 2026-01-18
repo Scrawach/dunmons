@@ -1,0 +1,24 @@
+[gd_scene load_steps=6 format=3 uid="uid://dtcq0oxltpghh"]
+
+[ext_resource type="PackedScene" uid="uid://cpq3bvvv5605v" path="res://monsters/monster_base.tscn" id="1_qbavg"]
+[ext_resource type="Texture2D" uid="uid://cgqtilri68dqg" path="res://monsters/faces/faces_smile.svg" id="2_34y2d"]
+[ext_resource type="Resource" uid="uid://cnxv5vlxrol7" path="res://monsters/specifics/mushroom/mushroom_info.tres" id="2_r3pse"]
+[ext_resource type="PackedScene" uid="uid://bnk3wlmthm77k" path="res://monsters/specifics/mushroom/mushroom.glb" id="3_bqaiv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r3pse"]
+resource_local_to_scene = true
+transparency = 1
+shading_mode = 0
+albedo_texture = ExtResource("2_34y2d")
+
+[node name="Mushroom" node_paths=PackedStringArray("body") instance=ExtResource("1_qbavg")]
+body = NodePath("Model Root/mushroom/Cube_019")
+data = ExtResource("2_r3pse")
+
+[node name="mushroom" parent="Model Root" index="4" instance=ExtResource("3_bqaiv")]
+
+[node name="Emotion" parent="Visual" index="0" node_paths=PackedStringArray("face")]
+face = NodePath("../../Model Root/MeshInstance3D")
+material = SubResource("StandardMaterial3D_r3pse")
+
+[editable path="Model Root/mushroom"]

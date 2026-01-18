@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://ya46toa4tsdo"]
+
+[ext_resource type="PackedScene" uid="uid://cpq3bvvv5605v" path="res://monsters/monster_base.tscn" id="1_31nre"]
+[ext_resource type="PackedScene" uid="uid://cl0drcu5xysnb" path="res://monsters/specifics/plant/plant.glb" id="2_03s33"]
+[ext_resource type="Texture2D" uid="uid://cgqtilri68dqg" path="res://monsters/faces/faces_smile.svg" id="2_i75o6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_03s33"]
+resource_local_to_scene = true
+transparency = 1
+shading_mode = 0
+albedo_texture = ExtResource("2_i75o6")
+
+[node name="Plant" node_paths=PackedStringArray("body") instance=ExtResource("1_31nre")]
+body = NodePath("Model Root/plant/Cube_020")
+
+[node name="plant" parent="Model Root" index="4" instance=ExtResource("2_03s33")]
+
+[node name="Emotion" parent="Visual" index="0" node_paths=PackedStringArray("face")]
+face = NodePath("../../Model Root/plant/Cube_020/Face_004")
+material = SubResource("StandardMaterial3D_03s33")
+
+[editable path="Model Root/plant"]
